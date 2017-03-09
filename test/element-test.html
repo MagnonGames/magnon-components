@@ -14,6 +14,15 @@
                         new MagnonElement();
                     }).to.throw(TypeError);
                 });
+
+                it("doesn't require a template to function", () => {
+                    expect(() => {
+                        class Element extends MagnonElement {
+                            static get elementName() { return "element-name"; }
+                        }
+                        Element.init();
+                    }).to.not.throw(Error);
+                });
             });
         </script>
     </body>

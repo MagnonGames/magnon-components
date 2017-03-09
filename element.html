@@ -14,8 +14,9 @@
                 }
             };
 
-            this.root = this.attachShadow({ mode: "open" });
             const t = searchForTemplate(document);
+            if (!t) return; // Component without elements
+            this.root = this.attachShadow({ mode: "open" });
             const instance = t.content.cloneNode(true);
             this.root.appendChild(instance);
         }
