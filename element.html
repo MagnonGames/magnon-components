@@ -4,7 +4,7 @@
             super();
 
             const searchForTemplate = (doc) => {
-                const template = doc.querySelector(`#${this.elementName}`);
+                const template = doc.querySelector(`#${this.name}`);
                 if (template) return template;
                 else {
                     for (const link of doc.querySelectorAll("link[rel=import]")) {
@@ -21,16 +21,16 @@
             this.root.appendChild(instance);
         }
 
-        static get elementName() {
+        static get name() {
             throw new TypeError("Element is missing an element name declaration");
         }
 
-        get elementName() {
-            return this.constructor.elementName;
+        get name() {
+            return this.constructor.name;
         }
 
         static init() {
-            customElements.define(this.elementName, this);
+            customElements.define(this.name, this);
         }
     };
 </script>

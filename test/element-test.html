@@ -18,7 +18,7 @@
                 it("doesn't require a template to function", () => {
                     expect(() => {
                         class Element extends MagnonElement {
-                            static get elementName() { return "element-name"; }
+                            static get name() { return "element-name"; }
                         }
                         Element.init();
                     }).to.not.throw(Error);
