@@ -1,0 +1,31 @@
+{
+  "name": "magnon-components",
+  "version": "0.1.0",
+  "description": "A set of Magnon web-components",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run lint && wct",
+    "lint": "eslint **/*.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theMagnon/magnon-components.git"
+  },
+  "keywords": [
+    "web-components",
+    "magnon"
+  ],
+  "author": "magnonellie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theMagnon/magnon-components/issues"
+  },
+  "homepage": "https://github.com/theMagnon/magnon-components#readme",
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-plugin-html": "^2.0.1",
+    "web-component-tester": "^5.0.0"
+  }
+}
