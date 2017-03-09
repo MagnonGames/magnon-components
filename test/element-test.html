@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../../web-component-tester/browser.js"></script>
+        <link rel="import" href="../element.html">
+    </head>
+    <body>
+        <script>
+            describe("MagnonElement", () => {
+                it("throws error when initialized (is abstract)", () => {
+                    expect(() => {
+                        /* eslint-disable */
+                        new MagnonElement();
+                    }).to.throw(TypeError);
+                });
+            });
+        </script>
+    </body>
+</html>

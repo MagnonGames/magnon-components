@@ -1,0 +1,35 @@
+<script>
+    window.MagnonElement = class extends HTMLElement {
+        constructor() {
+            super();
+
+            const searchForTemplate = (doc) => {
+            const template = doc.querySelector(`#${this.elementName}`);
+                if (template) return template;
+                else {
+                    for (const link of doc.querySelectorAll("link[rel=import]")) {
+                        const template = searchForTemplate(link.import);
+                        if (template) return template;
+                    }
+                }
+            };
+
+            this.root = this.attachShadow({ mode: "open" });
+            const t = searchForTemplate(document);
+            const instance = t.content.cloneNode(true);
+            this.root.appendChild(instance);
+        }
+
+        static get elementName() {
+            throw new TypeError("Element is missing an element name declaration");
+        }
+
+        get elementName() {
+            return this.constructor.elementName;
+        }
+
+        static init() {
+            customElements.define(this.elementName, this);
+        }
+    }
+</script>
