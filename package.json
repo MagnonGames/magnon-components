@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "npm run lint && wct",
-    "lint": "eslint **/*.html"
+    "lint": "eslint **/*.html element.html"
   },
   "repository": {
     "type": "git",

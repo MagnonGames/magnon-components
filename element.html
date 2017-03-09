@@ -4,7 +4,7 @@
             super();
 
             const searchForTemplate = (doc) => {
-            const template = doc.querySelector(`#${this.elementName}`);
+                const template = doc.querySelector(`#${this.elementName}`);
                 if (template) return template;
                 else {
                     for (const link of doc.querySelectorAll("link[rel=import]")) {
@@ -31,5 +31,5 @@
         static init() {
             customElements.define(this.elementName, this);
         }
-    }
+    };
 </script>
