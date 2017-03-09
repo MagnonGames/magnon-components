@@ -7,7 +7,15 @@
     </head>
     <body>
         <script>
+            /* globals MagnonElement */
             describe("MagnonElement", () => {
+                const Element = class extends MagnonElement {
+                    static get name() {
+                        return "element-name";
+                    }
+                };
+                Element.init();
+
                 it("throws error when initialized (is abstract)", () => {
                     expect(() => {
                         /* eslint-disable */
@@ -17,11 +25,16 @@
 
                 it("doesn't require a template to function", () => {
                     expect(() => {
-                        class Element extends MagnonElement {
-                            static get name() { return "element-name"; }
-                        }
-                        Element.init();
+                        new Element();
                     }).to.not.throw(Error);
+                });
+
+                it("has a shadow dom if a template was found", () => {
+                    const template = document.createElement("template");
+                    template.id = "element-name";
+                    document.body.appendChild(template);
+                    const element = new Element();
+                    expect(element.shadowRoot).to.be.an.instanceof(ShadowRoot);
                 });
             });
         </script>
