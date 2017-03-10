@@ -29,6 +29,6 @@
     "web-component-tester": "^5.0.0"
   },
   "dependencies": {
-    "webcomponents.js": "git+ssh://git@github.com/webcomponents/webcomponentsjs.git"
+    "webcomponents.js": "git+https://github.com/webcomponents/webcomponentsjs.git"
   }
 }
