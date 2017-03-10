@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="../../webcomponents.js/webcomponents-loader.js"></script>
-        <script src="../../web-component-tester/browser.js"></script>
-        <link rel="import" href="../element.html">
+        <script src="../node_modules/webcomponents.js/webcomponents-loader.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <script src="../src/magnon-element.js"></script>
     </head>
     <body>
         <script>
@@ -19,14 +20,13 @@
 
                 it("throws error when initialized (is abstract)", () => {
                     expect(() => {
-                        /* eslint-disable */
-                        new MagnonElement();
-                    }).to.throw(TypeError);
+                        new MagnonElement(); // eslint-disable-line
+                    }).to.throw(Error);
                 });
 
                 it("doesn't require a template to function", () => {
                     expect(() => {
-                        new Element();
+                        new Element(); // eslint-disable-line
                     }).to.not.throw(Error);
                 });
 
