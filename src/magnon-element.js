@@ -1,5 +1,5 @@
 window.MagnonElement = class extends HTMLElement {
-    constructor() {
+    constructor(options = { shadow: true }) {
         super();
 
         const searchForTemplate = (doc) => {
@@ -15,7 +15,7 @@ window.MagnonElement = class extends HTMLElement {
 
         const t = searchForTemplate(document);
         if (!t) return; // Component without elements
-        this.root = this.attachShadow({ mode: "open" });
+        this.root = options.shadow ? this.attachShadow({ mode: "open" }) : this;
         const instance = t.content.cloneNode(true);
         this.root.appendChild(instance);
     }

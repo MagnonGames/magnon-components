@@ -18,6 +18,13 @@
                 };
                 Element.init();
 
+                afterEach(() => {
+                    // Remove anything added after the script.
+                    while (document.body.children.length > 1) {
+                        document.body.removeChild(document.body.children[document.body.children.length - 1]);
+                    }
+                });
+
                 it("throws error when initialized (is abstract)", () => {
                     expect(() => {
                         new MagnonElement(); // eslint-disable-line
@@ -36,6 +43,18 @@
                     document.body.appendChild(template);
                     const element = new Element();
                     expect(element.shadowRoot).to.be.an.instanceof(ShadowRoot);
+                });
+
+                it("doesn't use shadow dom if told not to", () => {
+                    const template = document.createElement("template");
+                    template.id = "element-name";
+                    template.innerHTML = "<span></span>";
+                    document.body.appendChild(template);
+                    const element = new Element({
+                        shadow: false
+                    });
+                    expect(element.shadowRoot).to.be.null;
+                    expect(element.root.children.length).to.be.above(0);
                 });
             });
         </script>
