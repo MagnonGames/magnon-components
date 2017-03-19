@@ -1,0 +1,131 @@
+<link rel="import" href="../element.html">
+
+<template id="magnon-drawer">
+    <style>
+        /* latin-ext */
+        @font-face {
+            font-family: "Raleway";
+            font-style: normal;
+            font-weight: 300;
+            src: local("Raleway Light"), local("Raleway-Light"), url(https://fonts.gstatic.com/s/raleway/v11/ZKwULyCG95tk6mOqHQfRBCEAvth_LlrfE80CYdSH47w.woff2) format("woff2");
+            unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+        }
+        /* latin */
+        @font-face {
+            font-family: "Raleway";
+            font-style: normal;
+            font-weight: 300;
+            src: local("Raleway Light"), local("Raleway-Light"), url(https://fonts.gstatic.com/s/raleway/v11/-_Ctzj9b56b8RgXW8FArifk_vArhqVIZ0nv9q090hN8.woff2) format("woff2");
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+
+        #container {
+            display: flex;
+            position: fixed;
+            top: 0; bottom: 0; left: -20vw;
+            width: 90vw;
+            height: 100vh;
+            max-width: 300px;
+            z-index: 10001;
+
+            background: white;
+            font-family: "Raleway", sans-serif;
+
+            transition: left 0.15s ease-out;
+        }
+
+        #main-nav > a {
+            color: #2EA36F;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 20px;
+            margin: 30px 30px;
+            flex-grow: 1;
+        }
+
+        #blackout {
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+
+            background: #237ACB;
+            opacity: 0;
+
+            transition: opacity 0.2s ease-in-out;
+        }
+    </style>
+
+    <div id="container">
+        <nav id="main-nav">
+            <a href="/">Home</a>
+            <a href="/games">Games</a>
+            <a href="/about">About Us</a>
+            <a href="https://blog.magnon.net">Blog</a>
+        </nav>
+    </div>
+
+    <span id="blackout"></span>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    class MagnonDrawer extends MagnonElement {
+        static get name() {
+            return "magnon-drawer";
+        }
+
+        static get observedAttributes() {
+            return ["open"];
+        }
+
+        constructor() {
+            super();
+
+            this._open = false;
+
+            this._container = this.root.querySelector("#container");
+            this._blackout = this.root.querySelector("#blackout");
+        }
+
+        connectedCallback() {
+            this._closeCallback = () => (this.open = false);
+            this._blackout.addEventListener("click", this._closeCallback);
+        }
+
+        disconnectedCallback() {
+            if (!this._closeCallback) return;
+            this._blackout.removeEventListener("click", this._closeCallback);
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            if (attribute === "open") {
+                this.open = value;
+            }
+        }
+
+        set open(isOpen) {
+            const lastOpen = this._open;
+            this._open = isOpen !== false;
+            if (lastOpen === this._open) return;
+
+            if (this._open) {
+                this._container.style.left = "0px";
+                this._blackout.style.opacity = "0.8";
+                this._blackout.style.pointerEvents = "all";
+            } else {
+                this._container.style.left = "-300px";
+                this._blackout.style.opacity = "0";
+                this._blackout.style.pointerEvents = "none";
+            }
+        }
+
+        get open() {
+            return this._open;
+        }
+    }
+
+    MagnonDrawer.init();
+</script>

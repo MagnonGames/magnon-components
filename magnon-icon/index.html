@@ -1,0 +1,84 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="icon-set.html">
+<link rel="import" href="standard-set.html">
+
+<template id="magnon-icon">
+    <style>
+        :host {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+
+    <svg width="16px" height="16px" viewBox="0 0 16 16"></svg>
+</template>
+
+<script>
+    /* globals MagnonElement, MagnonIconSet */
+    class MagnonIcon extends MagnonElement {
+        static get name() {
+            return "magnon-icon";
+        }
+
+        static get observedAttributes() {
+            return ["icon", "color", "size"];
+        }
+
+        constructor() {
+            super();
+
+            this._svg = this.root.querySelector("svg");
+        }
+
+        set color(value) {
+            this._svg.style.fill = value;
+            this._color = this._svg.style.fill;
+        }
+
+        get color() {
+            return this._color;
+        }
+
+        set size(value) {
+            this._svg.setAttribute("width", value);
+            this._svg.setAttribute("height", value);
+
+            this.style.width = this.style.height = value;
+
+            this._size = value;
+        }
+
+        get size() {
+            return this._size;
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            if (attribute === "icon") {
+                const separatorIndex = value.indexOf("-");
+                const setName = separatorIndex < 0 ? "standard" : value.substring(0, separatorIndex);
+                const iconName = value.substring(separatorIndex + 1);
+
+                this.changeIcon(setName, iconName);
+            } else if (attribute === "color") {
+                this.color = value;
+            } else if (attribute === "size") {
+                this.size = value;
+            }
+        }
+
+        changeIcon(set, icon) {
+            this._emptySvg();
+
+            this._svg.appendChild(MagnonIconSet.getSet(set).getIcon(icon));
+        }
+
+        _emptySvg() {
+            while (this._svg.children[0]) {
+                this._svg.removeChild(this._svg.children[0]);
+            }
+        }
+    }
+
+    MagnonIcon.init();
+</script>

@@ -1,0 +1,60 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="../magnon-icon/">
+
+<template id="magnon-icon-button">
+    <style>
+        :host {
+            display: inline-block;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 0;
+
+            border: none;
+            border-radius: 50%;
+            background-color: transparent;
+
+            transition: background 0.15s ease-out;
+            outline: none;
+        }
+
+        button:focus {
+            background: rgba(46, 163, 111, 0.5);
+        }
+
+        button:active {
+            background: rgba(46, 163, 111, 0.8);
+        }
+    </style>
+
+    <button>
+        <magnon-icon></magnon-icon>
+    </button>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    class MagnonIconButton extends MagnonElement {
+        static get name() {
+            return "magnon-icon-button";
+        }
+
+        static get observedAttributes() {
+            return ["icon"];
+        }
+
+        constructor() {
+            super();
+
+            this._button = this.root.querySelector("button");
+            this._icon = this.root.querySelector("magnon-icon");
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            this._icon.setAttribute(attribute, value);
+        }
+    }
+
+    MagnonIconButton.init();
+</script>

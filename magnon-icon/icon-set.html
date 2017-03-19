@@ -1,0 +1,40 @@
+<link rel="import" href="../element.html">
+
+<template id="magnon-icon-set">
+    <slot></slot>
+</template>
+
+<script>
+    const sets = [];
+
+    /* globals MagnonElement */
+    class MagnonIconSet extends MagnonElement {
+        static get name() {
+            return "magnon-icon-set";
+        }
+
+        static getSet(name) {
+            for (let set of sets) {
+                if (set.setName === name) return set;
+            }
+        }
+
+        constructor() {
+            super();
+
+            this.setName = this.getAttribute("set-name");
+            sets.push(this);
+
+            this._slot = this.root.querySelector("slot");
+        }
+
+        getIcon(name) {
+            const svg = this._slot.assignedNodes().find(n => n.tagName === "svg");
+            const icon = svg.querySelector(`#${name}`);
+            const node = icon.cloneNode(true);
+            return node;
+        }
+    }
+
+    MagnonIconSet.init();
+</script>
