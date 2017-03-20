@@ -31,4 +31,10 @@ window.MagnonElement = class extends HTMLElement {
     static init() {
         customElements.define(this.name, this);
     }
+
+    fire(eventName, detail) {
+        this.dispatchEvent(new CustomEvent(eventName, {
+            detail
+        }));
+    }
 };

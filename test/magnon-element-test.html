@@ -56,6 +56,15 @@
                     expect(element.shadowRoot).to.be.null;
                     expect(element.root.children.length).to.be.above(0);
                 });
+
+                it("can fire events with fire and a custom parameter", done => {
+                    const element = new Element();
+                    element.addEventListener("event", e => {
+                        expect(e.detail).to.equal("parameter");
+                        done();
+                    });
+                    element.fire("event", "parameter");
+                });
             });
         </script>
     </body>
