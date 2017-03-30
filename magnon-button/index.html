@@ -34,7 +34,9 @@
         }
     </style>
 
-    <button></button>
+    <button>
+        <slot></slot>
+    </button>
 </template>
 
 <script>
@@ -48,16 +50,6 @@
             super();
 
             this._button = this.root.querySelector("button");
-
-            this.text = this.getAttribute("value");
-        }
-
-        set text(text) {
-            this._button.innerText = text;
-        }
-
-        get value() {
-            return this._button.innerText;
         }
     }
 
