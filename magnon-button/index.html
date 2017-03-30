@@ -50,6 +50,13 @@
             super();
 
             this._button = this.root.querySelector("button");
+
+            this._generateLabel();
+        }
+
+        _generateLabel() {
+            const label = this.textContent.trim();
+            this._button.setAttribute("aria-label", label);
         }
     }
 
