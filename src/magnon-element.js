@@ -1,10 +1,9 @@
-/* globals ShadyCSS */
 window.MagnonElement = class extends HTMLElement {
     constructor(options = { shadow: true }) {
         super();
 
         this.usesShadow = options.shadow;
-        this.usesShadyCSS = options.shadow && ShadyCSS;
+        this.usesShadyCSS = options.shadow && window.ShadyCSS;
 
         const searchForTemplate = (doc) => {
             const template = doc.querySelector(`#${this.name}`);
@@ -20,10 +19,10 @@ window.MagnonElement = class extends HTMLElement {
         const t = searchForTemplate(document);
         if (!t) return; // Component without elements
 
-        if (this.usesShadyCSS) ShadyCSS.prepareTemplate(t, this.name);
+        if (this.usesShadyCSS) window.ShadyCSS.prepareTemplate(t, this.name);
 
         this._instance = t.content.cloneNode(true);
-        if (this.usesShadyCSS) ShadyCSS.styleElement(this._instance);
+        if (this.usesShadyCSS) window.ShadyCSS.styleElement(this._instance);
 
         this.root = options.shadow ? this.attachShadow({ mode: "open" }) : this;
         this.root.appendChild(this._instance);
@@ -42,11 +41,11 @@ window.MagnonElement = class extends HTMLElement {
     }
 
     static restyle() {
-        if (this.usesShadyCSS) ShadyCSS.styleDocument();
+        if (this.usesShadyCSS) window.ShadyCSS.styleDocument();
     }
 
     restyleLocal() {
-        if (this.usesShadyCSS) ShadyCSS.styleSubtree(this._instance);
+        if (this.usesShadyCSS) window.ShadyCSS.styleSubtree(this._instance);
     }
 
     fire(eventName, detail) {
