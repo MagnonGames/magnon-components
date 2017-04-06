@@ -5,6 +5,7 @@
         :host {
             --padding: 15px;
             --depth: 3px;
+            display: inline-block;
         }
 
         button {
@@ -44,11 +45,8 @@
             return "magnon-button";
         }
 
-        constructor() {
-            super();
-
+        connectedCallback() {
             this._button = this.root.querySelector("button");
-
             this._generateLabel();
         }
 
