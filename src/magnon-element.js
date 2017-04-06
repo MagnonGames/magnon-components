@@ -5,6 +5,8 @@ window.MagnonElement = class extends HTMLElement {
         this.usesShadow = options.shadow;
         this.usesShadyCSS = options.shadow && window.ShadyCSS;
 
+        this.root = this;
+
         const searchForTemplate = (doc) => {
             const template = doc.querySelector(`#${this.name}`);
             if (template) return template;
@@ -24,7 +26,7 @@ window.MagnonElement = class extends HTMLElement {
         this._instance = t.content.cloneNode(true);
         if (this.usesShadyCSS) window.ShadyCSS.styleElement(this._instance);
 
-        this.root = options.shadow ? this.attachShadow({ mode: "open" }) : this;
+        if (options.shadow) this.root = this.attachShadow({ mode: "open" });
         this.root.appendChild(this._instance);
     }
 
