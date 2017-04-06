@@ -1,0 +1,64 @@
+<link rel="import" href="../element.html">
+
+<template id="magnon-card">
+    <style>
+        :host {
+            display: block;
+
+            --card-padding: 20px;
+        }
+
+        #card {
+            display: flex;
+            flex-direction: column;
+
+            max-width: 100%;
+            min-height: 100%;
+
+            padding: var(--card-padding);
+            box-sizing: border-box;
+
+            background: white;
+            box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        #title {
+            margin-bottom: var(--card-padding);
+        }
+
+        #content {
+            flex-grow: 1;
+        }
+
+        #footer {
+            margin-top: var(--card-padding);
+        }
+
+        #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }
+        #title ::slotted(h3) { margin: 0; } #title ::slotted(h4) { margin: 0; }
+        #title ::slotted(h5) { margin: 0; } #title ::slotted(h6) { margin: 0; }
+    </style>
+
+    <div id="card">
+        <div id="title">
+            <slot name="title"></slot>
+        </div>
+        <div id="content">
+            <slot></slot>
+        </div>
+        <div id="footer">
+            <slot name="footer"></slot>
+        </div>
+    </div>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    class MagnonCard extends MagnonElement {
+        static get name() {
+            return "magnon-card";
+        }
+    }
+
+    MagnonCard.init();
+</script>
