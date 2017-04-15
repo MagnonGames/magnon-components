@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Components Demo</title>
+
+        <style>
+            .twitter-blue {
+                --magnon-icon-color: #1da1f2;
+            }
+        </style>
+
+        <link rel="import" href="../magnon-shell/magnon-shell.html">
+        <link rel="import" href="../magnon-card/magnon-card.html">
+        <link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
+        <link rel="import" href="../magnon-icon/social-set.html">
+    </head>
+    <body>
+        <magnon-shell>
+            <div slot="content">
+                <magnon-card>
+                    <h1 slot="title">Hello, World!</h1>
+                    <p>
+                        This is a demo page for Magnon Webcomponents!
+                    </p>
+                    <div slot="footer">
+                        <a href="https://twitter.com/theMagnon" target="_blank">
+                            <magnon-icon-button class="twitter-blue" icon="social-twitter"></magnon-icon-button>
+                        </a>
+                    </div>
+                </magnon-card>
+            </div>
+        </magnon-shell>
+    </body>
+</html>
