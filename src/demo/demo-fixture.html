@@ -1,6 +1,6 @@
 <link rel="import" href="../../element.html">
 
-<template id="demo-fixture">
+<template id="styling">
     <style>
         html, body {
             margin: 0;
@@ -22,12 +22,17 @@
     class DemoFixture extends MagnonElement {
         constructor() {
             super({ shadow: false });
+
+            const styleTemplate = currentDocument.querySelector("#styling");
+            document.body.appendChild(styleTemplate.content.cloneNode(true));
         }
 
         static get name() {
             return "demo-fixture";
         }
     }
+
+    const currentDocument = document.currentScript.ownerDocument;
 
     DemoFixture.init();
 </script>
