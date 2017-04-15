@@ -1,0 +1,23 @@
+<link rel="import" href="../element.html">
+
+<script>
+    /* globals MagnonElement */
+    class MagnonGlobalStyle extends MagnonElement {
+        constructor() {
+            super({ shadow: false });
+        }
+
+        static get name() {
+            return "magnon-global-style";
+        }
+
+        connectedCallback() {
+            const template = this.root.querySelector("template");
+            if (!template) return;
+
+            document.body.appendChild(template.content.cloneNode(true).children[0]);
+        }
+    }
+
+    MagnonGlobalStyle.init();
+</script>
