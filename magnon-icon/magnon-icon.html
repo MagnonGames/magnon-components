@@ -26,22 +26,13 @@
         }
 
         static get observedAttributes() {
-            return ["icon", "color", "size"];
+            return ["icon", "size"];
         }
 
         constructor() {
             super();
 
             this._svg = this.root.querySelector("svg");
-        }
-
-        set color(value) {
-            this._svg.style.fill = value;
-            this._color = this._svg.style.fill;
-        }
-
-        get color() {
-            return this._color;
         }
 
         set size(value) {
@@ -64,8 +55,6 @@
                 const iconName = value.substring(separatorIndex + 1);
 
                 this.changeIcon(setName, iconName);
-            } else if (attribute === "color") {
-                this.color = value;
             } else if (attribute === "size") {
                 this.size = value;
             }
