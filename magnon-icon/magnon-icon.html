@@ -6,8 +6,8 @@
     <style>
         :host {
             display: inline-block;
-            width: 16px;
-            height: 16px;
+            width: var(--magnon-icon-size, 16px);
+            height: var(--magnon-icon-size, 16px);
         }
 
         svg {
@@ -15,7 +15,7 @@
         }
     </style>
 
-    <svg width="16px" height="16px" viewBox="0 0 16 16"></svg>
+    <svg width="100%" height="100%" viewBox="0 0 16 16"></svg>
 </template>
 
 <script>
@@ -26,26 +26,13 @@
         }
 
         static get observedAttributes() {
-            return ["icon", "size"];
+            return ["icon"];
         }
 
         constructor() {
             super();
 
             this._svg = this.root.querySelector("svg");
-        }
-
-        set size(value) {
-            this._svg.setAttribute("width", value);
-            this._svg.setAttribute("height", value);
-
-            this.style.width = this.style.height = value;
-
-            this._size = value;
-        }
-
-        get size() {
-            return this._size;
         }
 
         attributeChangedCallback(attribute, old, value) {
@@ -55,8 +42,6 @@
                 const iconName = value.substring(separatorIndex + 1);
 
                 this.changeIcon(setName, iconName);
-            } else if (attribute === "size") {
-                this.size = value;
             }
         }
 
