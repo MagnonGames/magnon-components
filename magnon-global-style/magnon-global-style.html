@@ -15,7 +15,14 @@
             const template = this.root.querySelector("template");
             if (!template) return;
 
-            document.body.appendChild(template.content.cloneNode(true).children[0]);
+            const append = () => {
+                document.body.appendChild(template.content.cloneNode(true).children[0]);
+            };
+
+            if (document.readyState === "complete") append();
+            else {
+                window.addEventListener("DOMContentLoaded", () => append());
+            }
         }
     }
 
