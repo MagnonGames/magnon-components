@@ -19,15 +19,32 @@
             <style>
                 magnon-icon {
                     margin: 0 15px;
+                    --magnon-icon-size: 24px;
+                }
+
+                #twitch {
+                    --magnon-icon-color: #6441a5;
+                }
+
+                #twitter {
+                    --magnon-icon-color: #1da1f2;
+                }
+
+                #gplus {
+                    --magnon-icon-color: #c53929;
+                }
+
+                #youtube {
+                    --magnon-icon-color: #cd201f;
                 }
             </style>
 
-            <magnon-icon icon="cross" size="24px"></magnon-icon>
-            <magnon-icon icon="check" size="24px"></magnon-icon>
-            <magnon-icon icon="social-twitch" color="#6441a5" size="24px"></magnon-icon>
-            <magnon-icon icon="social-twitter" color="#1da1f2" size="24px"></magnon-icon>
-            <magnon-icon icon="social-gplus" color="#c53929" size="24px"></magnon-icon>
-            <magnon-icon icon="social-youtube" color="#cd201f" size="24px"></magnon-icon>
+            <magnon-icon icon="cross"></magnon-icon>
+            <magnon-icon icon="check"></magnon-icon>
+            <magnon-icon icon="social-twitch" id="twitch"></magnon-icon>
+            <magnon-icon icon="social-twitter" id="twitter"></magnon-icon>
+            <magnon-icon icon="social-gplus" id="gplus"></magnon-icon>
+            <magnon-icon icon="social-youtube" id="youtube"></magnon-icon>
         </demo-fixture>
     </body>
 </html>
