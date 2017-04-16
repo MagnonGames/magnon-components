@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-global-style/magnon-global-style.html">
+    </head>
+    <body>
+        <test-fixture id="style">
+            <template>
+                <magnon-global-style>
+                    <template>
+                        <style>
+                            /* some style */
+                        </style>
+                    </template>
+                </magnon-global-style>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, sinon */
+            describe("<magnon-global-style>", () => {
+                it("appends style to body if loaded", () => {
+                    const appendStub = sinon.stub(document.body, "appendChild");
+
+                    fixture("style");
+                    expect(appendStub).to.have.been.called;
+
+                    appendStub.restore();
+                });
+
+                it("defers appending if body isn't loaded", () => {
+                    const appendStub = sinon.stub(document.body, "appendChild");
+                    const stateStub = sinon.stub(document, "readyState", {
+                        get: () => "loading"
+                    });
+                    const listenStub = sinon.stub(window, "addEventListener", (n, c) => {
+                        expect(document.readyState).to.equal("loading");
+                        expect(appendStub).to.not.have.been.called;
+                        stateStub.restore();
+                        c();
+                    });
+
+                    fixture("style");
+                    expect(listenStub).to.have.been.called;
+                    expect(appendStub).to.have.been.called;
+
+                    appendStub.restore();
+                    listenStub.restore();
+                });
+            });
+        </script>
+    </body>
+</html>
