@@ -23,10 +23,12 @@
         constructor() {
             super();
 
+            this._slot = this.root.querySelector("slot");
+        }
+
+        connectedCallback() {
             this.setName = this.getAttribute("set-name");
             sets.push(this);
-
-            this._slot = this.root.querySelector("slot");
         }
 
         getIcon(name) {
