@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-logo/magnon-logo.html">
+    </head>
+    <body>
+        <test-fixture id="logo">
+            <template>
+                <magnon-logo></magnon-logo>
+            </template>
+        </test-fixture>
+
+        <test-fixture id="animating-logo">
+            <template>
+                <magnon-logo animate></magnon-logo>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-logo>", () => {
+                let logo; // eslint-disable-line
+
+                beforeEach(() => {
+                    logo = fixture("logo");
+                });
+
+                it("updates animating value correctly", done => {
+                    logo.animateIn(() => {
+                        expect(logo.animating).to.not.be.ok;
+                        done();
+                    });
+                    expect(logo.animating).to.be.ok;
+                });
+
+                it("has a callback after animating", done => {
+                    logo._animate("in", () => done());
+                });
+
+                it("starts animating if animate attribute is present", () => {
+                    const animatingLogo = fixture("animating-logo");
+                    expect(animatingLogo.animating).to.be.ok;
+                });
+
+                it("doesn't start animating if animate attribute isn't present", () => {
+                    expect(logo.animating).to.not.be.ok;
+                });
+            });
+
+            a11ySuite("logo");
+        </script>
+    </body>
+</html>
