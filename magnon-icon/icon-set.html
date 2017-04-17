@@ -17,6 +17,7 @@
             for (let set of sets) {
                 if (set.setName === name) return set;
             }
+            console.error(`Icon set not found: ${name}`);
         }
 
         constructor() {
