@@ -23,13 +23,20 @@
         <script>
             /* globals fixture, sinon */
             describe("<magnon-global-style>", () => {
-                it("appends style to body if loaded", () => {
+                it("appends style to body if loaded or interactive", () => {
                     const appendStub = sinon.stub(document.body, "appendChild");
 
                     fixture("style");
                     expect(appendStub).to.have.been.called;
 
+                    const stateStub = sinon.stub(document, "readyState", {
+                        get: () => "interactive"
+                    });
+                    fixture("style");
+                    expect(appendStub).to.have.been.calledTwice;
+
                     appendStub.restore();
+                    stateStub.restore();
                 });
 
                 it("defers appending if body isn't loaded", () => {
