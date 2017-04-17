@@ -3,8 +3,7 @@
 <template id="magnon-logo">
     <style>
         :host {
-            display: flex;
-            justify-content: center;
+            display: inline-block;
             min-height: 30px;
             height: 50px;
 
@@ -13,11 +12,10 @@
 
         #icon {
             height: 100%;
+            float: left;
 
             fill: white;
             stroke: none;
-
-            margin-right: 5%;
 
             transition: transform 0.7s ease;
             transform-origin: 50% 50%;
@@ -29,6 +27,7 @@
 
         #text {
             height: 100%;
+            float: right;
 
             fill: none;
             stroke: white;
