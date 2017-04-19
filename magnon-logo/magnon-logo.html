@@ -122,7 +122,7 @@
                             path.addEventListener("transitionend", () => callback());
                         }
                     }
-                }, i * 50);
+                }, i * 50 + 50);
             });
 
             /* Icon Aniamtion */
@@ -149,7 +149,7 @@
                 setTimeout(() => {
                     path.style.transition = "";
                     path.style.opacity = animatingIn ? 1 : 0;
-                }, i * 200);
+                }, i * 200 + 50);
             }
         }
     }
