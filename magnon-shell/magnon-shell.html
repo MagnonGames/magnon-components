@@ -40,10 +40,14 @@
             --magnon-icon-size: 30px;
         }
 
-        magnon-logo {
+        #logo-link {
             position: absolute;
             margin: auto;
             height: 40px;
+        }
+
+        #logo-link > magnon-logo {
+            height: 100%;
         }
 
         #content-container {
@@ -63,7 +67,9 @@
 
     <div id="header-container">
         <magnon-icon-button id="navigation-button" icon="menu"></magnon-icon-button>
-        <magnon-logo animate></magnon-logo>
+        <a id="logo-link" href="/">
+            <magnon-logo animate></magnon-logo>
+        </a>
     </div>
 
     <magnon-drawer>
