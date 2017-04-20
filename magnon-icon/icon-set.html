@@ -34,6 +34,9 @@
         getIcon(name) {
             const svg = this._slot.assignedNodes().find(n => n.tagName === "svg");
             const icon = svg.querySelector(`#${name}`);
+            if (!icon) {
+                throw new Error(`Icon set "${this.setName}" doesn't contain a "${name}" icon!`);
+            }
             const node = icon.cloneNode(true);
             return node;
         }
