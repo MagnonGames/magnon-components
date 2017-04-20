@@ -37,6 +37,14 @@
                     }).to.not.throw(Error);
                 });
 
+                it("can use a template different than its name", () => {
+                    const otherTemplate = document.createElement("template");
+                    otherTemplate.id = "other";
+                    document.body.appendChild(otherTemplate);
+                    const element = new Element({ template: "other" });
+                    expect(element.shadowRoot).to.be.an.instanceof(ShadowRoot);
+                });
+
                 it("has a shadow dom if a template was found", () => {
                     const template = document.createElement("template");
                     template.id = "element-name";
@@ -51,7 +59,7 @@
                     template.innerHTML = "<span></span>";
                     document.body.appendChild(template);
                     const element = new Element({
-                        shadow: false
+                        noShadow: true
                     });
                     expect(element.shadowRoot).to.be.null;
                     expect(element.root.children.length).to.be.above(0);

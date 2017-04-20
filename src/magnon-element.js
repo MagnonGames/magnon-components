@@ -1,14 +1,16 @@
 window.MagnonElement = class extends HTMLElement {
-    constructor(options = { shadow: true }) {
+    constructor(options = { noShadow: false }) {
         super();
 
-        this.usesShadow = options.shadow;
-        this.usesShadyCSS = options.shadow && window.ShadyCSS;
+        this.usesShadow = !options.noShadow;
+        this.usesShadyCSS = this.usesShadow && window.ShadyCSS;
 
         this.root = this;
 
+        const templateName = options.template || this.name;
+
         const searchForTemplate = (doc) => {
-            const template = doc.querySelector(`#${this.name}`);
+            const template = doc.querySelector(`#${templateName}`);
             if (template) return template;
             else {
                 for (const link of doc.querySelectorAll("link[rel=import]")) {
@@ -26,7 +28,7 @@ window.MagnonElement = class extends HTMLElement {
         this._instance = t.content.cloneNode(true);
         if (this.usesShadyCSS) window.ShadyCSS.styleElement(this._instance);
 
-        if (options.shadow) this.root = this.attachShadow({ mode: "open" });
+        if (this.usesShadow) this.root = this.attachShadow({ mode: "open" });
         this.root.appendChild(this._instance);
     }
 
