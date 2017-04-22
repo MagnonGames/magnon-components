@@ -20,8 +20,10 @@ window.MagnonElement = class extends HTMLElement {
             }
         };
 
-        const t = searchForTemplate(document);
-        if (!t) return; // Component without elements
+        const template = searchForTemplate(document);
+        if (!template) return; // Component without elements
+
+        const t = template.cloneNode(true);
 
         if (this.usesShadyCSS) window.ShadyCSS.prepareTemplate(t, this.name);
 
