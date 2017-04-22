@@ -26,6 +26,10 @@
         button:active {
             background: rgba(46, 163, 111, 0.8);
         }
+
+        button::-moz-focus-inner {
+            padding: 0;
+        }
     </style>
 
     <button>
@@ -41,7 +45,7 @@
         }
 
         static get observedAttributes() {
-            return ["icon"];
+            return ["icon", "title"];
         }
 
         constructor() {
@@ -52,7 +56,27 @@
         }
 
         attributeChangedCallback(attribute, old, value) {
-            this._icon.setAttribute(attribute, value);
+            if (attribute === "icon") {
+                this._icon.setAttribute(attribute, value);
+                if (!this.hasAttribute("title")) {
+                    this._setTitleFromIconName(value);
+                }
+            } else if (attribute === "title") {
+                if (value && value.length > 0) {
+                    this._button.setAttribute("aria-label", value);
+                } else {
+                    this._setTitleFromIconName(this.getAttribute("icon"));
+                }
+            }
+        }
+
+        _setTitleFromIconName(iconName) {
+            const dashIndex = iconName.indexOf("-");
+            const betterName = (
+                iconName.charAt(dashIndex + 1).toUpperCase() +
+                iconName.slice(dashIndex + 2)
+            ).replace(/-/g, " ");
+            this._button.setAttribute("aria-label", betterName);
         }
     }
 
