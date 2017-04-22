@@ -45,7 +45,7 @@
         }
 
         static get observedAttributes() {
-            return ["icon", "title"];
+            return ["icon", "title", "tabindex"];
         }
 
         constructor() {
@@ -67,6 +67,10 @@
                 } else {
                     this._setTitleFromIconName(this.getAttribute("icon"));
                 }
+            } else if (attribute === "tabindex") {
+                // BUG: It doesn't seem like the polyfill takes into account
+                // tabindex incapsulation of shadowdom. This is a workaround.
+                this._button.setAttribute("tabindex", value);
             }
         }
 
