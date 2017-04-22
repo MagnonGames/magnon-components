@@ -1,0 +1,102 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="magnon-social-button.html">
+<link rel="import" href="../magnon-icon/social-set.html">
+
+<template id="social-button">
+    <style>
+        :host {
+            display: inline-block;
+        }
+    </style>
+
+    <div id="container">
+        <magnon-social-button></magnon-social-button>
+    </div>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    const createSocialIconButton = (name, icon, color, hrefTemplate, titleTemplate, userTemplate, idURL) => {
+        const socialIconButton = class extends MagnonElement {
+            constructor() {
+                super({ template: "social-button" });
+
+                this.root.querySelector("#container").style.setProperty(
+                    "--magnon-icon-color",
+                    `var(--magnon-social-icon-button-color, ${color})`
+                );
+
+                this._button = this.root.querySelector("magnon-social-button");
+                this._button.setAttribute("icon", icon);
+            }
+
+            static get name() {
+                return name;
+            }
+
+            static get observedAttributes() {
+                return ["user", "id"];
+            }
+
+            attributeChangedCallback(attribute, old, value) {
+                if (attribute === "user") {
+                    if (!idURL) this._button.setAttribute("href", hrefTemplate(value));
+                    this._button.setAttribute("title", titleTemplate(value));
+                    this._button.setAttribute("user", userTemplate(value));
+                } else if (attribute === "id" && idURL) {
+                    this._button.setAttribute("href", hrefTemplate(value));
+                }
+            }
+        };
+
+        socialIconButton.init();
+    };
+
+    const userTmpl = (strings) => user => strings[0] + user + strings[1];
+
+    createSocialIconButton(
+        "magnon-twitter-button",
+        "social-twitter",
+        "#1DA1F3",
+        userTmpl`https://twitter.com/${0}`,
+        userTmpl`Follow @${0} on Twitter!`,
+        userTmpl`@${0}`
+    );
+
+    createSocialIconButton(
+        "magnon-gplus-button",
+        "social-gplus",
+        "#DB4437",
+        userTmpl`https://plus.google.com/+${0}`,
+        userTmpl`Add +${0} on Google+!`,
+        userTmpl`+${0}`
+    );
+
+    createSocialIconButton(
+        "magnon-twitch-button",
+        "social-twitch",
+        "#6441A4",
+        userTmpl`https://www.twitch.tv/${0}`,
+        userTmpl`Follow ${0} on Twitch!`,
+        userTmpl`${0}`
+    );
+
+    createSocialIconButton(
+        "magnon-youtube-button",
+        "social-youtube",
+        "#CD201F",
+        userTmpl`https://www.youtube.com/channel/${0}`,
+        userTmpl`Subscribe to ${0} on YouTube!`,
+        userTmpl`${0}`,
+        true
+    );
+
+    createSocialIconButton(
+        "magnon-github-button",
+        "social-github",
+        "#171515",
+        userTmpl`https://github.com/${0}`,
+        userTmpl`Follow ${0} on Github!`,
+        userTmpl`${0}`
+    );
+</script>

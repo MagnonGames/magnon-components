@@ -1,0 +1,48 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
+
+<template id="magnon-social-button">
+    <style>
+        :host {
+            display: block;
+        }
+    </style>
+
+    <a target="_blank">
+        <magnon-icon-button tabindex="-1" id="button"></magnon-icon-button>
+    </a>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    class MagnonSocialButton extends MagnonElement {
+        constructor() {
+            super();
+
+            this._a = this.root.querySelector("a");
+            this._button = this.root.querySelector("#button");
+        }
+
+        static get name() {
+            return "magnon-social-button";
+        }
+
+        static get observedAttributes() {
+            return ["icon", "href", "user", "title"];
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            if (attribute === "icon") {
+                this._button.setAttribute("icon", value);
+            } else if (attribute === "href") {
+                this._a.setAttribute("href", value);
+            } else if (attribute === "user") {
+                // TODO: Name display
+            } else if (attribute === "title") {
+                this._a.setAttribute("title", value);
+            }
+        }
+    }
+
+    MagnonSocialButton.init();
+</script>
