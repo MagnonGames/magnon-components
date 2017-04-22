@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
+    </head>
+    <body>
+        <test-fixture id="icon-button">
+            <template>
+                <magnon-icon-button icon="cross"></magnon-icon-button>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, sinon, a11ySuite */
+            describe("<magnon-icon-button>", () => {
+                let iconButton; // eslint-disable-line
+
+                beforeEach(() => {
+                    iconButton = fixture("icon-button");
+                });
+
+                it("Has a width equal to its height", () => {
+                    expect(iconButton.offsetWidth).to.equal(iconButton.offsetHeight);
+                });
+
+                it("Generates a label appropriately", () => {
+                    expect(iconButton._button.getAttribute("aria-label")).to.equal("Cross");
+
+                    iconButton.setAttribute("title", "Close");
+                    expect(iconButton._button.getAttribute("aria-label")).to.equal("Close");
+
+                    iconButton.setAttribute("icon", "check");
+                    expect(iconButton._button.getAttribute("aria-label")).to.not.equal("Check");
+
+                    iconButton.setAttribute("title", "");
+                    expect(iconButton._button.getAttribute("aria-label")).to.equal("Check");
+                });
+
+                it("Generates good labels for other icon sets", () => {
+                    const iconChangeStub = sinon.stub(iconButton._icon, "changeIcon");
+
+                    iconButton.setAttribute("icon", "something-nothing");
+                    expect(iconButton._button.getAttribute("aria-label")).to.equal("Nothing");
+
+                    iconButton.setAttribute("icon", "other-icon-that-doesnt-exist");
+                    expect(iconButton._button.getAttribute("aria-label")).to.equal("Icon that doesnt exist");
+
+                    iconChangeStub.restore();
+                });
+            });
+
+            // BUG: accessibility-developer-tools (wct a11ySuite?) has a bug
+            // which causes humanLangMissing to be tested here which completely
+            // crashes everything.
+            a11ySuite("icon-button", ["humanLangMissing"]);
+        </script>
+    </body>
+</html>
