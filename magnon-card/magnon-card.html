@@ -25,6 +25,10 @@
             border-radius: 4px;
         }
 
+        #card.shadow {
+            box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.35);
+        }
+
         #title {
             margin-bottom: var(--card-padding);
         }
@@ -58,8 +62,28 @@
 <script>
     /* globals MagnonElement */
     class MagnonCard extends MagnonElement {
+        constructor() {
+            super();
+
+            this._card = this.root.querySelector("#card");
+        }
+
         static get name() {
             return "magnon-card";
+        }
+
+        static get observedAttributes() {
+            return ["shadow"];
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            if (attribute === "shadow") {
+                if (this.hasAttribute("shadow") && value !== "false") {
+                    this._card.classList.add("shadow");
+                } else {
+                    this._card.classList.remove("shadow");
+                }
+            }
         }
     }
 
