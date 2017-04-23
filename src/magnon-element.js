@@ -14,6 +14,7 @@ window.MagnonElement = class extends HTMLElement {
             if (template) return template;
             else {
                 for (const link of doc.querySelectorAll("link[rel=import]")) {
+                    if (link.import === null) return;
                     const template = searchForTemplate(link.import);
                     if (template) return template;
                 }
