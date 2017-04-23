@@ -16,6 +16,11 @@
             font-family: var(--magnon-font);
 
             --magnon-header-height: 50px;
+
+            overflow-y: scroll;
+            overflow-x: auto;
+
+            background: var(--magnon-shell-background, #f0f0f0);
         }
 
         #header-container {
@@ -51,12 +56,18 @@
             height: 100%;
         }
 
-        #content-container {
+        #main-container {
             position: absolute;
-            top: 0;
+            top: var(--magnon-header-height);
             left: 0;
             right: 0;
-            margin: calc(var(--magnon-header-height) + 20px) auto 0 auto;
+
+            width: 100%;
+            min-height: calc(100% - var(--magnon-header-height));
+        }
+
+        #content-container {
+            margin: 20px auto 0 auto;
             width: 70vw;
 
             box-sizing: border-box;
@@ -69,7 +80,7 @@
             margin-top: var(--magnon-header-height);
         }
 
-        #footer {
+        magnon-footer {
             position: absolute;
             bottom: 0;
             width: 100%;
@@ -87,11 +98,11 @@
         <slot name="sub-navigation"></slot>
     </magnon-drawer>
 
-    <div id="content-container">
-        <slot name="content"></slot>
-    </div>
+    <div id="main-container">
+        <div id="content-container">
+            <slot name="content"></slot>
+        </div>
 
-    <div id="footer">
         <magnon-footer></magnon-footer>
     </div>
 </template>
