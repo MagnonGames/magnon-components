@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Components Demo 2</title>
+
+        <style>
+            #game-card {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+
+                width: 40%;
+            }
+
+            #game-art {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-image: url("https://magnon.net/images/games/pillowKnights.png");
+                background-position: 0% center;
+                image-rendering: pixelated;
+
+                animation-duration: 40s;
+                animation-name: pan;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                animation-timing-function: ease;
+            }
+
+            @keyframes pan {
+                to {
+                    background-position: 100% center;
+                }
+            }
+        </style>
+
+        <link rel="import" href="../magnon-shell/magnon-shell.html">
+        <link rel="import" href="../magnon-card/magnon-card.html">
+        <link rel="import" href="../magnon-button/magnon-button.html">
+    </head>
+    <body>
+        <magnon-shell expand-content>
+            <div slot="content">
+                <span id="game-art"></span>
+
+                <magnon-card id="game-card" shadow>
+                    <h1 slot="title">Pillow Knights</h1>
+                    <p>
+                        The cat invasion is here! Your kingdom needs help! Will you be the one who finally defeats the cat boss?
+                        <br /><br />
+                        Play as the Pillow Knight in a world swarmed with cats! Your mission is to defend your kingdom from the cat invasion and to stay alive as long as possible. You will encounter everything from bouncing house cats to burning lava cats. The kingdom is in your hands.
+                        The character is constantly moving in the direction that you are facing with the exception of when you are ducking. Use everything you know to outsmart the cats by either ducking, jumping over or killing them by jumping on top of them, though some cats may not die that easily so be careful.
+                        You get points by just surviving and also by killing the cats but you can also get large bonuses by performing good. Compare your highscore with your friends and try to get on the leaderboard. There is also a shop where you can upgrade your characters cosmetics.
+                    </p>
+                    <div slot="footer">
+                        <magnon-button>Download Game</magnon-button>
+                    </div>
+                </magnon-card>
+            </div>
+        </magnon-shell>
+    </body>
+</html>
