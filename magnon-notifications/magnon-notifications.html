@@ -1,0 +1,124 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="../magnon-styles/magnon-styles.html">
+<link rel="import" href="../magnon-icon/magnon-icon.html">
+
+
+<template id="magnon-notifications">
+    <style>
+        :host {
+            display: flex;
+            position: fixed;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: 1000;
+            pointer-events: none;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            padding: 20px 40px;
+        }
+
+        ::slotted(magnon-notification) {
+            margin-top: 20px;
+        }
+    </style>
+
+    <slot></slot>
+</template>
+
+<template id="magnon-notification">
+    <style>
+        :host {
+            display: flex;
+            pointer-events: all;
+            min-width: 350px;
+
+            background: var(--magnon-black);
+            color: white;
+            font-family: var(--magnon-font);
+
+            border-radius: 4px;
+        }
+
+        #left {
+            padding: 20px;
+        }
+
+        #icon {
+            --magnon-icon-color: var(--magnon-notification-color, white);
+            --magnon-icon-size: 48px;
+        }
+
+        #right {
+            flex-grow: 1;
+            padding: 17px 20px 17px 10px;
+        }
+
+        #title {
+            display: block;
+            color: var(--magnon-notification-color);
+
+            font-size: 18px;
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <div id="left">
+        <div id="icon"><slot name="icon"></slot></div>
+    </div>
+    <div id="right">
+        <span id="title"><slot name="title"></slot></span>
+        <div id="content"><slot></slot></div>
+    </div>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    class MagnonNotifications extends MagnonElement {
+        static appendToBody() {
+            const append = () => {
+                const notificationContainer = document.createElement("magnon-notifications");
+                this.notificationContainer = notificationContainer;
+                document.body.appendChild(notificationContainer);
+            };
+
+            if (document.readyState !== "loading") {
+                append();
+            } else {
+                document.addEventListener("DOMContentLoaded", () => append());
+            }
+        }
+
+        static send(template) {
+            const instance = template.content.cloneNode(true);
+            this.notificationContainer.appendChild(instance);
+        }
+
+        static get name() {
+            return "magnon-notifications";
+        }
+    }
+
+    class MagnonNotification extends MagnonElement {
+        static get name() {
+            return "magnon-notification";
+        }
+
+        static get observedAttributes() {
+            return ["color"];
+        }
+
+        attributeChangedCallback(attribute, old, value) {
+            if (attribute === "color") {
+                const newValue = value.startsWith("--") ? `var(${value})` : value;
+                this.style.setProperty("--magnon-notification-color", newValue);
+            }
+        }
+    }
+
+    MagnonNotifications.init();
+    MagnonNotifications.appendToBody();
+    MagnonNotification.init();
+</script>
