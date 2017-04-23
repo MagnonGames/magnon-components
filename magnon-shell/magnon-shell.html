@@ -2,6 +2,7 @@
 <link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
 <link rel="import" href="../magnon-logo/magnon-logo.html">
 <link rel="import" href="../magnon-drawer/magnon-drawer.html">
+<link rel="import" href="../magnon-footer/magnon-footer.html">
 <link rel="import" href="../magnon-styles/magnon-styles.html">
 
 <template id="magnon-shell">
@@ -57,11 +58,21 @@
             right: 0;
             margin: calc(var(--magnon-header-height) + 20px) auto 0 auto;
             width: 70vw;
+
+            box-sizing: border-box;
+            min-height: 100%;
+            padding-bottom: 300px;
         }
 
         #content-container.expand-content {
             width: 100vw;
             margin-top: var(--magnon-header-height);
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 
@@ -81,7 +92,7 @@
     </div>
 
     <div id="footer">
-
+        <magnon-footer></magnon-footer>
     </div>
 </template>
 
