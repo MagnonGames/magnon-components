@@ -76,8 +76,10 @@
         }
 
         #content-container.expand-content {
-            width: 100vw;
-            margin-top: var(--magnon-header-height);
+            width: 100%;
+            max-width: 100%;
+            min-height: calc(100vh - var(--magnon-header-height) + 300px);
+            margin: 0;
         }
 
         magnon-footer {
