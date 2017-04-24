@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-icon/magnon-icon.html">
+    </head>
+    <body>
+        <test-fixture id="icon">
+            <template>
+                <magnon-icon icon="check"></magnon-icon>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-icon>", () => {
+                let icon; // eslint-disable-line
+
+                beforeEach(() => {
+                    icon = fixture("icon");
+                });
+            });
+
+            // See magnon-icon-button-test.html for "humanLangMissing" explanation.
+            a11ySuite("icon", ["humanLangMissing"]);
+        </script>
+    </body>
+</html>
