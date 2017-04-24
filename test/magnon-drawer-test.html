@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-drawer/magnon-drawer.html">
+    </head>
+    <body>
+        <test-fixture id="drawer">
+            <template>
+                <magnon-drawer open></magnon-drawer>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-drawer>", () => {
+                let drawer; // eslint-disable-line
+
+                beforeEach(() => {
+                    drawer = fixture("drawer");
+                });
+            });
+
+            a11ySuite("drawer");
+        </script>
+    </body>
+</html>
