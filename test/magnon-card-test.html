@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-card/magnon-card.html">
+    </head>
+    <body>
+        <test-fixture id="card">
+            <template>
+                <magnon-card>
+                    <h1 slot="title">Test</h1>
+                    <p>
+                        More test.
+                    </p>
+                    <span slot="footer">Footer.</span>
+                </magnon-card>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-card>", () => {
+                let card; // eslint-disable-line
+
+                beforeEach(() => {
+                    card = fixture("card");
+                });
+            });
+
+            a11ySuite("card");
+        </script>
+    </body>
+</html>
