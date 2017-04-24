@@ -38,6 +38,8 @@
             font-family: var(--magnon-font);
 
             border-radius: 4px;
+
+            animation: 0.3s ease-out 0s 1 notification-in;
         }
 
         #left {
@@ -62,6 +64,18 @@
             font-weight: bold;
 
             margin-bottom: 10px;
+        }
+
+        @keyframes notification-in {
+            from {
+                transform: translateY(150%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 
