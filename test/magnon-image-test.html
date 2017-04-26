@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-image/magnon-image.html">
+    </head>
+    <body>
+        <test-fixture id="image">
+            <template>
+                <magnon-image src="test-image.png" alt="A lovely message"></magnon-image>
+            </template>
+        </test-fixture>
+
+        <test-fixture id="no-fullscreen-image">
+            <template>
+                <magnon-image src="test-image.png" alt="A lovely message" no-fullscreen></magnon-image>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-image>", () => {
+                let image; // eslint-disable-line
+
+                beforeEach(() => {
+                    image = fixture("image");
+                });
+
+                it("Can go to fullscreen normally", done => {
+                    image._image.click();
+                    setTimeout(() => {
+                        expect(image._fullscreenBackdrop.style.opacity).to.be.above(0);
+                        done();
+                    }, 200);
+                });
+
+                it("Doesn't go to fullscreen if attribute no-fullscreen is present", done => {
+                    const fimage = fixture("no-fullscreen-image");
+                    fimage._image.click();
+                    setTimeout(() => {
+                        expect(fimage._fullscreenBackdrop.style.opacity).to.not.equal(1);
+                        done();
+                    }, 200);
+                });
+            });
+
+            a11ySuite("image");
+        </script>
+    </body>
+</html>
