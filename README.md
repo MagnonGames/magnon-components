@@ -7,7 +7,7 @@ Magnon Webcomponents is a collection of webcomponents made for Magnon web projec
 
 Among the different components, some highlights are:
 - `magnon-logo` for a modular and animatable Magnon logo
-- `magnon-image` for an <img> tag with superpowers (such as going to fullscreen when clicked)
+- `magnon-image` for an &lt;img&gt; tag with superpowers (such as going to fullscreen when clicked)
 - `magnon-shell` as just a shell? xP
 
 ## Contributing
