@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/webcomponents.js/webcomponents-lite.js"></script>
+        <script src="../node_modules/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../magnon-shell/magnon-shell.html">
+    </head>
+    <body>
+        <test-fixture id="shell">
+            <template>
+                <magnon-shell></magnon-shell>
+            </template>
+        </test-fixture>
+
+        <script>
+            /* globals fixture, a11ySuite */
+            describe("<magnon-shell>", () => {
+                let shell; // eslint-disable-line
+
+                beforeEach(() => {
+                    shell = fixture("shell");
+                });
+            });
+
+            // See magnon-icon-button-test.html for "humanLangMissing" explanation.
+            a11ySuite("shell", ["humanLangMissing"]);
+        </script>
+    </body>
+</html>
