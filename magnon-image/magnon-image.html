@@ -7,6 +7,20 @@
             display: inline-block;
         }
 
+        #alt-text.shown {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #alt-text {
+            display: hidden;
+            text-align: center;
+            font-family: var(--magnon-font);
+            font-size: 20px;
+
+            transition: 0.3s opacity;
+        }
+
         #main-image {
             border-radius: var(--magnon-image-border-radius);
 
@@ -40,6 +54,8 @@
             width: 80%;
             height: auto;
 
+            margin: 0 100px;
+
             transform-origin: top left;
             transition: all 0.3s ease-out;
         }
@@ -48,15 +64,44 @@
             width: auto;
             height: 80%;
         }
+
+        #fullscreen-text {
+            display: none;
+            color: white;
+            z-index: 1;
+            font-family: var(--magnon-font);
+            max-width: 40%;
+            margin-right: 100px;
+            opacity: 0;
+
+            transition: 0.3s opacity;
+        }
+
+        #fullscreen-text.shown {
+            display: block;
+        }
+
+        #description-title {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
     </style>
 
     <div id="image-container">
         <img id="main-image"></img>
+        <span id="alt-text"></span>
     </div>
 
     <div id="fullscreen-container">
         <span id="fullscreen-backdrop"></span>
         <img id="fullscreen-image"></img>
+        <div id="fullscreen-text">
+            <div id="description-title">
+                <slot name="description-title"></slot>
+            </div>
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -69,10 +114,12 @@
             this._fullscreenEnabled = true;
 
             this._image = this.root.querySelector("#main-image");
+            this._altText = this.root.querySelector("#alt-text");
 
             this._fullscreenContainer = this.root.querySelector("#fullscreen-container");
             this._fullscreenBackdrop = this.root.querySelector("#fullscreen-backdrop");
             this._fullscreenImage = this.root.querySelector("#fullscreen-image");
+            this._fullscreenText = this.root.querySelector("#fullscreen-text");
 
             this._image.addEventListener("load", () => this._updateImageSize());
             this._image.addEventListener("click", () => (this.fullscreen = true));
@@ -88,11 +135,18 @@
         }
 
         static get observedAttributes() {
-            return ["src", "alt", "no-fullscreen"];
+            return ["src", "alt", "show-alt", "no-fullscreen"];
+        }
+
+        get _hasDescription() {
+            return this.textContent.trim().length > 0;
         }
 
         set fullscreen(value) {
             if (value && !this._fullscreenEnabled) return;
+
+            this._updateDescription();
+            this._updateImageSize();
 
             if (value) {
                 this._fullscreenImage.style.opacity = "1";
@@ -100,6 +154,8 @@
 
                 this._image.style.transition = "none";
                 this._image.style.opacity = "0";
+
+                this._altText.style.opacity = "0";
 
                 const startBox = this._image.getBoundingClientRect();
                 const startBorderRadius = window.getComputedStyle(this._image).getPropertyValue("border-radius");
@@ -124,6 +180,8 @@
 
                     this._fullscreenImage.style.borderRadius = "0";
 
+                    this._fullscreenText.style.opacity = "1";
+
                     const endAction = () => {
                         this._fullscreenContainer.style.pointerEvents = "all";
                         this._fullscreenImage.removeAttribute("style");
@@ -146,7 +204,17 @@
 
                 this._fullscreenImage.style.opacity = "0";
                 this._fullscreenBackdrop.style.opacity = "0";
+                this._fullscreenText.style.opacity = "0";
                 this._image.style.opacity = "1";
+                this._altText.style.opacity = "1";
+            }
+        }
+
+        _updateDescription() {
+            if (this._hasDescription) {
+                this._fullscreenText.classList.add("shown");
+            } else {
+                this._fullscreenText.classList.remove("shown");
             }
         }
 
@@ -155,15 +223,40 @@
                 this._image.src = value;
                 this._fullscreenImage.src = value;
             } else if (attribute === "alt") {
-                this._image.alt = value;
-                this._fullscreenImage.alt = value;
+                this._setAlt(value);
+            } else if (attribute === "show-alt") {
+                const show = this.hasAttribute("show-alt");
+                if (show) {
+                    this._altText.classList.add("shown");
+                } else {
+                    this._altText.classList.remove("shown");
+                }
+                this._setAlt(this.getAttribute("alt"), show);
             } else if (attribute === "no-fullscreen") {
                 this._fullscreenEnabled = !this.hasAttribute("no-fullscreen");
             }
         }
 
+        _setAlt(alt, altTextEnabled = this.hasAttribute("show-alt")) {
+            if (altTextEnabled) {
+                this._image.alt = "";
+                this._fullscreenImage.alt = "";
+                this._altText.textContent = alt;
+            } else {
+                this._image.alt = alt;
+                this._fullscreenImage.alt = alt;
+                this._altText.textContent = "";
+            }
+        }
+
         _updateImageSize() {
-            const width = window.innerWidth;
+            const textStyle = window.getComputedStyle(this._fullscreenText);
+            const textWidth = textStyle.display !== "none"
+                ? (this._fullscreenText.offsetWidth +
+                parseFloat(textStyle.marginLeft) + parseFloat(textStyle.marginRight))
+                : 0;
+
+            const width = window.innerWidth - textWidth;
             const height = window.innerHeight;
             const imageWidth = this._image.width;
             const imageHeight = this._image.height;

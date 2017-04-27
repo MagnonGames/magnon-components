@@ -21,6 +21,15 @@
             </template>
         </test-fixture>
 
+        <test-fixture id="image-with-description">
+            <template>
+                <magnon-image src="test-image.png" alt="A lovely message" show-alt>
+                    <span slot="description-title">A message for all</span>
+                    <span>IDK</span>
+                </magnon-image>
+            </template>
+        </test-fixture>
+
         <script>
             /* globals fixture, a11ySuite */
             describe("<magnon-image>", () => {
@@ -49,6 +58,8 @@
             });
 
             a11ySuite("image");
+            a11ySuite("no-fullscreen-image");
+            a11ySuite("image-with-description");
         </script>
     </body>
 </html>
