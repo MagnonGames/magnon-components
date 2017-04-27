@@ -20,6 +20,7 @@
 
         ::slotted(magnon-notification) {
             flex-shrink: 0;
+            max-width: 30%;
         }
     </style>
 
@@ -43,7 +44,7 @@
 
             margin: 10px 0;
 
-            animation: 0.3s ease-out 0.5s 1 notification-in;
+            animation: 0.3s ease-out 0.4s 1 notification-in;
             transition: 0.2s all;
         }
 
@@ -124,25 +125,29 @@
         constructor() {
             super();
 
-            const height = this.offsetHeight;
             const margin = window.getComputedStyle(this).margin;
-            console.log(margin);
 
             this.style.transition = "none";
-
             this.style.height = "0px";
             this.style.margin = "0px 0px";
 
             setTimeout(() => {
-                this.style.transition = "";
+                this.style.height = "";
+                const height = this.offsetHeight;
 
-                this.style.margin = margin;
-                this.style.height = `${height}px`;
+                this.style.height = "0px";
 
-                this.addEventListener("animationstart", () => {
-                    console.log("start");
-                    this.style.opacity = 1;
-                });
+                setTimeout(() => {
+                    this.style.transition = "";
+
+                    this.style.margin = margin;
+                    this.style.height = `${height}px`;
+
+                    this.addEventListener("animationstart", () => {
+                        console.log("start");
+                        this.style.opacity = 1;
+                    });
+                }, 100);
             }, 100);
         }
 

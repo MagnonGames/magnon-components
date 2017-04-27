@@ -23,7 +23,16 @@
                 </magnon-notification>
             </template>
 
+            <template id="success">
+                <magnon-notification color="--magnon-neon-teal">
+                    <magnon-icon icon="check" slot="icon"></magnon-icon>
+                    <span slot="title">Yay!</span>
+                    <span>Something went fantastically great! This is also a "long" notification, so it wraps. :D</span>
+                </magnon-notification>
+            </template>
+
             <button onclick="MagnonNotifications.send(document.querySelector('#error'))">Send Error</button>
+            <button onclick="MagnonNotifications.send(document.querySelector('#success'))">Send Success</button>
         </demo-fixture>
     </body>
 </html>
