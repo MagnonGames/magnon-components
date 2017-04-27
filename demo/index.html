@@ -19,6 +19,15 @@
                 --magnon-image-border-radius: 50%;
                 margin: 0 30px;
             }
+
+            #team {
+                --magnon-social-icon-button-color: white;
+                --magnon-icon-size: 24px;
+            }
+
+            .user-social {
+                margin-top: 30px;
+            }
         </style>
 
         <link rel="import" href="../magnon-shell/magnon-shell.html">
@@ -26,6 +35,7 @@
         <link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
         <link rel="import" href="../magnon-icon/social-set.html">
         <link rel="import" href="../magnon-image/magnon-image.html">
+        <link rel="import" href="../magnon-social-buttons/magnon-social-buttons.html">
     </head>
     <body>
         <magnon-shell>
@@ -36,9 +46,7 @@
                         This is a demo page for Magnon Webcomponents!
                     </p>
                     <div slot="footer">
-                        <a href="https://twitter.com/theMagnon" target="_blank">
-                            <magnon-icon-button class="twitter-blue" icon="social-twitter"></magnon-icon-button>
-                        </a>
+                        <magnon-twitter-button user="theMagnon"></magnon-twitter-button>
                     </div>
                 </magnon-card>
                 <magnon-card>
@@ -55,7 +63,9 @@
                             gamer, mostly because my finger coordination is just
                             horrible. One important thing to note is that I am
                             horrible at spelling.
-                            <magnon-twitter-link user="CurrayNRice"></magnon-twitter-link>
+                            <div class="user-social">
+                                <magnon-twitter-button user="CurrayNRice"></magnon-twitter-button>
+                            </div>
                         </magnon-image>
                         <magnon-image src="https://www.gravatar.com/avatar/fffe89cd92e3d0d0ad8e4126aad37008?s=300" alt="Max" show-alt>
                             <h3 slot="description-title">Max</h3>
@@ -72,7 +82,9 @@
                             study Japanese, program games and other fun stuff such
                             as making this website. Also, console > PC when it comes
                             to gaming!
-                            <magnon-twitter-link user="magnonellie"></magnon-twitter-link>
+                            <div class="user-social">
+                                <magnon-twitter-button user="magnonellie"></magnon-twitter-button>
+                            </div>
                         </magnon-image>
                     </div>
                 </magnon-card>
