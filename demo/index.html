@@ -8,12 +8,24 @@
             .twitter-blue {
                 --magnon-icon-color: #1da1f2;
             }
+
+            #team {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            #team magnon-image {
+                --magnon-image-border-radius: 50%;
+                margin: 0 30px;
+            }
         </style>
 
         <link rel="import" href="../magnon-shell/magnon-shell.html">
         <link rel="import" href="../magnon-card/magnon-card.html">
         <link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
         <link rel="import" href="../magnon-icon/social-set.html">
+        <link rel="import" href="../magnon-image/magnon-image.html">
     </head>
     <body>
         <magnon-shell>
@@ -27,6 +39,41 @@
                         <a href="https://twitter.com/theMagnon" target="_blank">
                             <magnon-icon-button class="twitter-blue" icon="social-twitter"></magnon-icon-button>
                         </a>
+                    </div>
+                </magnon-card>
+                <magnon-card>
+                    <h2 slot="title">The team</h1>
+                    <p>
+                        Who makes Magnon go around? These lovely people of course:
+                    </p>
+                    <div id="team">
+                        <magnon-image src="https://www.gravatar.com/avatar/d1b5f7ed689d1e29178dafb6221ca935?s=300" alt="Karl" show-alt>
+                            <h3 slot="description-title">Karl</h3>
+                            Hey, my name is Karl. What I do when it comes to Magnon
+                            is programming, but what i really love is designing and
+                            creating a game that is actually fun to play. I am a PC
+                            gamer, mostly because my finger coordination is just
+                            horrible. One important thing to note is that I am
+                            horrible at spelling.
+                            <magnon-twitter-link user="CurrayNRice"></magnon-twitter-link>
+                        </magnon-image>
+                        <magnon-image src="https://www.gravatar.com/avatar/fffe89cd92e3d0d0ad8e4126aad37008?s=300" alt="Max" show-alt>
+                            <h3 slot="description-title">Max</h3>
+                            Greetings! I’m Max. I like graphics, sculpting and
+                            animation. Therefore, I’m the one responsible for that
+                            part. When not doing graphics related stuff I like to
+                            play games or just sleep. I’m not a big fan of social
+                            media so Steam is the place.
+                        </magnon-image>
+                        <magnon-image src="https://www.gravatar.com/avatar/556e7ba6081dc1a3c049ff83be5ccfd1?s=300" alt="Ellie" show-alt>
+                            <h3 slot="description-title">Ellie</h3>
+                            Hi, my name is Ellie. I am what most of you would call a
+                            weeb, though I try to be moderate about it. I like to
+                            study Japanese, program games and other fun stuff such
+                            as making this website. Also, console > PC when it comes
+                            to gaming!
+                            <magnon-twitter-link user="magnonellie"></magnon-twitter-link>
+                        </magnon-image>
                     </div>
                 </magnon-card>
             </div>
