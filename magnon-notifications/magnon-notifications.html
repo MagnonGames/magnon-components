@@ -19,7 +19,6 @@
         }
 
         ::slotted(magnon-notification) {
-            margin-top: 20px;
             flex-shrink: 0;
         }
     </style>
@@ -40,7 +39,12 @@
 
             border-radius: 4px;
 
-            animation: 0.3s ease-out 0s 1 notification-in;
+            opacity: 0;
+
+            margin: 10px 0;
+
+            animation: 0.3s ease-out 0.5s 1 notification-in;
+            transition: 0.2s all;
         }
 
         #left {
@@ -117,6 +121,31 @@
     }
 
     class MagnonNotification extends MagnonElement {
+        constructor() {
+            super();
+
+            const height = this.offsetHeight;
+            const margin = window.getComputedStyle(this).margin;
+            console.log(margin);
+
+            this.style.transition = "none";
+
+            this.style.height = "0px";
+            this.style.margin = "0px 0px";
+
+            setTimeout(() => {
+                this.style.transition = "";
+
+                this.style.margin = margin;
+                this.style.height = `${height}px`;
+
+                this.addEventListener("animationstart", () => {
+                    console.log("start");
+                    this.style.opacity = 1;
+                });
+            }, 100);
+        }
+
         static get name() {
             return "magnon-notification";
         }
