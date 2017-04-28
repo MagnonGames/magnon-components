@@ -26,9 +26,7 @@
   "devDependencies": {
     "eslint": "^3.17.1",
     "eslint-plugin-html": "^2.0.1",
-    "web-component-tester": "^5.0.0"
-  },
-  "dependencies": {
+    "web-component-tester": "^5.0.0",
     "webcomponents.js": "git+https://github.com/webcomponents/webcomponentsjs.git"
   }
 }
