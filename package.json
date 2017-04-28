@@ -1,5 +1,5 @@
 {
-  "name": "magnon-components",
+  "name": "@magnon/components",
   "version": "0.1.0",
   "description": "A set of Magnon web-components",
   "directories": {
