@@ -45,7 +45,7 @@
         }
 
         static range(query, action) {
-            const range = this.querySelector(query);
+            const range = document.querySelector(query);
             range.addEventListener("input", e => {
                 action(range.value);
             });
