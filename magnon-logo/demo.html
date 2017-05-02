@@ -36,11 +36,11 @@
         </div>
 
         <script>
+            /* globals DemoFixture */
             const logo = document.querySelector("magnon-logo");
-            const sizeRange = document.querySelector("#size");
 
-            sizeRange.addEventListener("input", e => {
-                logo.style.height = `${sizeRange.value}px`;
+            DemoFixture.range("size", value => {
+                logo.style.height = `${value}px`;
                 logo.restyleLocal();
             });
         </script>

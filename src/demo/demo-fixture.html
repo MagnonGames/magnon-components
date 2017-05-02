@@ -43,6 +43,13 @@
         static get name() {
             return "demo-fixture";
         }
+
+        static range(query, action) {
+            const range = this.querySelector(query);
+            range.addEventListener("input", e => {
+                action(range.value);
+            });
+        }
     }
 
     const currentDocument = document.currentScript.ownerDocument;
