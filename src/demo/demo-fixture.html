@@ -22,7 +22,6 @@
                 bottom: 20px;
                 display: flex;
                 justify-content: center;
-                color: white;
                 font-family: var(--magnon-font);
             }
 
@@ -44,11 +43,12 @@
             return "demo-fixture";
         }
 
-        static range(query, action) {
+        static range(query, action, value = null) {
             const range = document.querySelector(query);
             range.addEventListener("input", e => {
                 action(range.value);
             });
+            if (value !== null) range.value = value;
         }
     }
 
