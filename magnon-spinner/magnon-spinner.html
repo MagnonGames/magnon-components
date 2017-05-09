@@ -1,0 +1,107 @@
+<link rel="import" href="../element.html">
+<link rel="import" href="../magnon-styles/magnon-styles.html">
+
+<template id="magnon-spinner">
+    <style>
+        :host {
+            display: inline-block;
+            position: relative;
+            width: var(--magnon-spinner-size, 32px);
+            height: var(--magnon-spinner-size, 32px);
+        }
+
+        .ball {
+            display: block;
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            margin: auto;
+            background: var(--magnon-spinner-color, var(--magnon-black));
+            border-radius: 50%;
+            width: calc(var(--magnon-spinner-size, 32px) / 3);
+            height: calc(var(--magnon-spinner-size, 32px) / 3);
+            transform-origin: center;
+        }
+    </style>
+
+    <div id="container">
+    </div>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    const pi2 = Math.PI * 2;
+
+    class MagnonSpinner extends MagnonElement {
+        constructor(options = {
+            balls: 3, ballScale: 1, ballOffset: 1 / 3, spinSpeed: 1,
+            minRadius: 0, maxRadius: 100
+        }) {
+            super();
+
+            this._balls = [];
+
+            this.balls = options.balls;
+            this.ballScale = options.ballScale;
+            this.ballOffset = options.ballOffset;
+            this.alternate = options.alternate;
+
+            this.spinSpeed = options.spinSpeed;
+            this.minRadius = options.minRadius;
+            this.maxRadius = options.maxRadius;
+
+            this._timer = 0;
+            requestAnimationFrame(() => this._animate());
+        }
+
+        static get name() {
+            return "magnon-spinner";
+        }
+
+        set balls(value) {
+            const container = this.root.querySelector("#container");
+
+            let child = container.firstChild;
+            while (child) {
+                container.removeChild(child);
+                child = container.firstChild;
+            }
+            this._balls = [];
+
+            for (let i = 0; i < parseInt(value); i++) {
+                const ball = document.createElement("span");
+                ball.className = "ball";
+                container.appendChild(ball);
+                this._balls[i] = ball;
+            }
+            console.log(value, this.balls);
+        }
+
+        get balls() {
+            return this._balls.length;
+        }
+
+        _animate() {
+            this._timer += 0.05;
+            if (this._timer >= pi2) this._timer -= pi2;
+
+            const radiusMin = parseInt(this.minRadius);
+            const radiusMax = parseInt(this.maxRadius);
+            const radiusTotal = radiusMax - radiusMin;
+
+            this._balls.forEach((ball, i) => {
+                const rotation = pi2 * this.ballOffset * i + this._timer * this.spinSpeed;
+                const fromMiddle = (Math.sin(this._timer / 2) * radiusTotal) + radiusMin;
+
+                ball.style.transform = `
+                    rotate(${rotation}rad)
+                    translate(${fromMiddle}%)
+                    scale(${this.ballScale})
+                `;
+            });
+
+            requestAnimationFrame(() => this._animate());
+        }
+    }
+
+    MagnonSpinner.init();
+</script>
