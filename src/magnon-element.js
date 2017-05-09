@@ -7,8 +7,10 @@ window.MagnonElement = class extends HTMLElement {
 
         this.root = this;
 
-        const templateName = options.template || this.name;
+        this._initContent(options.template || this.name);
+    }
 
+    _initContent(templateName) {
         const searchForTemplate = (doc) => {
             const template = doc.querySelector(`#${templateName}`);
             if (template) return template;
