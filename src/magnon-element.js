@@ -7,7 +7,31 @@ window.MagnonElement = class extends HTMLElement {
 
         this.root = this;
 
+        this._initProperties();
         this._initContent(options.template || this.name);
+    }
+
+    _initProperties() {
+        const propertyAttributes = this.constructor._getDefaultedProperties();
+
+        this._propertyTypes = new Map([
+            ...propertyAttributes.bool.map(p => [p, "bool"]),
+            ...propertyAttributes.string.map(p => [p, "string"]),
+            ...propertyAttributes.number.map(p => [p, "number"])
+        ]);
+
+        this._propertyTypes.forEach((type, propertyName) => {
+            Object.defineProperty(this, propertyName, {
+                get() {
+                    return this[`_${propertyName}`];
+                },
+                set(value) {
+                    const old = this[`_${propertyName}`];
+                    this._setProperty(propertyName, old, value);
+                },
+                enumerable: true
+            });
+        });
     }
 
     _initContent(templateName) {
@@ -37,6 +61,15 @@ window.MagnonElement = class extends HTMLElement {
         this.root.appendChild(this._instance);
     }
 
+    static get observedAttributes() {
+        const propertyAttributes = this._getDefaultedProperties();
+        return [
+            ...propertyAttributes.bool,
+            ...propertyAttributes.string,
+            ...propertyAttributes.number
+        ];
+    }
+
     static get name() {
         throw new TypeError("Element is missing an element name declaration");
     }
@@ -53,6 +86,18 @@ window.MagnonElement = class extends HTMLElement {
         if (this.usesShadyCSS) window.ShadyCSS.styleDocument();
     }
 
+    static _getDefaultedProperties() {
+        const propertyAttributes = this.propertyAttributes || {};
+        propertyAttributes.bool = propertyAttributes.bool || [];
+        propertyAttributes.string = propertyAttributes.string || [];
+        propertyAttributes.number = propertyAttributes.number || [];
+        return propertyAttributes;
+    }
+
+    attributeChangedCallback(attribute, old, value) {
+        this._setProperty(attribute, old, value);
+    }
+
     restyleLocal() {
         if (this.usesShadyCSS) window.ShadyCSS.styleSubtree(this._instance);
     }
@@ -61,5 +106,33 @@ window.MagnonElement = class extends HTMLElement {
         this.dispatchEvent(new CustomEvent(eventName, {
             detail
         }));
+    }
+
+    _setProperty(property, old, value) {
+        const type = this._propertyTypes.get(property);
+
+        if (type === "bool") value = typeof value === "boolean" ? value : this.hasAttribute(property);
+        else if (type === "string") value = `${value}`;
+        else if (type === "number") value = parseFloat(value);
+
+        if (typeof value === "number" || value) {
+            if (type === "bool") {
+                if (!this.hasAttribute(property)) {
+                    this.setAttribute(property, "");
+                }
+            } else {
+                if (this.getAttribute(property) !== value) {
+                    this.setAttribute(property, value);
+                }
+            }
+        } else {
+            this.removeAttribute(property);
+        }
+
+        this[`_${property}`] = value;
+
+        if (typeof this.propertySet === "function") {
+            this.propertySet(property, old, value);
+        }
     }
 };

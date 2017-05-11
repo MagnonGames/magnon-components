@@ -15,6 +15,14 @@
                     static get name() {
                         return "element-name";
                     }
+
+                    static get propertyAttributes() {
+                        return {
+                            bool: ["enabled"],
+                            string: ["text"],
+                            number: ["value"]
+                        };
+                    }
                 };
                 Element.init();
 
@@ -72,6 +80,36 @@
                         done();
                     });
                     element.fire("event", "parameter");
+                });
+
+                it("reflects property attributes", () => {
+                    const element = new Element();
+
+                    element.enabled = true;
+                    expect(element.hasAttribute("enabled")).to.equal(true);
+                    element.removeAttribute("enabled");
+                    expect(element.enabled).to.equal(false);
+
+                    element.text = "hi";
+                    expect(element.getAttribute("text")).to.equal("hi");
+                    element.setAttribute("text", "something");
+                    expect(element.text).to.equal("something");
+
+                    element.value = 123;
+                    // Parse int because attributes are always strings.
+                    expect(parseInt(element.getAttribute("value"))).to.equal(123);
+                    element.setAttribute("value", 321);
+                    expect(element.value).to.equal(321);
+                });
+
+                it("assures property types", () => {
+                    const element = new Element();
+                    element.enabled = "something";
+                    expect(element.enabled).to.be.a("boolean");
+                    element.text = 456413;
+                    expect(element.text).to.be.a("string");
+                    element.value = "hello";
+                    expect(element.value).to.be.a("number");
                 });
             });
         </script>
