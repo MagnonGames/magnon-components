@@ -93,6 +93,7 @@
             top: 40px;
             right: 40px;
             --magnon-icon-color: white;
+            transition: 0.3s opacity;
         }
     </style>
 
@@ -129,10 +130,13 @@
             this._fullscreenBackdrop = this.root.querySelector("#fullscreen-backdrop");
             this._fullscreenImage = this.root.querySelector("#fullscreen-image");
             this._fullscreenText = this.root.querySelector("#fullscreen-text");
+            this._fullscreenCloseButton = this.root.querySelector(".close-button");
 
             this._image.addEventListener("load", () => this._updateImageSize());
             this._image.addEventListener("click", () => (this.fullscreen = true));
-            this._fullscreenBackdrop.addEventListener("click", () => (this.fullscreen = false));
+            const close = () => (this.fullscreen = false);
+            this._fullscreenBackdrop.addEventListener("click", close);
+            this._fullscreenCloseButton.addEventListener("click", close);
 
             window.addEventListener("resize", () => this._updateImageSize());
 
@@ -190,6 +194,7 @@
                     this._fullscreenImage.style.borderRadius = "0";
 
                     this._fullscreenText.style.opacity = "1";
+                    this._fullscreenCloseButton.style.opacity = "1";
 
                     const endAction = () => {
                         this._fullscreenContainer.style.pointerEvents = "all";
@@ -214,6 +219,7 @@
                 this._fullscreenImage.style.opacity = "0";
                 this._fullscreenBackdrop.style.opacity = "0";
                 this._fullscreenText.style.opacity = "0";
+                this._fullscreenCloseButton.style.opacity = "0";
                 this._image.style.opacity = "1";
                 this._altText.style.opacity = "1";
             }
