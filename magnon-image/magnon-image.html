@@ -1,5 +1,6 @@
 <link rel="import" href="../element.html">
 <link rel="import" href="../magnon-styles/magnon-styles.html">
+<link rel="import" href="../magnon-icon-button/magnon-icon-button.html">
 
 <template id="magnon-image">
     <style>
@@ -86,6 +87,13 @@
             font-size: 30px;
             margin-bottom: 20px;
         }
+
+        .close-button {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            --magnon-icon-color: white;
+        }
     </style>
 
     <div id="image-container">
@@ -102,6 +110,7 @@
             </div>
             <slot></slot>
         </div>
+        <magnon-icon-button icon="cross" class="close-button"></magnon-icon-button>
     </div>
 </template>
 
