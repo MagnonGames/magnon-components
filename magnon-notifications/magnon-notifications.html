@@ -149,6 +149,8 @@
             this.style.height = "0px";
             this.style.margin = "0px 0px";
 
+            this.root.querySelector(".close-button").addEventListener("click", () => this.close());
+
             setTimeout(() => {
                 this.style.height = "";
                 const height = this.offsetHeight;
@@ -181,6 +183,21 @@
                 const newValue = value.startsWith("--") ? `var(${value})` : value;
                 this.style.setProperty("--magnon-notification-color", newValue);
             }
+        }
+
+        close() {
+            this.style.transform = "scaleY(0)";
+            const end = () => {
+                this.style.height = "0px";
+                this.style.margin = "0px";
+                this.removeEventListener("transitionend", end);
+                const newEnd = () => {
+                    this.parentElement.removeChild(this);
+                    this.removeEventListener("transitionend", newEnd);
+                };
+                this.addEventListener("transitionend", newEnd);
+            };
+            this.addEventListener("transitionend", end);
         }
     }
 
