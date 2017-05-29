@@ -62,8 +62,10 @@
             return "magnon-drawer";
         }
 
-        static get observedAttributes() {
-            return ["open"];
+        static get propertyAttributes() {
+            return {
+                bool: ["open"]
+            };
         }
 
         constructor() {
@@ -85,18 +87,17 @@
             this._blackout.removeEventListener("click", this._closeCallback);
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "open") {
-                this.open = value;
+        propertySet(property, old, value) {
+            if (property === "open") {
+                this._setOpen(value);
             }
         }
 
-        set open(isOpen) {
-            const lastOpen = this._open;
-            this._open = isOpen !== false;
-            if (lastOpen === this._open) return;
+        _setOpen(isOpen) {
+            if (this._lastOpen === isOpen) return;
+            this._lastOpen = isOpen;
 
-            if (this._open) {
+            if (isOpen) {
                 this._container.style.left = "0px";
                 this._blackout.style.opacity = "0.8";
                 this._blackout.style.pointerEvents = "all";
@@ -105,10 +106,6 @@
                 this._blackout.style.opacity = "0";
                 this._blackout.style.pointerEvents = "none";
             }
-        }
-
-        get open() {
-            return this._open;
         }
     }
 
