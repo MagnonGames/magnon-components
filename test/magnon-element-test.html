@@ -19,7 +19,7 @@
                     static get propertyAttributes() {
                         return {
                             bool: ["enabled"],
-                            string: ["text"],
+                            string: ["text", "dashed-value"],
                             number: ["value"]
                         };
                     }
@@ -110,6 +110,30 @@
                     expect(element.text).to.be.a("string");
                     element.value = "hello";
                     expect(element.value).to.be.a("number");
+                });
+
+                it("converts property names to camelCase to javascript", () => {
+                    const element = new Element();
+                    element.setAttribute("dashed-value", "something");
+                    expect(element.dashedValue).to.equal("something");
+                });
+
+                it("converts property names to dashed from javascript", () => {
+                    const element = new Element();
+                    element.propertySet = p => {
+                        expect(p).to.equal("dashed-value");
+                    };
+                    element.dashedValue = "hi";
+                });
+
+                it("doesn't call propertySet multiple times", () => {
+                    const element = new Element();
+                    let count = 0;
+                    element.propertySet = () => {
+                        count++;
+                    };
+                    element.text = "something";
+                    expect(count).to.equal(1);
                 });
             });
         </script>

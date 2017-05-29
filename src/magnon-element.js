@@ -21,12 +21,13 @@ window.MagnonElement = class extends HTMLElement {
         ]);
 
         this._propertyTypes.forEach((type, propertyName) => {
-            Object.defineProperty(this, propertyName, {
+            const propertyCamel = dashToCamel(propertyName);
+            Object.defineProperty(this, propertyCamel, {
                 get() {
-                    return this[`_${propertyName}`];
+                    return this[`_${propertyCamel}`];
                 },
                 set(value) {
-                    const old = this[`_${propertyName}`];
+                    const old = this[`_${propertyCamel}`];
                     this._setProperty(propertyName, old, value);
                 },
                 enumerable: true
@@ -109,7 +110,10 @@ window.MagnonElement = class extends HTMLElement {
     }
 
     _setProperty(property, old, value) {
+        if (this._setPropertyListenerDisabled) return;
+
         const type = this._propertyTypes.get(property);
+        const propertyCamel = dashToCamel(property);
 
         if (type === "bool") value = typeof value === "boolean" ? value : this.hasAttribute(property);
         else if (type === "string") value = `${value}`;
@@ -118,21 +122,31 @@ window.MagnonElement = class extends HTMLElement {
         if (typeof value === "number" || value) {
             if (type === "bool") {
                 if (!this.hasAttribute(property)) {
+                    this._setPropertyListenerDisabled = true;
                     this.setAttribute(property, "");
+                    this._setPropertyListenerDisabled = false;
                 }
             } else {
                 if (this.getAttribute(property) !== value) {
+                    this._setPropertyListenerDisabled = true;
                     this.setAttribute(property, value);
+                    this._setPropertyListenerDisabled = false;
                 }
             }
         } else {
             this.removeAttribute(property);
         }
 
-        this[`_${property}`] = value;
+        this[`_${propertyCamel}`] = value;
 
         if (typeof this.propertySet === "function") {
             this.propertySet(property, old, value);
         }
     }
+};
+
+const dashToCamel = text => {
+    return text.replace(/-([a-zA-Z0-9])/, (m, p) => {
+        return p.toUpperCase();
+    });
 };
