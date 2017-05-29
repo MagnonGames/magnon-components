@@ -147,8 +147,11 @@
             return "magnon-image";
         }
 
-        static get observedAttributes() {
-            return ["src", "alt", "show-alt", "no-fullscreen"];
+        static get propertyAttributes() {
+            return {
+                bool: ["show-alt", "no-fullscreen"],
+                string: ["src", "alt"]
+            };
         }
 
         get _hasDescription() {
@@ -233,26 +236,25 @@
             }
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "src") {
+        propertySet(property, old, value) {
+            if (property === "src") {
                 this._image.src = value;
                 this._fullscreenImage.src = value;
-            } else if (attribute === "alt") {
+            } else if (property === "alt") {
                 this._setAlt(value);
-            } else if (attribute === "show-alt") {
-                const show = this.hasAttribute("show-alt");
-                if (show) {
+            } else if (property === "show-alt") {
+                if (value) {
                     this._altText.classList.add("shown");
                 } else {
                     this._altText.classList.remove("shown");
                 }
-                this._setAlt(this.getAttribute("alt"), show);
-            } else if (attribute === "no-fullscreen") {
-                this._fullscreenEnabled = !this.hasAttribute("no-fullscreen");
+                this._setAlt(this.alt, value);
+            } else if (property === "no-fullscreen") {
+                this._fullscreenEnabled = !value;
             }
         }
 
-        _setAlt(alt, altTextEnabled = this.hasAttribute("show-alt")) {
+        _setAlt(alt, altTextEnabled = this.showAlt) {
             if (altTextEnabled) {
                 this._image.alt = "";
                 this._fullscreenImage.alt = "";
