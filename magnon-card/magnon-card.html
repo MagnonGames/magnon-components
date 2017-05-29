@@ -72,13 +72,15 @@
             return "magnon-card";
         }
 
-        static get observedAttributes() {
-            return ["shadow"];
+        static get propertyAttributes() {
+            return {
+                bool: ["shadow"]
+            };
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "shadow") {
-                if (this.hasAttribute("shadow") && value !== "false") {
+        propertySet(property, old, value) {
+            if (property === "shadow") {
+                if (value) {
                     this._card.classList.add("shadow");
                 } else {
                     this._card.classList.remove("shadow");
