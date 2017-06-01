@@ -31,18 +31,20 @@
             return "magnon-social-button";
         }
 
-        static get observedAttributes() {
-            return ["icon", "href", "user", "title"];
+        static get propertyAttributes() {
+            return {
+                string: ["icon", "href", "user", "title"]
+            };
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "icon") {
+        propertySet(property, old, value) {
+            if (property === "icon") {
                 this._button.setAttribute("icon", value);
-            } else if (attribute === "href") {
+            } else if (property === "href") {
                 this._a.setAttribute("href", value);
-            } else if (attribute === "user") {
+            } else if (property === "user") {
                 // TODO: Name display
-            } else if (attribute === "title") {
+            } else if (property === "title") {
                 this._a.setAttribute("title", value);
             }
         }

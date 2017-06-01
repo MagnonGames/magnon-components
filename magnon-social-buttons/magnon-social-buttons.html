@@ -34,16 +34,18 @@
                 return name;
             }
 
-            static get observedAttributes() {
-                return ["user", "id"];
+            static get propertyAttributes() {
+                return {
+                    string: ["user", "id"]
+                };
             }
 
-            attributeChangedCallback(attribute, old, value) {
-                if (attribute === "user") {
+            propertySet(property, old, value) {
+                if (property === "user") {
                     if (!idURL) this._button.setAttribute("href", hrefTemplate(value));
                     this._button.setAttribute("title", titleTemplate(value));
                     this._button.setAttribute("user", userTemplate(value));
-                } else if (attribute === "id" && idURL) {
+                } else if (property === "id" && idURL) {
                     this._button.setAttribute("href", hrefTemplate(value));
                 }
             }
