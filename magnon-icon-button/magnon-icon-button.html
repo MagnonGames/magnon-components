@@ -44,8 +44,11 @@
             return "magnon-icon-button";
         }
 
-        static get observedAttributes() {
-            return ["icon", "title", "tabindex"];
+        static get propertyAttributes() {
+            return {
+                string: ["icon", "title"],
+                number: ["tabindex"]
+            };
         }
 
         constructor() {
@@ -55,19 +58,19 @@
             this._icon = this.root.querySelector("magnon-icon");
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "icon") {
-                this._icon.setAttribute(attribute, value);
-                if (!this.hasAttribute("title")) {
+        propertySet(property, old, value) {
+            if (property === "icon") {
+                this._icon.setAttribute("icon", value);
+                if (!this.title) {
                     this._setTitleFromIconName(value);
                 }
-            } else if (attribute === "title") {
+            } else if (property === "title") {
                 if (value && value.length > 0) {
                     this._button.setAttribute("aria-label", value);
                 } else {
-                    this._setTitleFromIconName(this.getAttribute("icon"));
+                    this._setTitleFromIconName(this.icon);
                 }
-            } else if (attribute === "tabindex") {
+            } else if (property === "tabindex") {
                 // BUG: It doesn't seem like the polyfill takes into account
                 // tabindex incapsulation of shadowdom. This is a workaround.
                 this._button.setAttribute("tabindex", value);
