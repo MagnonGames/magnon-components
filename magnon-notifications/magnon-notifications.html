@@ -174,12 +174,14 @@
             return "magnon-notification";
         }
 
-        static get observedAttributes() {
-            return ["color"];
+        static get propertyAttributes() {
+            return {
+                string: ["color"]
+            };
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "color") {
+        propertySet(property, old, value) {
+            if (property === "color") {
                 const newValue = value.startsWith("--") ? `var(${value})` : value;
                 this.style.setProperty("--magnon-notification-color", newValue);
             }
