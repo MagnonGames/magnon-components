@@ -40,14 +40,7 @@
 
             this._balls = [];
 
-            this.balls = options.balls;
-            this.ballScale = options.ballScale;
-            this.ballOffset = options.ballOffset;
-            this.alternate = options.alternate;
-
-            this.spinSpeed = options.spinSpeed;
-            this.minRadius = options.minRadius;
-            this.maxRadius = options.maxRadius;
+            this._initOptions = options;
 
             this._timer = 0;
             requestAnimationFrame(() => this._animate());
@@ -57,26 +50,47 @@
             return "magnon-spinner";
         }
 
-        set balls(value) {
-            const container = this.root.querySelector("#container");
-
-            let child = container.firstChild;
-            while (child) {
-                container.removeChild(child);
-                child = container.firstChild;
-            }
-            this._balls = [];
-
-            for (let i = 0; i < parseInt(value); i++) {
-                const ball = document.createElement("span");
-                ball.className = "ball";
-                container.appendChild(ball);
-                this._balls[i] = ball;
-            }
+        static get propertyAttributes() {
+            return {
+                bool: ["alternate"],
+                number: [
+                    "balls", "ball-scale", "ball-offset",
+                    "spin-speed", "min-radius", "max-radius"
+                ]
+            };
         }
 
-        get balls() {
-            return this._balls.length;
+        connectedCallback() {
+            const options = this._initOptions;
+
+            this.balls = options.balls;
+            this.ballScale = options.ballScale;
+            this.ballOffset = options.ballOffset;
+            this.alternate = options.alternate;
+
+            this.spinSpeed = options.spinSpeed;
+            this.minRadius = options.minRadius;
+            this.maxRadius = options.maxRadius;
+        }
+
+        propertySet(property, old, value) {
+            if (property === "balls") {
+                const container = this.root.querySelector("#container");
+
+                let child = container.firstChild;
+                while (child) {
+                    container.removeChild(child);
+                    child = container.firstChild;
+                }
+                this._balls = [];
+
+                for (let i = 0; i < value; i++) {
+                    const ball = document.createElement("span");
+                    ball.className = "ball";
+                    container.appendChild(ball);
+                    this._balls[i] = ball;
+                }
+            }
         }
 
         _animate() {
