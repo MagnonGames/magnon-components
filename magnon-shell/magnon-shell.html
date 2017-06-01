@@ -140,13 +140,15 @@
             return "magnon-shell";
         }
 
-        static get observedAttributes() {
-            return ["expand-content"];
+        static get propertyAttributes() {
+            return {
+                bool: ["expand-content"]
+            };
         }
 
-        attributeChangedCallback(attribute, old, value) {
-            if (attribute === "expand-content") {
-                if (this.hasAttribute("expand-content")) this._content.classList.add("expand-content");
+        propertySet(property, old, value) {
+            if (property === "expand-content") {
+                if (value) this._content.classList.add("expand-content");
                 else this._content.classList.remove("expand-content");
             }
         }
