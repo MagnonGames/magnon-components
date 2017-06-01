@@ -24,10 +24,10 @@ window.MagnonElement = class extends HTMLElement {
             const propertyCamel = dashToCamel(propertyName);
             Object.defineProperty(this, propertyCamel, {
                 get() {
-                    return this[`_${propertyCamel}`];
+                    return this[`__${propertyCamel}`];
                 },
                 set(value) {
-                    const old = this[`_${propertyCamel}`];
+                    const old = this[`__${propertyCamel}`];
                     this._setProperty(propertyName, old, value);
                 },
                 enumerable: true
@@ -137,7 +137,7 @@ window.MagnonElement = class extends HTMLElement {
             this.removeAttribute(property);
         }
 
-        this[`_${propertyCamel}`] = value;
+        this[`__${propertyCamel}`] = value;
 
         if (typeof this.propertySet === "function") {
             this.propertySet(property, old, value);

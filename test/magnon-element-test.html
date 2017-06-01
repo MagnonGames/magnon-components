@@ -135,6 +135,11 @@
                     element.text = "something";
                     expect(count).to.equal(1);
                 });
+
+                it("doesn't interfere with common private properties", () => {
+                    const element = new Element();
+                    expect(element._text).to.be.undefined;
+                });
             });
         </script>
     </body>
