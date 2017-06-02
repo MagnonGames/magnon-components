@@ -140,6 +140,15 @@
                     const element = new Element();
                     expect(element._text).to.be.undefined;
                 });
+
+                it("has old set correctly on first callback", done => {
+                    const element = new Element();
+                    element.propertySet = (property, old, value) => {
+                        expect(old).to.equal(false);
+                        done();
+                    };
+                    element.enabled = true;
+                });
             });
         </script>
     </body>

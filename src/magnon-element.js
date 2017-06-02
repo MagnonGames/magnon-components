@@ -115,9 +115,14 @@ window.MagnonElement = class extends HTMLElement {
         const type = this._propertyTypes.get(property);
         const propertyCamel = dashToCamel(property);
 
-        if (type === "bool") value = typeof value === "boolean" ? value : this.hasAttribute(property);
-        else if (type === "string") value = `${value}`;
-        else if (type === "number") value = parseFloat(value);
+        if (type === "bool") {
+            old = Boolean(old);
+            value = typeof value === "boolean" ? value : this.hasAttribute(property);
+        } else if (type === "string") {
+            value = `${value}`;
+        } else if (type === "number") {
+            value = parseFloat(value);
+        }
 
         if (typeof value === "number" || value) {
             if (type === "bool") {
