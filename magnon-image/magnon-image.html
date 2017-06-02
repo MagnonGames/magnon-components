@@ -190,6 +190,10 @@
             this._updateImageSize();
 
             if (value) {
+                // Disable scroll
+                document.body.style.overflow = "hidden";
+
+                // The rest
                 this._fullscreenContainer.style.pointerEvents = "all";
 
                 this._fullscreenImage.style.opacity = "1";
@@ -237,6 +241,10 @@
                     this._fullscreenImage.addEventListener("transitionend", endAction);
                 }, 100);
             } else {
+                // Enable scroll
+                document.body.style.overflow = "auto";
+
+                // The rest
                 const endAction = () => {
                     this._fullscreenContainer.style.pointerEvents = "none";
                     this._fullscreenBackdrop.removeEventListener("transitionend", endAction);
@@ -256,6 +264,10 @@
 
                 this._animating = false;
             }
+        }
+
+        get fullscreen() {
+            return this._fullscreen;
         }
 
         connectedCallback() {
