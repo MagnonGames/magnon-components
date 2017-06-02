@@ -54,6 +54,7 @@
         <link rel="import" href="../magnon-icon/social-set.html">
         <link rel="import" href="../magnon-image/magnon-image.html">
         <link rel="import" href="../magnon-social-buttons/magnon-social-buttons.html">
+        <link rel="import" href="../magnon-switch/magnon-switch.html">
     </head>
     <body class="light">
         <magnon-shell>
@@ -67,6 +68,10 @@
                     <h1 slot="title">Hello, World!</h1>
                     <p>
                         This is a demo page for Magnon Webcomponents!
+                        <br><br>
+                        Change colors?
+                        <br><br>
+                        <magnon-switch ontoggle="body.className = this.enabled ? '' : 'light'"></magnon-switch>
                     </p>
                     <div slot="footer">
                         <magnon-twitter-button user="theMagnon"></magnon-twitter-button>
