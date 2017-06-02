@@ -2,9 +2,18 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Magnon Components Demo</title>
 
         <style>
+            body {
+                --magnon-content-background: var(--magnon-dark-grey);
+                --magnon-background: var(--magnon-black);
+                --magnon-content-color: white;
+                --magnon-highlight-color: var(--magnon-neon-yellow);
+                --magnon-highlight-contrast-color: var(--magnon-black);
+            }
+
             .twitter-blue {
                 --magnon-icon-color: #1da1f2;
             }
@@ -40,6 +49,11 @@
     </head>
     <body>
         <magnon-shell>
+            <a href="/" slot="nav">Home</a>
+            <a href="/games" slot="nav">Games</a>
+            <a href="/about" slot="nav">About Us</a>
+            <a href="https://blog.magnon.net" slot="nav">Blog</a>
+
             <div slot="content">
                 <magnon-card>
                     <h1 slot="title">Hello, World!</h1>
