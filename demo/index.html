@@ -14,6 +14,14 @@
                 --magnon-highlight-contrast-color: var(--magnon-black);
             }
 
+            body.light {
+                --magnon-content-background: white;
+                --magnon-background: var(--magnon-grey);
+                --magnon-content-color: var(--magnon-black);
+                --magnon-highlight-color: var(--magnon-normal-blue);
+                --magnon-highlight-contrast-color: white;
+            }
+
             .twitter-blue {
                 --magnon-icon-color: #1da1f2;
             }
@@ -47,7 +55,7 @@
         <link rel="import" href="../magnon-image/magnon-image.html">
         <link rel="import" href="../magnon-social-buttons/magnon-social-buttons.html">
     </head>
-    <body>
+    <body class="light">
         <magnon-shell>
             <a href="/" slot="nav">Home</a>
             <a href="/games" slot="nav">Games</a>
