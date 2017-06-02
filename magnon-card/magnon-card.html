@@ -1,4 +1,5 @@
 <link rel="import" href="../element.html">
+<link rel="import" href="../magnon-styles/magnon-styles.html">
 
 <template id="magnon-card">
     <style>
@@ -20,8 +21,8 @@
             padding: var(--card-padding);
             box-sizing: border-box;
 
-            background: var(--magnon-card-background, white);
-            color: var(--magnon-black);
+            background: var(--magnon-card-background, var(--magnon-content-background));
+            color: var(--magnon-content-color);
 
             border-radius: 4px;
 

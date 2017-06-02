@@ -20,7 +20,7 @@
             overflow-y: scroll;
             overflow-x: auto;
 
-            background: var(--magnon-shell-background, var(--magnon-grey));
+            background: var(--magnon-shell-background, var(--magnon-background));
         }
 
         #header-container {
@@ -36,8 +36,8 @@
             padding: 5px;
             box-sizing: border-box;
 
-            background: var(--magnon-shell-color, var(--magnon-normal-blue));
-            color: white;
+            background: var(--magnon-shell-header-background, var(--magnon-highlight-color));
+            --magnon-logo-color: var(--magnon-shell-header-color, var(--magnon-highlight-contrast-color));
 
             box-shadow: var(--magnon-shadow-1);
         }
@@ -75,6 +75,7 @@
             color: white;
             text-decoration: none;
             font-size: 18px;
+            color: var(--magnon-shell-header-color, var(--magnon-highlight-contrast-color));
 
             margin: 0 10px;
         }
