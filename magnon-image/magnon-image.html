@@ -136,11 +136,15 @@
 
             this._image.addEventListener("load", () => this._updateImageSize());
             this._image.addEventListener("click", () => {
-                if (this._fullscreenEnabled) {
+                if (location.hash.startsWith("#mimg-")) return;
+
+                if (!this._animating && this._fullscreenEnabled) {
                     location.hash = this._hash;
                 }
             });
             const close = () => {
+                if (this._animating) return;
+
                 const current = location.href.match(/([^#]*)/)[0];
 
                 if (!this._directlyLinked) {
@@ -248,11 +252,14 @@
                 const endAction = () => {
                     this._fullscreenContainer.style.pointerEvents = "none";
                     this._fullscreenBackdrop.removeEventListener("transitionend", endAction);
+
+                    this._animating = false;
                 };
 
-                const opacity = window.getComputedStyle(this._fullscreenBackdrop).getPropertyValue("opacity");
-                if (opacity !== "") {
+                if (this._fullscreenBackdrop.style.opacity !== "") {
                     this._fullscreenBackdrop.addEventListener("transitionend", endAction);
+                } else {
+                    this._animating = false;
                 }
 
                 this._fullscreenImage.style.opacity = "0";
@@ -261,8 +268,6 @@
                 this._fullscreenCloseButton.style.opacity = "0";
                 this._image.style.opacity = "1";
                 this._altText.style.opacity = "1";
-
-                this._animating = false;
             }
         }
 
