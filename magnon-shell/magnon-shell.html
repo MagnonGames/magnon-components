@@ -15,45 +15,68 @@
 
             font-family: var(--magnon-font);
 
-            --magnon-header-height: 50px;
+            --magnon-header-height: 125px;
 
             overflow-y: scroll;
             overflow-x: auto;
 
-            background: var(--magnon-shell-background, #f0f0f0);
+            background: var(--magnon-shell-background, var(--magnon-grey));
         }
 
         #header-container {
             position: absolute;
             top: 0; right: 0; bottom: 0; left: 0;
-            display: block;
+            display: flex;
             width: 100%;
             height: var(--magnon-header-height);
 
             justify-content: center;
+            flex-direction: column;
 
             padding: 5px;
             box-sizing: border-box;
 
             background: var(--magnon-shell-color, var(--magnon-normal-blue));
             color: white;
+
+            box-shadow: var(--magnon-shadow-1);
+        }
+
+        #header-container > * {
+            flex-grow: 1;
         }
 
         #navigation-button {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+
             --magnon-icon-button-padding: 5px;
             --magnon-icon-color: white;
             --magnon-icon-size: 30px;
+
+            display: none;
         }
 
         #logo-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0; right: 0; bottom: 0; left: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ::slotted(a) {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+
+            margin: 0 10px;
         }
 
         #logo-link {
@@ -105,11 +128,12 @@
                 <magnon-logo animate></magnon-logo>
             </a>
         </div>
+        <nav>
+            <slot name="nav"></slot>
+        </nav>
     </div>
 
-    <magnon-drawer>
-        <slot name="sub-navigation"></slot>
-    </magnon-drawer>
+    <magnon-drawer></magnon-drawer>
 
     <div id="main-container">
         <div id="content-container">
@@ -128,10 +152,11 @@
 
             this._drawer = this.root.querySelector("magnon-drawer");
             this._content = this.root.querySelector("#content-container");
+            this._navButton = this.root.querySelector("magnon-icon-button");
         }
 
         connectedCallback() {
-            this.root.querySelector("magnon-icon-button").addEventListener("click", () => {
+            this._navButton.addEventListener("click", () => {
                 this._drawer.open = !this._drawer.open;
             });
         }
@@ -142,7 +167,7 @@
 
         static get propertyAttributes() {
             return {
-                bool: ["expand-content"]
+                bool: ["expand-content", "use-drawer"]
             };
         }
 
@@ -150,6 +175,8 @@
             if (property === "expand-content") {
                 if (value) this._content.classList.add("expand-content");
                 else this._content.classList.remove("expand-content");
+            } else if (property === "use-drawer") {
+                this._navButton.style.display = value ? "block" : "none";
             }
         }
     }
