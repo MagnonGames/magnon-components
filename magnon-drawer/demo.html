@@ -15,7 +15,12 @@
     </head>
     <body>
         <demo-fixture>
-            <magnon-drawer open></magnon-drawer>
+            <magnon-drawer open>
+                <a href="/" slot="nav">Home</a>
+                <a href="/games" slot="nav">Games</a>
+                <a href="/about" slot="nav">About Us</a>
+                <a href="https://blog.magnon.net" slot="nav">Blog</a>
+            </magnon-drawer>
 
             <a href="#" onclick="document.querySelector('magnon-drawer').open = true;">Open</a>
         </demo-fixture>

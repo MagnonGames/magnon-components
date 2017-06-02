@@ -18,7 +18,7 @@
             transition: left 0.15s ease-out;
         }
 
-        #main-nav > a {
+        #main-nav > ::slotted(a) {
             color: var(--magnon-dark-teal);
             text-decoration: none;
             display: block;
@@ -45,10 +45,7 @@
 
     <div id="container">
         <nav id="main-nav">
-            <a href="/">Home</a>
-            <a href="/games">Games</a>
-            <a href="/about">About Us</a>
-            <a href="https://blog.magnon.net">Blog</a>
+            <slot name="nav"></slot>
         </nav>
     </div>
 
