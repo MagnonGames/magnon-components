@@ -6,12 +6,14 @@
         :host {
             display: block;
 
-            --card-padding: 20px;
+            --card-padding: 30px;
 
-            margin-bottom: 20px;
+            margin-top: 50px;
+            margin-bottom: 30px;
         }
 
         #card {
+            position: relative;
             display: flex;
             flex-direction: column;
 
@@ -19,6 +21,7 @@
             min-height: 100%;
 
             padding: var(--card-padding);
+            padding-top: 50px;
             box-sizing: border-box;
 
             background: var(--magnon-card-background, var(--magnon-content-background));
@@ -35,7 +38,16 @@
         }
 
         #title {
-            margin-bottom: var(--card-padding);
+            position: absolute;
+            top: -25px;
+            left: -20px;
+            background: inherit;
+            box-shadow: var(--magnon-shadow-2);
+            padding: 15px 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #content {
