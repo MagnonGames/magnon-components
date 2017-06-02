@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/theMagnon/magnon-components#readme",
   "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^1.0.1",
     "eslint": "^3.17.1",
     "eslint-plugin-html": "^2.0.1",
-    "web-component-tester": "^5.0.0",
-    "webcomponents.js": "git+https://github.com/webcomponents/webcomponentsjs.git"
+    "web-component-tester": "^5.0.1"
   }
 }
