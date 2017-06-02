@@ -117,6 +117,8 @@
 
 <script>
     /* globals MagnonElement */
+    let counter = 0;
+
     class MagnonImage extends MagnonElement {
         constructor() {
             super();
@@ -133,12 +135,27 @@
             this._fullscreenCloseButton = this.root.querySelector(".close-button");
 
             this._image.addEventListener("load", () => this._updateImageSize());
-            this._image.addEventListener("click", () => (this.fullscreen = true));
-            const close = () => (this.fullscreen = false);
+            this._image.addEventListener("click", () => {
+                if (this._fullscreenEnabled) {
+                    location.hash = this._hash;
+                }
+            });
+            const close = () => {
+                const current = location.href.match(/([^#]*)/)[0];
+
+                if (!this._directlyLinked) {
+                    history.back();
+                } else {
+                    history.replaceState(null, null, current);
+                }
+
+                this._checkHash();
+            };
             this._fullscreenBackdrop.addEventListener("click", close);
             this._fullscreenCloseButton.addEventListener("click", close);
 
             window.addEventListener("resize", () => this._updateImageSize());
+            window.addEventListener("hashchange", () => this._checkHash());
 
             this.fullscreen = false;
         }
@@ -158,13 +175,23 @@
             return this.textContent.trim().length > 0;
         }
 
+        get _hash() {
+            return `#mimg-${this._count}`;
+        }
+
         set fullscreen(value) {
             if (value && !this._fullscreenEnabled) return;
+
+            if (this._animating) return;
+
+            this._animating = true;
 
             this._updateDescription();
             this._updateImageSize();
 
             if (value) {
+                this._fullscreenContainer.style.pointerEvents = "all";
+
                 this._fullscreenImage.style.opacity = "1";
                 this._fullscreenBackdrop.style.opacity = "1";
 
@@ -200,11 +227,12 @@
                     this._fullscreenCloseButton.style.opacity = "1";
 
                     const endAction = () => {
-                        this._fullscreenContainer.style.pointerEvents = "all";
                         this._fullscreenImage.removeAttribute("style");
                         this._fullscreenImage.removeEventListener("transitionend", endAction);
 
                         this._image.style.transition = "";
+
+                        this._animating = false;
                     };
                     this._fullscreenImage.addEventListener("transitionend", endAction);
                 }, 100);
@@ -225,7 +253,15 @@
                 this._fullscreenCloseButton.style.opacity = "0";
                 this._image.style.opacity = "1";
                 this._altText.style.opacity = "1";
+
+                this._animating = false;
             }
+        }
+
+        connectedCallback() {
+            this._count = counter++;
+
+            this._checkHash();
         }
 
         _updateDescription() {
@@ -286,6 +322,19 @@
             } else {
                 this._fullscreenImage.classList.remove("tall");
             }
+        }
+
+        _checkHash() {
+            if (this._prevHash && this._prevHash === this._hash) {
+                this.fullscreen = false;
+            } else if (location.hash === this._hash) {
+                this.fullscreen = true;
+            }
+
+            this._directlyLinked =
+                typeof this._prevHash === "undefined" &&
+                location.hash === this._hash;
+            this._prevHash = location.hash;
         }
     }
 
