@@ -130,8 +130,12 @@
         }
 
         static send(template) {
-            const instance = template.content.cloneNode(true);
-            this.notificationContainer.appendChild(instance);
+            if (typeof template !== "string") {
+                const instance = template.content.cloneNode(true);
+                this.notificationContainer.appendChild(instance);
+            } else {
+                this.notificationContainer.innerHTML += template;
+            }
         }
 
         static get name() {
