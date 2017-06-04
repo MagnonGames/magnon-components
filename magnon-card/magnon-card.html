@@ -27,8 +27,6 @@
             background: var(--magnon-card-background, var(--magnon-content-background));
             color: var(--magnon-content-color);
 
-            border-radius: 4px;
-
             box-shadow: var(--magnon-shadow-2);
             transition: 0.5s box-shadow;
         }
@@ -40,11 +38,12 @@
         #title {
             position: absolute;
             top: -25px;
-            left: 30px;
+            left: 10px;
             background: inherit;
             box-shadow: var(--magnon-shadow-2);
             padding: 15px 30px;
             height: 30px;
+            width: calc(100% - 80px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -61,6 +60,17 @@
         #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }
         #title ::slotted(h3) { margin: 0; } #title ::slotted(h4) { margin: 0; }
         #title ::slotted(h5) { margin: 0; } #title ::slotted(h6) { margin: 0; }
+
+        @media(min-width: 580px) {
+            #card {
+                border-radius: 4px;
+            }
+
+            #title {
+                left: auto;
+                width: auto;
+            }
+        }
     </style>
 
     <div id="card">
