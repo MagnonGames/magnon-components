@@ -114,7 +114,7 @@
 
 <script>
     /* globals MagnonElement */
-    class MagnonNotifications extends MagnonElement {
+    window.MagnonNotifications = class extends MagnonElement {
         static appendToBody() {
             const append = () => {
                 const notificationContainer = document.createElement("magnon-notifications");
@@ -141,7 +141,7 @@
         static get name() {
             return "magnon-notifications";
         }
-    }
+    };
 
     class MagnonNotification extends MagnonElement {
         constructor() {
@@ -207,7 +207,7 @@
         }
     }
 
-    MagnonNotifications.init();
-    MagnonNotifications.appendToBody();
+    window.MagnonNotifications.init();
+    window.MagnonNotifications.appendToBody();
     MagnonNotification.init();
 </script>
