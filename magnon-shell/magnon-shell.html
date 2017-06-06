@@ -4,21 +4,31 @@
 <link rel="import" href="../magnon-drawer/magnon-drawer.html">
 <link rel="import" href="../magnon-footer/magnon-footer.html">
 <link rel="import" href="../magnon-styles/magnon-styles.html">
+<link rel="import" href="../magnon-global-style/magnon-global-style.html">
+
+<magnon-global-style>
+    <template>
+        <style>
+            html, body {
+                padding: 0;
+                margin: 0;
+                overflow-y: scroll;
+            }
+        </style>
+    </template>
+</magnon-global-style>
 
 <template id="magnon-shell">
     <style>
         :host {
-            position: fixed;
-            top: 0; right: 0; bottom: 0; left: 0;
+            display: block;
+
             width: 100vw;
-            height: 100vh;
+            min-height: 100vh;
 
             font-family: var(--magnon-font);
 
             --magnon-header-height: 125px;
-
-            overflow-y: scroll;
-            overflow-x: auto;
 
             background: var(--magnon-shell-background, var(--magnon-background));
         }
