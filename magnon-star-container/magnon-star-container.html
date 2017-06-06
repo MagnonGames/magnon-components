@@ -1,0 +1,146 @@
+<link rel="import" href="../element.html">
+
+<template id="magnon-star-container">
+    <style>
+        :host {
+            position: relative;
+            display: block;
+            color: white;
+            z-index: 0;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #content {
+            z-index: 1;
+        }
+    </style>
+
+    <canvas></canvas>
+    <div id="content">
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+    /* globals MagnonElement */
+    const stars = 100;
+    const starSpeed = 0.0005;
+    const starSize = 5;
+    const reactionDistance = 0.3;
+
+    let width, height;
+
+    let mouseX, mouseY;
+
+    class MagnonStarContainer extends MagnonElement {
+        constructor() {
+            super();
+
+            this._canvas = this.root.querySelector("canvas");
+            this._ctx = this._canvas.getContext("2d");
+
+            this._stars = [];
+            for (let i = 0; i < stars; i++) {
+                this._stars[i] = new Star(Math.random());
+                this._stars[i].randomYZ();
+            }
+
+            window.addEventListener("mousemove", e => {
+                const { top, left } = this._canvas.getBoundingClientRect();
+                mouseX = (e.clientX - left) / width;
+                mouseY = (e.clientY - top) / height;
+            });
+
+            this._animate();
+        }
+
+        static get name() {
+            return "magnon-star-container";
+        }
+
+        _animate() {
+            const ctx = this._ctx;
+            const ratio = window.devicePixelRatio;
+            const { width: realWidth, height: realHeight } = this._canvas.getBoundingClientRect();
+            width = realWidth * ratio;
+            height = realHeight * ratio;
+
+            this._canvas.width = width;
+            this._canvas.height = height;
+
+            ctx.fillStyle = "#1A232C";
+            ctx.fillRect(0, 0, width, height);
+
+            this._stars.forEach(s => {
+                s.update();
+                s.draw(ctx);
+            });
+
+            requestAnimationFrame(() => this._animate());
+        }
+    }
+
+    class Star {
+        constructor(x, y, z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+
+            this.sizeMultiplier = 1;
+
+            this.color = [60, 250, 166, 0];
+        }
+
+        randomYZ() {
+            this.y = Math.random();
+            this.z = Math.random() * 0.5 + 0.5;
+        }
+
+        update() {
+            if (this.color[3] < 1) this.color[3] += 0.01;
+
+            const a = this.x - mouseX;
+            const b = this.y - mouseY;
+            const distanceToMouse = Math.sqrt(a * a + b * b);
+
+            if (distanceToMouse < reactionDistance) {
+                const newColor = [61, 250, 166];
+                const value = (-distanceToMouse + reactionDistance) / reactionDistance;
+
+                for (let i = 0; i < 3; i++) {
+                    this.color[i] = Math.round(255 - value * (255 - newColor[i]));
+                }
+
+                this.sizeMultiplier = 1 + value * 2;
+            } else for (let i = 0; i < 3; i++) this.color[i] = 255;
+
+            this.x -= starSpeed * this.z;
+            if (this.x < -starSize / width) {
+                this.x = 1 + starSize / width;
+                this.velX = this.velY = 0;
+                this.randomYZ();
+            }
+        }
+
+        draw(ctx) {
+            const drawSize = starSize * this.z * this.sizeMultiplier;
+            const halfSize = drawSize / 2;
+
+            const colorString = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${this.color[3]})`;
+            const x = this.x * width - halfSize;
+            const y = this.y * height - halfSize;
+
+            ctx.fillStyle = colorString;
+            ctx.fillRect(x, y, drawSize, drawSize);
+        }
+    }
+
+    MagnonStarContainer.init();
+</script>
