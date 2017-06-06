@@ -136,6 +136,9 @@
             } else {
                 this.notificationContainer.innerHTML += template;
             }
+
+            const notifications = this.notificationContainer.querySelectorAll("magnon-notification");
+            return notifications[notifications.length - 1];
         }
 
         static get name() {
