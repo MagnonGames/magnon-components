@@ -191,6 +191,8 @@
 
             this._animating = true;
 
+            this.style.transform = "none";
+
             this._updateDescription();
             this._updateImageSize();
 
@@ -251,6 +253,8 @@
 
                 // The rest
                 const endAction = () => {
+                    this.style.transform = "";
+
                     this._fullscreenContainer.style.pointerEvents = "none";
                     this._fullscreenBackdrop.removeEventListener("transitionend", endAction);
 
