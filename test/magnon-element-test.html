@@ -20,7 +20,7 @@
                         return {
                             bool: ["enabled"],
                             string: ["text", "dashed-value"],
-                            number: ["value"]
+                            number: ["value", "very-dashed-value"]
                         };
                     }
                 };
@@ -118,6 +118,8 @@
                     const element = new Element();
                     element.setAttribute("dashed-value", "something");
                     expect(element.dashedValue).to.equal("something");
+                    element.setAttribute("very-dashed-value", 123);
+                    expect(element.veryDashedValue).to.equal(123);
                 });
 
                 it("converts property names to dashed from javascript", () => {

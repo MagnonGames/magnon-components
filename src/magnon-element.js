@@ -151,7 +151,7 @@ window.MagnonElement = class extends HTMLElement {
 };
 
 const dashToCamel = text => {
-    return text.replace(/-([a-zA-Z0-9])/, (m, p) => {
+    return text.replace(/-([a-zA-Z0-9])/g, (m, p) => {
         return p.toUpperCase();
     });
 };
