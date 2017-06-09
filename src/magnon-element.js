@@ -96,7 +96,7 @@ window.MagnonElement = class extends HTMLElement {
     }
 
     attributeChangedCallback(attribute, old, value) {
-        this._setProperty(attribute, old, value);
+        this._setProperty(attribute, old, value || this.hasAttribute(attribute));
     }
 
     restyleLocal() {
@@ -117,7 +117,7 @@ window.MagnonElement = class extends HTMLElement {
 
         if (type === "bool") {
             old = Boolean(old);
-            value = typeof value === "boolean" ? value : this.hasAttribute(property);
+            value = Boolean(value);
         } else if (type === "string") {
             value = `${value}`;
         } else if (type === "number") {

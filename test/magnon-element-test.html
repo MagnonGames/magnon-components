@@ -105,9 +105,11 @@
                 it("assures property types", () => {
                     const element = new Element();
                     element.enabled = "something";
-                    expect(element.enabled).to.be.a("boolean");
+                    expect(element.enabled).to.be.ok;
+                    element.enabled = undefined;
+                    expect(element.enabled).to.not.be.ok;
                     element.text = 456413;
-                    expect(element.text).to.be.a("string");
+                    expect(element.text).to.equal("456413");
                     element.value = "hello";
                     expect(element.value).to.be.a("number");
                 });
