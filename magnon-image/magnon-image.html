@@ -135,26 +135,37 @@
             this._fullscreenText = this.root.querySelector("#fullscreen-text");
             this._fullscreenCloseButton = this.root.querySelector(".close-button");
 
+            this._fullscreenOpacity = "1";
+
             this._image.addEventListener("load", () => this._updateImageSize());
             this._image.addEventListener("click", () => {
-                if (location.hash.startsWith("#mimg-")) return;
+                console.log(this.disableImageUrl);
+                if (!this.disableImageUrl && location.hash.startsWith("#mimg-")) return;
 
                 if (!this._animating && this._fullscreenEnabled) {
-                    location.hash = this._hash;
+                    if (this.disableImageUrl) {
+                        this.fullscreen = true;
+                    } else {
+                        location.hash = this._hash;
+                    }
                 }
             });
             const close = () => {
                 if (this._animating) return;
 
-                const current = location.href.match(/([^#]*)/)[0];
-
-                if (!this._directlyLinked) {
-                    history.back();
+                if (this.disableImageUrl) {
+                    this.fullscreen = false;
                 } else {
-                    history.replaceState(null, null, current);
-                }
+                    const current = location.href.match(/([^#]*)/)[0];
 
-                this._checkHash();
+                    if (!this._directlyLinked) {
+                        history.back();
+                    } else {
+                        history.replaceState(null, null, current);
+                    }
+
+                    this._checkHash();
+                }
             };
             this._fullscreenBackdrop.addEventListener("click", close);
             this._fullscreenCloseButton.addEventListener("click", close);
@@ -171,7 +182,7 @@
 
         static get propertyAttributes() {
             return {
-                bool: ["show-alt", "no-fullscreen"],
+                bool: ["show-alt", "no-fullscreen", "disable-image-url"],
                 string: ["src", "alt"]
             };
         }
@@ -204,7 +215,7 @@
                 this._fullscreenContainer.style.pointerEvents = "all";
 
                 this._fullscreenImage.style.opacity = "1";
-                this._fullscreenBackdrop.style.opacity = "1";
+                this._fullscreenBackdrop.style.opacity = this._fullscreenOpacity;
 
                 this._image.style.transition = "none";
                 this._image.style.opacity = "0";
@@ -309,6 +320,11 @@
                 this._setAlt(this.alt, value);
             } else if (property === "no-fullscreen") {
                 this._fullscreenEnabled = !value;
+            } else if (property === "disable-image-url") {
+                this._fullscreenOpacity = value ? "0.7" : "1";
+                this._fullscreenBackdrop.style.background = value
+                    ? "var(--magnon-black)"
+                    : "var(--magnon-black-blue)";
             }
         }
 
