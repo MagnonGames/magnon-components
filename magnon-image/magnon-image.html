@@ -139,7 +139,6 @@
 
             this._image.addEventListener("load", () => this._updateImageSize());
             this._image.addEventListener("click", () => {
-                console.log(this.disableImageUrl);
                 if (!this.disableImageUrl && location.hash.startsWith("#mimg-")) return;
 
                 if (!this._animating && this._fullscreenEnabled) {
