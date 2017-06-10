@@ -96,7 +96,11 @@ window.MagnonElement = class extends HTMLElement {
     }
 
     attributeChangedCallback(attribute, old, value) {
-        this._setProperty(attribute, old, value || this.hasAttribute(attribute));
+        const type = this._propertyTypes.get(attribute);
+
+        if (type === "bool") value = value || this.hasAttribute(attribute);
+
+        this._setProperty(attribute, old, value);
     }
 
     restyleLocal() {
@@ -139,7 +143,9 @@ window.MagnonElement = class extends HTMLElement {
                 }
             }
         } else {
+            this._setPropertyListenerDisabled = true;
             this.removeAttribute(property);
+            this._setPropertyListenerDisabled = false;
         }
 
         this[`__${propertyCamel}`] = value;

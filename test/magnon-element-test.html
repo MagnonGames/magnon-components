@@ -114,6 +114,21 @@
                     expect(element.value).to.be.a("number");
                 });
 
+                it("doesn't screw up strings when set empty", () => {
+                    const element = new Element();
+                    document.body.appendChild(element);
+
+                    element.text = "hello";
+                    element.text = "";
+                    expect(element.getAttribute("text")).to.be.null;
+                    expect(element.text).to.equal("");
+
+                    element.text = "hello";
+                    element.setAttribute("text", "");
+                    expect(element.getAttribute("text")).to.be.null;
+                    expect(element.text).to.equal("");
+                });
+
                 it("converts property names to camelCase to javascript", () => {
                     const element = new Element();
                     element.setAttribute("dashed-value", "something");
