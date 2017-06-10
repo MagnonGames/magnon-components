@@ -31,8 +31,6 @@
             font-family: var(--magnon-font);
 
             --magnon-header-height: 125px;
-
-            background: var(--magnon-shell-background, var(--magnon-background));
         }
 
         #header-container {
@@ -110,12 +108,14 @@
 
             width: 100%;
             min-height: calc(100% - var(--magnon-header-height));
+
+            background: var(--magnon-shell-background, var(--magnon-background));
         }
 
         #content-container {
             position: relative;
 
-            margin: 20px auto 300px auto;
+            margin: 20px auto 350px auto;
             width: 100vw;
 
             box-sizing: border-box;
