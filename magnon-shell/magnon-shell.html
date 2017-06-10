@@ -113,26 +113,29 @@
         }
 
         #content-container {
-            margin: 20px auto 0 auto;
+            position: relative;
+
+            margin: 20px auto 300px auto;
             width: 100vw;
 
             box-sizing: border-box;
             min-height: 100%;
-            padding-bottom: 300px;
+
+            z-index: 2;
         }
 
         #content-container.expand-content {
             width: 100%;
             max-width: 100%;
             min-height: calc(100vh - var(--magnon-header-height) + 300px);
-            margin: 0;
+            margin: 0 0 300px 0;
         }
 
         magnon-footer {
             position: absolute;
             bottom: 0;
             width: 100%;
-            z-index: -1;
+            z-index: 0;
         }
 
         @media(min-width: 580px) {
