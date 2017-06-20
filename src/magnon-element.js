@@ -1,5 +1,5 @@
-window.MagnonElement = class extends HTMLElement {
-    constructor(options = { noShadow: false }) {
+export default class MagnonElement extends HTMLElement {
+    constructor(options = { noShadow: false, content: "" }) {
         super();
 
         this.usesShadow = !options.noShadow;
@@ -8,7 +8,7 @@ window.MagnonElement = class extends HTMLElement {
         this.root = this;
 
         this._initProperties();
-        this._initContent(options.template || this.name);
+        this._initContent(options.content);
     }
 
     _initProperties() {
@@ -35,21 +35,17 @@ window.MagnonElement = class extends HTMLElement {
         });
     }
 
-    _initContent(templateName) {
-        const searchForTemplate = (doc) => {
-            const template = doc.querySelector(`#${templateName}`);
-            if (template) return template;
-            else {
-                for (const link of doc.querySelectorAll("link[rel=import]")) {
-                    if (link.import === null) return;
-                    const template = searchForTemplate(link.import);
-                    if (template) return template;
-                }
-            }
-        };
+    _initContent(content) {
+        if (!content) return;
 
-        const template = searchForTemplate(document);
-        if (!template) return; // Component without elements
+        let template;
+        if (content.match(/^[.|#]/)) {
+            template = this._getTemplate(content);
+        } else {
+            const el = document.createElement("template");
+            el.innerHTML = content;
+            template = el;
+        }
 
         const t = template.cloneNode(true);
 
@@ -60,6 +56,24 @@ window.MagnonElement = class extends HTMLElement {
 
         if (this.usesShadow) this.root = this.attachShadow({ mode: "open" });
         this.root.appendChild(this._instance);
+
+        if (this.contentReady) this.contentReady();
+    }
+
+    _getTemplate(query) {
+        const searchForTemplate = (doc) => {
+            const template = doc.querySelector(query);
+            if (template) return template;
+            else {
+                for (const link of doc.querySelectorAll("link[rel=import]")) {
+                    if (link.import === null) return;
+                    const template = searchForTemplate(link.import);
+                    if (template) return template;
+                }
+            }
+        };
+
+        return searchForTemplate(document);
     }
 
     static get observedAttributes() {
@@ -155,6 +169,8 @@ window.MagnonElement = class extends HTMLElement {
         }
     }
 };
+
+window.MagnonElement = MagnonElement;
 
 const dashToCamel = text => {
     return text.replace(/-([a-zA-Z0-9])/g, (m, p) => {

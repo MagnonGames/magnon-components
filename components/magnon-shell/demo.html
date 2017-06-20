@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Shell Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+
+        <script type="module" src="./magnon-shell.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <magnon-shell current-page="Home/Sub 1">
+            <span slot="title">Hello, World!</span>
+
+            <a href="#sub1" slot="nav">Sub 1</a>
+            <a href="#sub2" slot="nav">Sub 2</a>
+            <a href="#sub3" slot="nav">Sub 3</a>
+            <a href="#sub4" slot="nav">Sub 4</a>
+
+            <div slot="content">
+                This is some content.
+            </div>
+        </magnon-shell>
+    </body>
+</html>

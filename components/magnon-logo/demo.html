@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Logo Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./magnon-logo.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <style>
+            body {
+                background: #101010;
+                color: white;
+            }
+
+            magnon-logo {
+                height: 200px;
+            }
+        </style>
+
+        <demo-fixture>
+            <magnon-logo animate></magnon-logo>
+        </demo-fixture>
+
+        <div id="controls">
+            Size: <input id="size" type="range" min="30" max="400" value="200"></input>
+            <button onclick="logo.animateIn()">Animate In!</button>
+            <button onclick="logo.animateOut()">Animate Out!</button>
+        </div>
+
+        <script>
+            /* globals DemoFixture */
+            let logo;
+
+            window.onload = () => {
+                logo = document.querySelector("magnon-logo");
+
+                DemoFixture.range("#size", value => {
+                    logo.style.height = `${value}px`;
+                    logo.restyleLocal();
+                });
+            };
+        </script>
+    </body>
+</html>

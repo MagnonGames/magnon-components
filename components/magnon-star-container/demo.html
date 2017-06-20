@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Star Container Demo</title>
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./magnon-star-container.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <style>
+            magnon-star-container {
+                width: 80vw;
+                height: 80vh;
+                padding: 10vw;
+                box-sizing: border-box;
+            }
+        </style>
+
+        <demo-fixture>
+            <magnon-star-container>
+                <h1>Hello World!</h1>
+                <span>This is a cool star container</span>
+            </magnon-star-container>
+        </demo-fixture>
+    </body>
+</html>

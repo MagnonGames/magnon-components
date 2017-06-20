@@ -2,12 +2,14 @@
   "name": "@magnon/components",
   "version": "0.3.0",
   "description": "A set of Magnon web-components",
+  "main": "components/all.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "webpack",
     "test": "npm run lint && wct",
-    "lint": "eslint **/*.html element.html src/**/*.html src/**/*.js"
+    "lint": "eslint components/**/* demo/**/* src/**/* test/**/*.html"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,9 @@
     "@webcomponents/webcomponentsjs": "^1.0.1",
     "eslint": "^3.17.1",
     "eslint-plugin-html": "^2.0.1",
-    "web-component-tester": "^5.0.1"
+    "html-loader": "^0.4.5",
+    "test-fixture": "git+https://github.com/PolymerElements/test-fixture.git",
+    "web-component-tester": "^5.0.1",
+    "webpack": "^2.6.1"
   }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Icon Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./social-set.js"></script>
+        <script type="module" src="./magnon-icon.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <demo-fixture>
+            <style>
+                magnon-icon {
+                    margin: 0 15px;
+                    --magnon-icon-size: 24px;
+                }
+
+                #twitch {
+                    --magnon-icon-color: #6441a5;
+                }
+
+                #twitter {
+                    --magnon-icon-color: #1da1f2;
+                }
+
+                #gplus {
+                    --magnon-icon-color: #c53929;
+                }
+
+                #youtube {
+                    --magnon-icon-color: #cd201f;
+                }
+            </style>
+
+            <magnon-icon icon="cross"></magnon-icon>
+            <magnon-icon icon="check"></magnon-icon>
+            <magnon-icon icon="social-twitch" id="twitch"></magnon-icon>
+            <magnon-icon icon="social-twitter" id="twitter"></magnon-icon>
+            <magnon-icon icon="social-gplus" id="gplus"></magnon-icon>
+            <magnon-icon icon="social-youtube" id="youtube"></magnon-icon>
+        </demo-fixture>
+    </body>
+</html>

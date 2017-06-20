@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Spinner Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./magnon-spinner.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <style>
+            magnon-spinner {
+                --magnon-spinner-size: 128px;
+            }
+        </style>
+
+        <demo-fixture>
+            <magnon-spinner></magnon-spinner>
+        </demo-fixture>
+
+        <div id="controls">
+            Balls: <input id="balls" type="range" min="1" max="100">
+            Ball Size: <input id="size" type="range" min="0.01" max="2" step="any">
+            Ball Offset: <input id="offset" type="range" min="0" max="3.14" step="any">
+            Spin Speed: <input id="spinSpeed" type="range" min="0" max="30" step="any">
+            Min Radius: <input id="minRadius" type="range" min="0" max="100" step="any">
+            Max Radius: <input id="maxRadius" type="range" min="0" max="100" step="any">
+        </div>
+
+        <script>
+            /* globals DemoFixture */
+            window.onload = () => {
+                const spinner = document.querySelector("magnon-spinner");
+
+                DemoFixture.range("#balls", value => (spinner.balls = value), spinner.balls);
+                DemoFixture.range("#size", value => (spinner.ballScale = value), spinner.ballScale);
+                DemoFixture.range("#offset", value => (spinner.ballOffset = value), spinner.ballOffset);
+                DemoFixture.range("#spinSpeed", value => (spinner.spinSpeed = value), spinner.spinSpeed);
+                DemoFixture.range("#minRadius", value => (spinner.minRadius = value), spinner.minRadius);
+                DemoFixture.range("#maxRadius", value => (spinner.maxRadius = value), spinner.maxRadius);
+
+                const exportSpinner = () => { // eslint-disable-line
+                    return JSON.stringify({
+                        balls: spinner.balls,
+                        ballScale: spinner.ballScale,
+                        ballOffset: spinner.ballOffset,
+                        spinSpeed: spinner.spinSpeed,
+                        minRadius: spinner.minRadius,
+                        maxRadius: spinner.maxRadius
+                    });
+                };
+
+                const importSpinner = spinnerConfig => { // eslint-disable-line
+                    spinnerConfig = JSON.parse(spinnerConfig);
+
+                    for (let config in spinnerConfig) {
+                        spinner[config] = spinnerConfig[config];
+                    }
+                };
+            };
+        </script>
+    </body>
+</html>

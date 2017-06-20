@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Image Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./magnon-image.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <style>
+            magnon-image {
+                display: block;
+            }
+
+            .rounded {
+                --magnon-image-border-radius: 10px;
+            }
+
+            .round {
+                --magnon-image-border-radius: 50%;
+            }
+        </style>
+
+        <demo-fixture>
+            <magnon-image src="http://lorempixel.com/640/480/nature" alt="Nature" show-alt>
+                <span slot="description-title">Nature</span>
+                <span>
+                    Nature, in the broadest sense, is the natural, physical, or
+                    material world or universe. "Nature" can refer to the
+                    phenomena of the physical world, and also to life in
+                    general. The study of nature is a large part of science.
+                    Although humans are part of nature, human activity is often
+                    understood as a separate category from other natural
+                    phenomena.
+                    <br /><br />
+                    Text from Nature article on Wikipedia (Licensed under CC BY-SA 3.0)
+                </span>
+            </magnon-image>
+            <magnon-image class="rounded" src="http://lorempixel.com/640/480/food" no-fullscreen></magnon-image>
+            <magnon-image class="round" src="https://www.gravatar.com/avatar/556e7ba6081dc1a3c049ff83be5ccfd1?s=400"></magnon-image>
+        </demo-fixture>
+    </body>
+</html>

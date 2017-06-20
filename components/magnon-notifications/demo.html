@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Magnon Notifications Demo</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+        <script type="module" src="./magnon-notifications.js"></script>
+        <script type="module" src="../../src/demo-fixture.js"></script>
+        <script nomodule defer src="../../out/demo.js"></script>
+    </head>
+    <body>
+        <demo-fixture>
+            <template id="error">
+                <magnon-notification color="--magnon-neon-red">
+                    <magnon-icon icon="cross" slot="icon"></magnon-icon>
+                    <span slot="title">Oops.</span>
+                    <span>Something went wrong.</span>
+                </magnon-notification>
+            </template>
+
+            <template id="success">
+                <magnon-notification color="--magnon-neon-teal">
+                    <magnon-icon icon="check" slot="icon"></magnon-icon>
+                    <span slot="title">Yay!</span>
+                    <span>Something went fantastically great! This is also a "long" notification, so it wraps. :D</span>
+                </magnon-notification>
+            </template>
+
+            <button onclick="MagnonNotifications.send(document.querySelector('#error'))">Send Error</button>
+            <button onclick="MagnonNotifications.send(document.querySelector('#success'))">Send Success</button>
+        </demo-fixture>
+    </body>
+</html>
