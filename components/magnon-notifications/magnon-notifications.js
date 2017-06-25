@@ -34,6 +34,8 @@ export class MagnonNotifications extends MagnonElement {
     }
 
     static appendToBody() {
+        if (window.MAGNON_COMPONENTS_DISABLE_GLOBAL) return;
+
         const append = () => {
             const notificationContainer = document.createElement("magnon-notifications");
             this.notificationContainer = notificationContainer;
