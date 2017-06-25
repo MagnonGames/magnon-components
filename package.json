@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "npm run lint && wct",
+    "test": "npm run lint && npm run build && wct",
     "lint": "eslint components/**/* demo/**/* src/**/* test/**/*.html"
   },
   "repository": {

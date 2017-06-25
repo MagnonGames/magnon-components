@@ -49,7 +49,7 @@
                     const otherTemplate = document.createElement("template");
                     otherTemplate.id = "other";
                     document.body.appendChild(otherTemplate);
-                    const element = new Element({ template: "other" });
+                    const element = new Element({ content: "#other" });
                     expect(element.shadowRoot).to.be.an.instanceof(ShadowRoot);
                 });
 

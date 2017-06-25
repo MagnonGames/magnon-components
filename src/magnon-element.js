@@ -35,9 +35,7 @@ export default class MagnonElement extends HTMLElement {
         });
     }
 
-    _initContent(content) {
-        if (!content) return;
-
+    _initContent(content = `#${this.name}`) {
         let template;
         if (content.match(/^[.|#]/)) {
             template = this._getTemplate(content);
