@@ -2,9 +2,9 @@ import MagnonElement from "../../src/magnon-element.js";
 
 import css from "./star-container.style.js";
 
-const stars = 100;
+const stars = 200;
 const starSpeed = 0.0005;
-const starSize = 5;
+const starSize = 2.5;
 const reactionDistance = 0.3;
 
 export class MagnonStarContainer extends MagnonElement {
@@ -18,6 +18,12 @@ export class MagnonStarContainer extends MagnonElement {
 
     static get name() {
         return "magnon-star-container";
+    }
+
+    static get propertyAttributes() {
+        return {
+            bool: ["parallax"]
+        };
     }
 
     contentReady() {
@@ -45,19 +51,21 @@ export class MagnonStarContainer extends MagnonElement {
     _animate() {
         const ctx = this._ctx;
         const ratio = window.devicePixelRatio;
-        const { width: realWidth, height: realHeight } = this._canvas.getBoundingClientRect();
+        const { width: realWidth, height: realHeight, top } = this._canvas.getBoundingClientRect();
         this.width = realWidth * ratio;
         this.height = realHeight * ratio;
 
         this._canvas.width = this.width;
         this._canvas.height = this.height;
 
-        ctx.fillStyle = "#1A232C";
-        ctx.fillRect(0, 0, this.width, this.height);
+        const mouseYoff = this.parallax ? top / this.height : 0;
+        const drawYoff = this.parallax ? -top : 0;
+
+        ctx.clearRect(0, 0, this.width, this.height);
 
         this._stars.forEach(s => {
-            s.update(this.mouseX, this.mouseY, this.width, this.height);
-            s.draw(ctx, this.width, this.height);
+            s.update(this.mouseX, this.mouseY + mouseYoff, this.width, this.height);
+            s.draw(ctx, this.width, this.height, drawYoff);
         });
 
         requestAnimationFrame(() => this._animate());
@@ -77,7 +85,7 @@ class Star {
 
     randomYZ() {
         this.y = Math.random();
-        this.z = Math.random() * 0.5 + 0.5;
+        this.z = Math.random() + 0.1;
     }
 
     update(mx, my, w, h) {
@@ -96,7 +104,10 @@ class Star {
             }
 
             this.sizeMultiplier = 1 + value * 2;
-        } else for (let i = 0; i < 3; i++) this.color[i] = 255;
+        } else {
+            for (let i = 0; i < 3; i++) this.color[i] = 255;
+            this.sizeMultiplier = 1;
+        }
 
         this.x -= starSpeed * this.z;
         if (this.x < -starSize / w) {
@@ -106,13 +117,13 @@ class Star {
         }
     }
 
-    draw(ctx, w, h) {
+    draw(ctx, w, h, yoff) {
         const drawSize = starSize * this.z * this.sizeMultiplier;
         const halfSize = drawSize / 2;
 
         const colorString = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${this.color[3]})`;
         const x = this.x * w - halfSize;
-        const y = this.y * h - halfSize;
+        const y = this.y * h - halfSize + yoff;
 
         ctx.fillStyle = colorString;
         ctx.fillRect(x, y, drawSize, drawSize);
