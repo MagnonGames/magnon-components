@@ -249,6 +249,12 @@ export class MagnonImage extends MagnonElement {
         } else {
             this._fullscreenImage.classList.remove("tall");
         }
+
+        if (windowRatio < 1) {
+            this._fullscreenContainer.classList.add("vertical");
+        } else {
+            this._fullscreenContainer.classList.remove("vertical");
+        }
     }
 
     _checkHash() {

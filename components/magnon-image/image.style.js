@@ -39,6 +39,11 @@ export default css`
     pointer-events: none;
 }
 
+#fullscreen-container.vertical {
+    flex-direction: column;
+    text-align: center;
+}
+
 #fullscreen-backdrop {
     position: absolute;
     width: 100%;
@@ -64,6 +69,11 @@ export default css`
     height: var(--magnon-image-size-percent, 70%);
 }
 
+#fullscreen-container.vertical #fullscreen-image {
+    width: var(--magnon-image-size-percent, 50%);
+    height: auto;
+}
+
 #fullscreen-text {
     display: none;
     color: white;
@@ -78,6 +88,11 @@ export default css`
 
 #fullscreen-text.shown {
     display: block;
+}
+
+#fullscreen-container.vertical #fullscreen-text {
+    margin: 30px;
+    max-width: none;
 }
 
 #description-title {
