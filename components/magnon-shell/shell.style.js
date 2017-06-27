@@ -90,6 +90,8 @@ export default css`
 
     width: 100%;
     min-height: calc(100% - var(--magnon-header-height));
+    display: flex;
+    flex-direction: column;
 
     background: var(--magnon-shell-background, var(--magnon-background));
 }
@@ -97,11 +99,12 @@ export default css`
 #content-container {
     position: relative;
 
-    margin: 20px auto 350px auto;
+    margin: 20px auto 0 auto;
     width: 100vw;
 
     box-sizing: border-box;
     min-height: 100%;
+    flex-grow: 1;
 
     z-index: 2;
 }
@@ -110,25 +113,13 @@ export default css`
     width: 100%;
     max-width: 100%;
     min-height: calc(100vh - var(--magnon-header-height) + 300px);
-    margin: 0 0 300px 0;
-}
-
-@media(min-width: 580px) {
-    #content-container {
-        width: 85vw;
-    }
-}
-
-@media(min-width: 1200px) {
-    #content-container {
-        width: 70vw;
-    }
+    margin: 0;
 }
 
 #footer {
-    display: block;
+    display: inline-block;
     width: 100%;
-    height: 300px;
+    min-height: 300px;
     transform: translate3d(0, 0, 0);
 
     background: var(--magnon-black);
@@ -136,8 +127,6 @@ export default css`
 
     --magnon-outline-color: white;
 
-    position: absolute;
-    bottom: 0;
     width: 100%;
     z-index: 0;
 }
@@ -147,9 +136,8 @@ export default css`
 }
 
 #footer-container {
-    display: flex;
     width: 100%;
-    height: 100%;
+    min-height: 300px;
     max-width: 1000px;
 
     position: relative;
@@ -159,21 +147,10 @@ export default css`
 }
 
 .side {
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0; bottom: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#left {
-    left: 0;
-}
-
-#right {
-    right: 0;
-    text-align: right;
+    width: 100%;
+    height: auto;
+    position: relative;
+    text-align: center;
 }
 
 #right * {
@@ -182,7 +159,7 @@ export default css`
 
 #footer-navigation {
     flex-grow: 1;
-    margin: 20px 0 0 20px;
+    margin: 20px 0 0 0;
 }
 
 #footer-navigation a {
@@ -194,7 +171,6 @@ export default css`
 }
 
 #social-buttons {
-    margin: 0 0 20px 10px;
     --magnon-social-icon-button-color: white;
 }
 
@@ -212,6 +188,54 @@ export default css`
 #license {
     margin: 20px;
     font-size: 13px;
+}
+
+@media(min-width: 580px) {
+    #content-container {
+        width: 85vw;
+    }
+
+    #footer {
+        display: block;
+    }
+
+    #footer-container {
+        flex-direction: row;
+        display: flex;
+    }
+
+    .side {
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0; bottom: 0;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #left {
+        left: 0;
+    }
+
+    #right {
+        right: 0;
+        text-align: right;
+    }
+
+    #footer-navigation {
+        margin: 20px 0 0 20px;
+    }
+
+    #social-buttons {
+        margin: 0 0 20px 10px;
+    }
+}
+
+@media(min-width: 1200px) {
+    #content-container {
+        width: 70vw;
+    }
 }
 `;
 
