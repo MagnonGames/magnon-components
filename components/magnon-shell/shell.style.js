@@ -211,7 +211,7 @@ export default css`
 
 #license {
     margin: 20px;
-    font-size: 10px;
+    font-size: 13px;
 }
 `;
 
