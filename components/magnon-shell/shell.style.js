@@ -57,13 +57,13 @@ export default css`
     pointer-events: none;
 }
 
-nav {
+#header-container nav {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-nav ::slotted(a) {
+#header-container nav ::slotted(a) {
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -113,13 +113,6 @@ nav ::slotted(a) {
     margin: 0 0 300px 0;
 }
 
-magnon-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    z-index: 0;
-}
-
 @media(min-width: 580px) {
     #content-container {
         width: 85vw;
@@ -130,6 +123,95 @@ magnon-footer {
     #content-container {
         width: 70vw;
     }
+}
+
+#footer {
+    display: block;
+    width: 100%;
+    height: 300px;
+    transform: translate3d(0, 0, 0);
+
+    background: var(--magnon-black);
+    color: white;
+
+    --magnon-outline-color: white;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+#footer-container * {
+    outline-color: var(--magnon-outline-color);
+}
+
+#footer-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+
+    position: relative;
+    margin: auto;
+
+    font-family: var(--magnon-font);
+}
+
+.side {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#left {
+    left: 0;
+}
+
+#right {
+    right: 0;
+    text-align: right;
+}
+
+#right * {
+    color: white !important;
+}
+
+#footer-navigation {
+    flex-grow: 1;
+    margin: 20px 0 0 20px;
+}
+
+#footer-navigation a {
+    color: white !important;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+#social-buttons {
+    margin: 0 0 20px 10px;
+    --magnon-social-icon-button-color: white;
+}
+
+#announcement {
+    flex-grow: 1;
+    margin: 20px;
+}
+
+#announcement-title {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#license {
+    margin: 20px;
+    font-size: 10px;
 }
 `;
 

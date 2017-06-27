@@ -3,7 +3,6 @@ export { default as MagnonElement } from "../src/magnon-element.js";
 export { MagnonButton } from "./magnon-button/magnon-button.js";
 export { MagnonCard } from "./magnon-card/magnon-card.js";
 export { MagnonDrawer } from "./magnon-drawer/magnon-drawer.js";
-export { MagnonFooter } from "./magnon-footer/magnon-footer.js";
 export { MagnonIcon } from "./magnon-icon/magnon-icon.js";
 export { MagnonIconButton } from "./magnon-icon-button/magnon-icon-button.js";
 export { MagnonImage } from "./magnon-image/magnon-image.js";

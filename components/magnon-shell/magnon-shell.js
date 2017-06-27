@@ -7,7 +7,6 @@ import css, { globalStyle } from "./shell.style.js";
 import "../magnon-icon-button/magnon-icon-button.js";
 import "../magnon-logo/magnon-logo.js";
 import "../magnon-drawer/magnon-drawer.js";
-import "../magnon-footer/magnon-footer.js";
 import "../magnon-styles/magnon-styles.js";
 
 GlobalStyle.add(globalStyle);
