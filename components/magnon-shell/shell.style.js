@@ -162,7 +162,7 @@ export default css`
     margin: 20px 0 0 0;
 }
 
-#footer-navigation a {
+#footer-navigation ::slotted(a) {
     color: white !important;
     text-decoration: none;
     font-size: 20px;
