@@ -250,7 +250,7 @@ export class MagnonImage extends MagnonElement {
             this._fullscreenImage.classList.remove("tall");
         }
 
-        if (windowRatio < 1) {
+        if (window.innerWidth / window.innerHeight < 1) {
             this._fullscreenContainer.classList.add("vertical");
         } else {
             this._fullscreenContainer.classList.remove("vertical");
