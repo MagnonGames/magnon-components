@@ -4,7 +4,7 @@ import css from "./star-container.style.js";
 
 const stars = 200;
 const starSpeed = 0.0005;
-const starSize = 2.5;
+const starSize = 2.5 * window.devicePixelRatio;
 const reactionDistance = 0.3;
 
 export class MagnonStarContainer extends MagnonElement {
@@ -27,17 +27,19 @@ export class MagnonStarContainer extends MagnonElement {
     }
 
     contentReady() {
+        this._mobile = navigator.userAgent.match(/(Mobile|Android|Phone|Touch|Tablet)/i);
+
         this._canvas = this.root.querySelector("canvas");
         this._ctx = this._canvas.getContext("2d");
 
         this._stars = [];
         for (let i = 0; i < stars; i++) {
-            this._stars[i] = new Star(Math.random());
+            this._stars[i] = new Star(Math.random(), 0, 0, this._mobile ? 1 : 0);
             this._stars[i].randomYZ();
         }
 
-        this.mouseX = this.mouseY = 0;
-        this.width = this.height = 0;
+        this.mouseX = this.mouseY = -Infinity;
+        this.width = this.height = -Infinity;
 
         window.addEventListener("mousemove", e => {
             const { top, left } = this._canvas.getBoundingClientRect();
@@ -46,6 +48,11 @@ export class MagnonStarContainer extends MagnonElement {
         });
 
         this._animate();
+
+        if (this._mobile) {
+            window.addEventListener("resize", () => this._animate());
+            window.addEventListener("load", () => this._animate());
+        }
     }
 
     _animate() {
@@ -58,8 +65,10 @@ export class MagnonStarContainer extends MagnonElement {
         this._canvas.width = this.width;
         this._canvas.height = this.height;
 
-        const mouseYoff = this.parallax ? top / this.height : 0;
-        const drawYoff = this.parallax ? -top : 0;
+        const useParallax = !this._mobile && this.parallax;
+
+        const mouseYoff = useParallax ? top / this.height : 0;
+        const drawYoff = useParallax ? -top : 0;
 
         ctx.clearRect(0, 0, this.width, this.height);
 
@@ -68,19 +77,19 @@ export class MagnonStarContainer extends MagnonElement {
             s.draw(ctx, this.width, this.height, drawYoff);
         });
 
-        requestAnimationFrame(() => this._animate());
+        if (!this._mobile) requestAnimationFrame(() => this._animate());
     }
 }
 
 class Star {
-    constructor(x, y, z) {
+    constructor(x, y, z, a) {
         this.x = x;
         this.y = y;
         this.z = z;
 
         this.sizeMultiplier = 1;
 
-        this.color = [60, 250, 166, 0];
+        this.color = [60, 250, 166, a];
     }
 
     randomYZ() {
