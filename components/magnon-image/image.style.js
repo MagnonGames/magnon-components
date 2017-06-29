@@ -41,11 +41,14 @@ export default css`
 
 #fullscreen-container.vertical {
     flex-direction: column;
+    justify-content: flex-start;
     text-align: center;
+    overflow: auto;
 }
 
 #fullscreen-backdrop {
-    position: absolute;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
     width: 100%;
     height: 100%;
     background: var(--magnon-black-blue);
@@ -69,9 +72,14 @@ export default css`
     height: var(--magnon-image-size-percent, 70%);
 }
 
+#fullscreen-container.cramped #fullscreen-image {
+    margin: 0 20px;
+}
+
 #fullscreen-container.vertical #fullscreen-image {
     width: var(--magnon-image-size-percent, 50%);
     height: auto;
+    margin-top: 30px;
 }
 
 #fullscreen-text {
@@ -93,6 +101,13 @@ export default css`
 #fullscreen-container.vertical #fullscreen-text {
     margin: 30px;
     max-width: none;
+}
+
+#fullscreen-container.cramped #fullscreen-text {
+    align-self: flex-start;
+    height: 100%;
+    overflow: auto;
+    margin-right: 30px;
 }
 
 #description-title {

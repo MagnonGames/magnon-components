@@ -230,31 +230,31 @@ export class MagnonImage extends MagnonElement {
     }
 
     _updateImageSize() {
+        const setClass = (el, name, present) => {
+            if (present) el.classList.add(name);
+            else el.classList.remove(name);
+        };
+
+        setClass(this._fullscreenContainer, "cramped", false);
+
+        const vertical = window.innerWidth / window.innerHeight < 1;
+        const cramped = !vertical && this.textContent.trim() !== "" && window.innerWidth < 1200;
+
+        setClass(this._fullscreenContainer, "vertical", vertical);
+        setClass(this._fullscreenContainer, "cramped", cramped);
+
         const textStyle = window.getComputedStyle(this._fullscreenText);
-        const textWidth = textStyle.display !== "none"
+        const textWidth = textStyle.display !== "none" && !vertical
             ? (this._fullscreenText.offsetWidth +
             parseFloat(textStyle.marginLeft) + parseFloat(textStyle.marginRight))
             : 0;
 
-        const width = window.innerWidth - textWidth;
-        const height = window.innerHeight;
-        const imageWidth = this._image.width;
-        const imageHeight = this._image.height;
+        const imageSpaceRatio = (window.innerWidth - textWidth) / window.innerHeight;
+        const imageRatio = this._image.naturalWidth / this._image.naturalHeight;
 
-        const windowRatio = width / height;
-        const imageRatio = imageWidth / imageHeight;
+        setClass(this._fullscreenImage, "tall", imageSpaceRatio > imageRatio);
 
-        if (windowRatio > imageRatio) {
-            this._fullscreenImage.classList.add("tall");
-        } else {
-            this._fullscreenImage.classList.remove("tall");
-        }
-
-        if (window.innerWidth / window.innerHeight < 1) {
-            this._fullscreenContainer.classList.add("vertical");
-        } else {
-            this._fullscreenContainer.classList.remove("vertical");
-        }
+        this._fullscreenContainer.offsetWidth;
     }
 
     _checkHash() {
