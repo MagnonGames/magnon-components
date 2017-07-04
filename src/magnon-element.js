@@ -44,7 +44,7 @@ export default class MagnonElement extends HTMLElement {
             el.innerHTML = content;
             template = el;
         }
-        console.log(content, template);
+
         const t = template.cloneNode(true);
 
         if (this.usesShadyCSS) window.ShadyCSS.prepareTemplate(t, this.elementName);
