@@ -22,7 +22,7 @@ export class MagnonIcon extends MagnonElement {
         super({ content: `<svg width="100%" height="100%" viewBox="0 0 16 16"></svg>${style}` });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-icon";
     }
 

@@ -25,7 +25,7 @@ export const createSocialIconButton = (name, icon, color, hrefTemplate, titleTem
             super({ content: content + style });
         }
 
-        static get name() {
+        static get elementName() {
             return name;
         }
 

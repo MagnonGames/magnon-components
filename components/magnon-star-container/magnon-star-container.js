@@ -16,7 +16,7 @@ export class MagnonStarContainer extends MagnonElement {
         ` });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-star-container";
     }
 

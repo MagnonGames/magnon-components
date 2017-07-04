@@ -8,7 +8,7 @@ export default class MagnonIconSet extends MagnonElement {
         if (name && content) this._register(name, content);
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-icon-set";
     }
 

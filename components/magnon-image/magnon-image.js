@@ -15,7 +15,7 @@ export class MagnonImage extends MagnonElement {
         this._fullscreenEnabled = true;
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-image";
     }
 

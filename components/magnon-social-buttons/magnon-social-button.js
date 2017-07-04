@@ -25,7 +25,7 @@ export class MagnonSocialButton extends MagnonElement {
         super({ content: content + style });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-social-button";
     }
 

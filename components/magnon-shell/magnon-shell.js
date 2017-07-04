@@ -26,7 +26,7 @@ export class MagnonShell extends MagnonElement {
         });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-shell";
     }
 

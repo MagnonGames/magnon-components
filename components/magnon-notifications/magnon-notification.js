@@ -12,7 +12,7 @@ export class MagnonNotification extends MagnonElement {
         super({ content: html + css });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-notification";
     }
 

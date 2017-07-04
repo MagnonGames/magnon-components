@@ -42,7 +42,7 @@ export class MagnonSpinner extends MagnonElement {
         requestAnimationFrame(() => this._animate());
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-spinner";
     }
 

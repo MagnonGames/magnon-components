@@ -14,7 +14,7 @@ export class MagnonCard extends MagnonElement {
         this._card = this.root.querySelector("#card");
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-card";
     }
 

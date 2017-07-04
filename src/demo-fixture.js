@@ -37,7 +37,7 @@ export class DemoFixture extends MagnonElement {
         super({ noShadow: true });
     }
 
-    static get name() {
+    static get elementName() {
         return "demo-fixture";
     }
 

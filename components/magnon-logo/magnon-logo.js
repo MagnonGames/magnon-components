@@ -8,7 +8,7 @@ export class MagnonLogo extends MagnonElement {
         super({ content: html + css });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-logo";
     }
 

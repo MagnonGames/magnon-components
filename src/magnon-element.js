@@ -35,7 +35,7 @@ export default class MagnonElement extends HTMLElement {
         });
     }
 
-    _initContent(content = `#${this.name}`) {
+    _initContent(content = `#${this.elementName}`) {
         let template;
         if (content.match(/^[.|#]/)) {
             template = this._getTemplate(content);
@@ -44,10 +44,10 @@ export default class MagnonElement extends HTMLElement {
             el.innerHTML = content;
             template = el;
         }
-
+        console.log(content, template);
         const t = template.cloneNode(true);
 
-        if (this.usesShadyCSS) window.ShadyCSS.prepareTemplate(t, this.name);
+        if (this.usesShadyCSS) window.ShadyCSS.prepareTemplate(t, this.elementName);
 
         this._instance = t.content.cloneNode(true);
         if (this.usesShadyCSS) window.ShadyCSS.styleElement(this._instance);
@@ -83,16 +83,16 @@ export default class MagnonElement extends HTMLElement {
         ];
     }
 
-    static get name() {
+    static get elementName() {
         throw new TypeError("Element is missing an element name declaration");
     }
 
-    get name() {
-        return this.constructor.name;
+    get elementName() {
+        return this.constructor.elementName;
     }
 
     static init() {
-        customElements.define(this.name, this);
+        customElements.define(this.elementName, this);
     }
 
     static restyle() {

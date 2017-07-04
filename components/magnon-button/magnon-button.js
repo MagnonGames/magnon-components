@@ -7,7 +7,7 @@ export class MagnonButton extends MagnonElement {
         super({ content: `<button><slot></slot></button>${css}` });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-button";
     }
 

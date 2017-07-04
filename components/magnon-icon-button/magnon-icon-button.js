@@ -9,7 +9,7 @@ export class MagnonIconButton extends MagnonElement {
         super({ content: `<button><magnon-icon></magnon-icon></button>${css}` });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-icon-button";
     }
 

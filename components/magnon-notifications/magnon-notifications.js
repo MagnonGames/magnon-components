@@ -29,7 +29,7 @@ export class MagnonNotifications extends MagnonElement {
         super({ content: `<slot></slot>${style}` });
     }
 
-    static get name() {
+    static get elementName() {
         return "magnon-notifications";
     }
 
