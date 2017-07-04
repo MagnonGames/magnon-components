@@ -8,6 +8,7 @@ export { MagnonIconButton } from "./magnon-icon-button/magnon-icon-button.js";
 export { MagnonImage } from "./magnon-image/magnon-image.js";
 export { MagnonLogo } from "./magnon-logo/magnon-logo.js";
 export { MagnonNotifications } from "./magnon-notifications/magnon-notifications.js";
+export { MagnonNotification } from "./magnon-notifications/magnon-notification.js";
 export { MagnonShell } from "./magnon-shell/magnon-shell.js";
 export { MagnonSocialButton, createSocialIconButton } from "./magnon-social-buttons/magnon-social-buttons.js";
 export { MagnonSpinner } from "./magnon-spinner/magnon-spinner.js";
