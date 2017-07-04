@@ -23,31 +23,33 @@ export class MagnonNotification extends MagnonElement {
     }
 
     contentReady() {
-        const margin = window.getComputedStyle(this).margin;
-
-        this.style.transition = "none";
-        this.style.height = "0px";
-        this.style.margin = "0px 0px";
-
         this.root.querySelector(".close-button").addEventListener("click", () => this.close());
 
-        setTimeout(() => {
-            this.style.height = "";
-            const height = this.offsetHeight;
+        requestAnimationFrame(() => {
+            const margin = window.getComputedStyle(this).margin;
 
+            this.style.transition = "none";
             this.style.height = "0px";
+            this.style.margin = "0px 0px";
 
             setTimeout(() => {
-                this.style.transition = "";
+                this.style.height = "";
+                const height = this.offsetHeight;
 
-                this.style.margin = margin;
-                this.style.height = `${height}px`;
+                this.style.height = "0px";
 
-                this.addEventListener("animationstart", () => {
-                    this.style.opacity = 1;
-                });
+                setTimeout(() => {
+                    this.style.transition = "";
+
+                    this.style.margin = margin;
+                    this.style.height = `${height}px`;
+
+                    this.addEventListener("animationstart", () => {
+                        this.style.opacity = 1;
+                    });
+                }, 100);
             }, 100);
-        }, 100);
+        });
     }
 
     propertySet(property, old, value) {
