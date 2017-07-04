@@ -50,15 +50,19 @@ export class MagnonNotifications extends MagnonElement {
     }
 
     static send(template) {
+        let notification;
+
         if (typeof template !== "string") {
             const instance = template.content.cloneNode(true);
-            this.notificationContainer.appendChild(instance);
+            notification = instance;
         } else {
-            this.notificationContainer.innerHTML += template;
+            const temp = document.createElement("div");
+            temp.innerHTML = template;
+            notification = temp.querySelector("magnon-notification");
         }
 
-        const notifications = this.notificationContainer.querySelectorAll("magnon-notification");
-        return notifications[notifications.length - 1];
+        this.notificationContainer.appendChild(notification);
+        return notification;
     }
 }
 
