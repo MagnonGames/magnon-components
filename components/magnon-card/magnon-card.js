@@ -12,6 +12,7 @@ export class MagnonCard extends MagnonElement {
 
     contentReady() {
         this._card = this.root.querySelector("#card");
+        this._header = this.root.querySelector("#header");
     }
 
     static get elementName() {
@@ -20,6 +21,7 @@ export class MagnonCard extends MagnonElement {
 
     static get propertyAttributes() {
         return {
+            string: ["header-image"],
             number: ["shadow"]
         };
     }
@@ -29,6 +31,13 @@ export class MagnonCard extends MagnonElement {
             const clamped = Math.min(3, Math.max(0, value));
 
             this._card.style.boxShadow = `var(--magnon-shadow-${clamped})`;
+        } else if (property === "header-image") {
+            if (value) {
+                this._header.style.display = "block";
+                this._header.style.backgroundImage = `url(${value})`;
+            } else {
+                this._header.style.display = "hidden";
+            }
         }
     }
 }

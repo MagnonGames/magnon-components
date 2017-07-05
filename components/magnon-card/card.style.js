@@ -45,6 +45,19 @@ export default css`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+}
+
+#header {
+    position: relative;
+    width: calc(100% + var(--card-padding) * 2);
+    height: 200px;
+    top: -70px;
+    left: calc(var(--card-padding) * -1);
+    background-size: cover;
+    background-position: center;
+    margin-bottom: -50px;
+    display: none;
 }
 
 #content {
@@ -67,6 +80,10 @@ export default css`
     #title {
         left: auto;
         width: auto;
+    }
+
+    #header {
+        border-radius: 4px 4px 0 0;
     }
 }
 `;

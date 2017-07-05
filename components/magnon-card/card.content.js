@@ -5,6 +5,7 @@ export default html`
     <div id="title">
         <slot name="title"></slot>
     </div>
+    <span id="header"></span>
     <div id="content">
         <slot></slot>
     </div>
