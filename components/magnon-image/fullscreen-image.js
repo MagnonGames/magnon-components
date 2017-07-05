@@ -62,10 +62,6 @@ export class FullscreenImage extends MagnonElement {
         if (this._currentImage) this._updateImageSize();
 
         if (value) {
-            // Disable scroll
-            document.body.style.overflow = "hidden";
-
-            // The rest
             this._fullscreenContainer.style.pointerEvents = "all";
 
             this._fullscreenImage.style.opacity = "1";
@@ -113,10 +109,6 @@ export class FullscreenImage extends MagnonElement {
                 this._fullscreenImage.addEventListener("transitionend", endAction);
             }, 100);
         } else {
-            // Enable scroll
-            document.body.style.overflow = "auto";
-
-            // The rest
             const endAction = () => {
                 this.style.transform = "";
 
