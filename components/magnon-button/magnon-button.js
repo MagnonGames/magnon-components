@@ -4,7 +4,7 @@ import css from "./button.style.js";
 
 export class MagnonButton extends MagnonElement {
     constructor() {
-        super({ content: `<button><slot></slot></button>${css}` });
+        super({ content: `<button><div><slot></slot></div></button>${css}` });
     }
 
     static get elementName() {

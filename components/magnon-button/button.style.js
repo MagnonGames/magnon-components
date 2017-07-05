@@ -1,33 +1,61 @@
 import { css } from "../../src/literals.js";
 
+import "../magnon-styles/magnon-styles.js";
+
 export default css`
 :host {
-    --padding: 15px;
-    --depth: 3px;
     display: inline-block;
 }
 
 button {
-    margin-top: var(--depth);
-    padding: var(--padding);
+    padding: 15px;
+    position: relative;
 
-    border: none;
+    border: 2px solid var(--magnon-button-color, var(--magnon-highlight-color));
     outline: none;
-    background: #237ACB; /* TODO: css properties */
-    font-size: 15px;
-    color: white;
+    background: transparent;
+    font-size: var(--magnon-button-size, 17px);
+    font-family: var(--magnon-font);
+    font-weight: bold;
+    color: var(--magnon-button-color, var(--magnon-highlight-color));
     border-radius: 4px;
+    overflow: hidden;
+
+    transition: all 0.15s;
 }
 
-button:hover {
-    margin-top: 0px;
-    border-bottom: var(--depth) solid rgba(255, 255, 255, 0.3);
+button::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border-radius: 4px;
+    background-image: linear-gradient(90deg, var(--magnon-black) 0%, transparent 100%);
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+
+    transition: all 0.15s;
+    transform: translateX(-100%);
+}
+
+button:active::after {
+    transform: translateX(0);
 }
 
 button:active {
-    margin-top: var(--depth);
-    padding-bottom: calc(var(--padding) - var(--depth));
-    border-top: var(--depth) solid rgba(0, 0, 0, 0.3);
-    border-bottom: none;
+    transform: scale(1.1);
+}
+
+button:hover, button:focus {
+    background: var(--magnon-button-color, var(--magnon-highlight-color));
+    color: var(--magnon-button-contrast-color, var(--magnon-highlight-contrast-color));
+}
+
+button > * {
+    position: relative;
+    z-index: 10;
 }
 `;
