@@ -112,7 +112,7 @@ export class MagnonImage extends MagnonElement {
             this._altText.style.opacity = "0";
 
             const startBox = this._image.getBoundingClientRect();
-            const startBorderRadius = window.getComputedStyle(this._image).getPropertyValue("border-radius");
+            const startBorderRadius = window.getComputedStyle(this._image).getPropertyValue("--magnon-image-border-radius");
             const endBox = this._fullscreenImage.getBoundingClientRect();
 
             this._fullscreenImage.style.transition = "none";
