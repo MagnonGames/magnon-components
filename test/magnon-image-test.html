@@ -43,7 +43,7 @@
                 it("Can go to fullscreen normally", done => {
                     image._image.click();
                     setTimeout(() => {
-                        expect(image._fullscreenBackdrop.style.opacity).to.be.above(0);
+                        expect(document.querySelector("magnon-image-fullscreen")._fullscreenBackdrop.style.opacity).to.be.above(0);
                         done();
                     }, 200);
                 });
@@ -52,7 +52,7 @@
                     const fimage = fixture("no-fullscreen-image");
                     fimage._image.click();
                     setTimeout(() => {
-                        expect(fimage._fullscreenBackdrop.style.opacity).to.not.equal(1);
+                        expect(document.querySelector("magnon-image-fullscreen")._fullscreenBackdrop.style.opacity).to.not.equal(1);
                         done();
                     }, 200);
                 });
