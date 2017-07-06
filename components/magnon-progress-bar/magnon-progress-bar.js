@@ -28,7 +28,7 @@ class MagnonProgressBar extends MagnonElement {
                     background: var(--magnon-progress-bar-color, var(--magnon-highlight-color));
                     transform: scaleX(0);
                     transform-origin: center left;
-                    transition: transform 0.05s ease-in-out;
+                    transition: transform 0.2s ease-in-out;
                 }
             </style>
 
@@ -45,7 +45,7 @@ class MagnonProgressBar extends MagnonElement {
     static get propertyAttributes() {
         return {
             number: ["progress"],
-            bool: ["visible"]
+            bool: ["visible", "animate"]
         };
     }
 
@@ -61,6 +61,8 @@ class MagnonProgressBar extends MagnonElement {
             `;
         } else if (property === "visible") {
             this._container.style.opacity = value ? 1 : 0;
+        } else if (property === "animate") {
+            this._filler.style.transition = value ? "" : "none";
         }
     }
 }
