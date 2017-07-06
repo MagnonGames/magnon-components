@@ -53,8 +53,8 @@ export class MagnonIcon extends MagnonElement {
     }
 
     _emptySvg() {
-        while (this._svg.children[0]) {
-            this._svg.removeChild(this._svg.children[0]);
+        while (this._svg.childNodes[0]) {
+            this._svg.removeChild(this._svg.childNodes[0]);
         }
     }
 }
