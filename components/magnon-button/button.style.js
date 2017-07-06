@@ -32,7 +32,7 @@ button::after {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     border-radius: 4px;
-    background-image: linear-gradient(90deg, var(--magnon-black) 0%, transparent 100%);
+    background-image: linear-gradient(90deg, white 0%, transparent 100%);
     background-repeat: no-repeat;
     opacity: 0.3;
     z-index: 0;
