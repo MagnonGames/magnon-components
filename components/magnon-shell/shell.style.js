@@ -128,7 +128,7 @@ export default css`
     --magnon-outline-color: white;
 
     width: 100%;
-    z-index: 0;
+    z-index: 100;
 }
 
 #footer-container * {
