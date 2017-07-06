@@ -177,7 +177,9 @@ export class FullscreenImage extends MagnonElement {
             : 0;
 
         const imageSpaceRatio = (window.innerWidth - textWidth) / window.innerHeight;
-        const imageRatio = this._currentImage.naturalWidth / this._currentImage.naturalHeight;
+        const imageRatio = this._currentImage
+            ? this._currentImage.naturalWidth / this._currentImage.naturalHeight
+            : 1;
 
         setClass(this._fullscreenImage, "tall", imageSpaceRatio > imageRatio);
 
