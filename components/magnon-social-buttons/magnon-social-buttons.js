@@ -115,3 +115,13 @@ createSocialIconButton(
     userTmpl`Check out ${0} on BitBucket`,
     userTmpl`${0}`
 );
+
+createSocialIconButton(
+    "magnon-feedly-button",
+    "social-rss",
+    "#101010",
+    userTmpl`http://cloud.feedly.com/#subscription/feed/${0}/rss/`,
+    userTmpl`Follow ${0} on Feedly!`,
+    userTmpl`${0}`,
+    true
+);
