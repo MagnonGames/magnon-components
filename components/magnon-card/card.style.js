@@ -27,10 +27,6 @@ export default css`
     transition: 0.2s all;
 }
 
-#card.wide {
-    border-radius: 4px;
-}
-
 #card.link:hover {
     box-shadow: var(--magnon-shadow-3);
     transform: scale(1.01);
@@ -99,4 +95,10 @@ a {
 #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }
 #title ::slotted(h3) { margin: 0; } #title ::slotted(h4) { margin: 0; }
 #title ::slotted(h5) { margin: 0; } #title ::slotted(h6) { margin: 0; }
+
+@media (min-width: 580px) {
+    #card {
+        border-radius: 4px;
+    }
+}
 `;
