@@ -34,6 +34,11 @@ export default css`
 
 #category {
     margin-bottom: calc(var(--card-padding) / 2);
+    text-align: center;
+}
+
+.wide #category {
+    text-align: left;
 }
 
 #category ::slotted(*) {
