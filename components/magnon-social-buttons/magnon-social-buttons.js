@@ -47,6 +47,12 @@ export const createSocialIconButton = (name, icon, color, hrefTemplate, titleTem
 
         propertySet(property, old, value) {
             if (property === "user") {
+                const urlRegex = new RegExp(`^${hrefTemplate("(\\w+?)")}$`);
+                const regexResult = urlRegex.exec(value.trim());
+                if (regexResult) {
+                    value = regexResult[1];
+                }
+
                 if (!idURL) this._button.setAttribute("href", hrefTemplate(value));
                 this._button.setAttribute("title", titleTemplate(value));
                 this._button.setAttribute("user", userTemplate(value));
