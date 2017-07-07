@@ -32,6 +32,25 @@ export default css`
     border-radius: 4px;
 }
 
+#header {
+    position: relative;
+    width: calc(100% + var(--card-padding) * 2);
+    height: 200px;
+    top: calc(var(--card-padding) * -1);
+    left: calc(var(--card-padding) * -1);
+    background-size: cover;
+    background-position: center;
+    display: none;
+}
+
+#header.big {
+    height: 400px;
+}
+
+.wide #header {
+    border-radius: 4px 4px 0 0;
+}
+
 #category {
     margin-bottom: calc(var(--card-padding) / 2);
     text-align: center;
@@ -61,21 +80,6 @@ export default css`
 
 .wide #title {
     text-align: left;
-}
-
-#header {
-    position: relative;
-    width: calc(100% + var(--card-padding) * 2);
-    height: 200px;
-    top: calc(var(--card-padding) * -1);
-    left: calc(var(--card-padding) * -1);
-    background-size: cover;
-    background-position: center;
-    display: none;
-}
-
-.wide #header {
-    border-radius: 4px 4px 0 0;
 }
 
 #content {
