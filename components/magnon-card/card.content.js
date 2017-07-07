@@ -3,6 +3,9 @@ import { html } from "../../src/literals.js";
 export default html`
 <div id="card">
     <span id="header"></span>
+    <div id="category">
+        <slot name="category"></slot>
+    </div>
     <div id="title">
         <slot name="title"></slot>
     </div>

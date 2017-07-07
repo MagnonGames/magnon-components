@@ -32,6 +32,22 @@ export default css`
     border-radius: 4px;
 }
 
+#category {
+    margin-bottom: calc(var(--card-padding) / 2);
+}
+
+#category ::slotted(*) {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.5);
+    transition: color 0.3s;
+    text-decoration: none;
+    margin-bottom: calc(var(--card-padding) / 3);
+}
+
+#category ::slotted(a:hover) {
+    color: var(--magnon-highlight-color);
+}
+
 #title {
     color: var(--magnon-content-color);
     margin-bottom: var(--card-padding);
