@@ -13,6 +13,9 @@ export class MagnonCard extends MagnonElement {
     contentReady() {
         this._card = this.root.querySelector("#card");
         this._header = this.root.querySelector("#header");
+
+        window.addEventListener("resize", () => this._onResize());
+        this._onResize();
     }
 
     static get elementName() {
@@ -39,6 +42,11 @@ export class MagnonCard extends MagnonElement {
                 this._header.style.display = "hidden";
             }
         }
+    }
+
+    _onResize() {
+        if (this.offsetWidth < 580) this._card.classList.remove("wide");
+        else this._card.classList.add("wide");
     }
 }
 

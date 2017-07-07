@@ -2,10 +2,10 @@ import { html } from "../../src/literals.js";
 
 export default html`
 <div id="card">
+    <span id="header"></span>
     <div id="title">
         <slot name="title"></slot>
     </div>
-    <span id="header"></span>
     <div id="content">
         <slot></slot>
     </div>

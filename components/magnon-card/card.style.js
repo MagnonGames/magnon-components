@@ -19,7 +19,6 @@ export default css`
     min-height: 100%;
 
     padding: var(--card-padding);
-    padding-top: 70px;
     box-sizing: border-box;
 
     background: var(--magnon-card-background, var(--magnon-content-background));
@@ -29,35 +28,33 @@ export default css`
     transition: 0.5s box-shadow;
 }
 
-#card.shadow {
-    box-shadow: none;
+.wide #card {
+    border-radius: 4px;
 }
 
 #title {
-    position: absolute;
-    top: -25px;
-    left: 10px;
-    background: inherit;
-    box-shadow: var(--magnon-shadow-2);
-    padding: 15px 30px;
-    height: 30px;
-    width: calc(100% - 80px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
+    color: var(--magnon-content-color);
+    margin-bottom: var(--card-padding);
+    text-align: center;
+}
+
+.wide #title {
+    text-align: left;
 }
 
 #header {
     position: relative;
     width: calc(100% + var(--card-padding) * 2);
     height: 200px;
-    top: -70px;
+    top: calc(var(--card-padding) * -1);
     left: calc(var(--card-padding) * -1);
     background-size: cover;
     background-position: center;
-    margin-bottom: -50px;
     display: none;
+}
+
+.wide #header {
+    border-radius: 4px 4px 0 0;
 }
 
 #content {
@@ -71,19 +68,4 @@ export default css`
 #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }
 #title ::slotted(h3) { margin: 0; } #title ::slotted(h4) { margin: 0; }
 #title ::slotted(h5) { margin: 0; } #title ::slotted(h6) { margin: 0; }
-
-@media(min-width: 580px) {
-    #card {
-        border-radius: 4px;
-    }
-
-    #title {
-        left: auto;
-        width: auto;
-    }
-
-    #header {
-        border-radius: 4px 4px 0 0;
-    }
-}
 `;
