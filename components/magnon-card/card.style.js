@@ -50,10 +50,6 @@ a {
     height: 400px;
 }
 
-.wide #header {
-    border-radius: 4px 4px 0 0;
-}
-
 #category {
     padding: var(--card-padding);
     padding-bottom: calc(var(--card-padding) / 2);
@@ -99,6 +95,10 @@ a {
 @media (min-width: 580px) {
     #card {
         border-radius: 4px;
+    }
+
+    #header {
+        border-radius: 4px 4px 0 0;
     }
 }
 `;
