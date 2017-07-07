@@ -28,7 +28,7 @@ export default css`
     transition: 0.5s box-shadow;
 }
 
-.wide #card {
+#card.wide {
     border-radius: 4px;
 }
 
