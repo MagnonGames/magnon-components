@@ -16,6 +16,7 @@ export class MagnonCard extends MagnonElement {
         this._header = this.root.querySelector("#header");
 
         window.addEventListener("resize", () => this._onResize());
+        window.addEventListener("load", () => this._onResize());
         this._onResize();
     }
 
