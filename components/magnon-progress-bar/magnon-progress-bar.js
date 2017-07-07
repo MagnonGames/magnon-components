@@ -2,7 +2,7 @@ import MagnonElement from "../../src/magnon-element.js";
 
 import "../magnon-styles/magnon-styles.js";
 
-class MagnonProgressBar extends MagnonElement {
+export class MagnonProgressBar extends MagnonElement {
     constructor() {
         super({ content: `
             <style>
