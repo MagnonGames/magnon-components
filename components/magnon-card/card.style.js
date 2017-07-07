@@ -18,26 +18,33 @@ export default css`
     max-width: 100%;
     min-height: 100%;
 
-    padding: var(--card-padding);
     box-sizing: border-box;
 
     background: var(--magnon-card-background, var(--magnon-content-background));
     color: var(--magnon-content-color);
 
     box-shadow: var(--magnon-shadow-2);
-    transition: 0.5s box-shadow;
+    transition: 0.2s all;
 }
 
 #card.wide {
     border-radius: 4px;
 }
 
+#card.link:hover {
+    box-shadow: var(--magnon-shadow-3);
+    transform: scale(1.01);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 #header {
     position: relative;
-    width: calc(100% + var(--card-padding) * 2);
+    width: 100%;
     height: 200px;
-    top: calc(var(--card-padding) * -1);
-    left: calc(var(--card-padding) * -1);
     background-size: cover;
     background-position: center;
     display: none;
@@ -52,7 +59,8 @@ export default css`
 }
 
 #category {
-    margin-bottom: calc(var(--card-padding) / 2);
+    padding: var(--card-padding);
+    padding-bottom: calc(var(--card-padding) / 2);
     text-align: center;
 }
 
@@ -68,13 +76,10 @@ export default css`
     margin-bottom: calc(var(--card-padding) / 3);
 }
 
-#category ::slotted(a:hover) {
-    color: var(--magnon-highlight-color);
-}
-
 #title {
     color: var(--magnon-content-color);
-    margin-bottom: var(--card-padding);
+    padding: var(--card-padding);
+    padding-top: 0;
     text-align: center;
 }
 
@@ -84,10 +89,11 @@ export default css`
 
 #content {
     flex-grow: 1;
+    padding: 0 var(--card-padding);
 }
 
 #footer {
-    margin-top: var(--card-padding);
+    padding: var(--card-padding);
 }
 
 #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }

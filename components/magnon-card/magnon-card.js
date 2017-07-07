@@ -12,6 +12,7 @@ export class MagnonCard extends MagnonElement {
 
     contentReady() {
         this._card = this.root.querySelector("#card");
+        this._link = this.root.querySelector("a");
         this._header = this.root.querySelector("#header");
 
         window.addEventListener("resize", () => this._onResize());
@@ -24,7 +25,7 @@ export class MagnonCard extends MagnonElement {
 
     static get propertyAttributes() {
         return {
-            string: ["header-image"],
+            string: ["header-image", "href"],
             number: ["shadow"],
             bool: ["big-header"]
         };
@@ -42,6 +43,13 @@ export class MagnonCard extends MagnonElement {
             } else {
                 this._header.style.display = "hidden";
             }
+        } else if (property === "href") {
+            if (value) {
+                this._card.classList.add("link");
+            } else {
+                this._card.classList.remove("link");
+            }
+            this._link.href = value;
         } else if (property === "big-header") {
             if (value) this._header.classList.add("big");
             else this._header.classList.remove("big");
