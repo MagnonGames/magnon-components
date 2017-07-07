@@ -5,7 +5,7 @@ export default html`
     <magnon-icon-button id="navigation-button" icon="menu"></magnon-icon-button>
     <div id="logo-container">
         <a id="logo-link" href="/" title="Magnon Homepage">
-            <magnon-logo animate></magnon-logo>
+            <magnon-logo></magnon-logo>
         </a>
     </div>
     <nav>
