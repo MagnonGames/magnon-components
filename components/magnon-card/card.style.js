@@ -6,8 +6,8 @@ export default css`
 
     --card-padding: 30px;
 
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 70px;
 }
 
 #card {
