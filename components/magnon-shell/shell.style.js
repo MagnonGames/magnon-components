@@ -306,4 +306,10 @@ hr {
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+blockquote {
+    margin-left: 40px;
+    padding-left: 20px;
+    border-left: 5px solid rgba(0, 0, 0, 0.2);
+}
 `;
