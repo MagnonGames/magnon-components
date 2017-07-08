@@ -29,8 +29,8 @@
 
                 afterEach(() => {
                     // Remove anything added after the script.
-                    while (document.body.children.length > 1) {
-                        document.body.removeChild(document.body.children[document.body.children.length - 1]);
+                    while (document.body.childNodes.length > 1) {
+                        document.body.removeChild(document.body.childNodes[document.body.childNodes.length - 1]);
                     }
                 });
 
@@ -71,7 +71,7 @@
                         noShadow: true
                     });
                     expect(element.shadowRoot).to.be.null;
-                    expect(element.root.children.length).to.be.above(0);
+                    expect(element.root.childNodes.length).to.be.above(0);
                 });
 
                 it("can fire events with fire and a custom parameter", done => {
