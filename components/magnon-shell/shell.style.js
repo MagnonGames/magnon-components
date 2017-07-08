@@ -68,7 +68,7 @@ export default css`
     text-decoration: none;
     font-size: 18px;
     color: var(--magnon-shell-header-color, var(--magnon-highlight-contrast-color));
-    cursor: default;
+    cursor: pointer;
 
     margin: 0 10px;
 }
