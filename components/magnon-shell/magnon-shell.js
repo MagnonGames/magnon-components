@@ -18,6 +18,7 @@ export class MagnonShell extends MagnonElement {
 
     contentReady() {
         this._drawer = this.root.querySelector("magnon-drawer");
+        this._siteTitle = this.root.querySelector("#site-title");
         this._content = this.root.querySelector("#content-container");
         this._navButton = this.root.querySelector("magnon-icon-button");
 
@@ -32,12 +33,15 @@ export class MagnonShell extends MagnonElement {
 
     static get propertyAttributes() {
         return {
+            string: ["site-title"],
             bool: ["expand-content", "use-drawer"]
         };
     }
 
     propertySet(property, old, value) {
-        if (property === "expand-content") {
+        if (property === "site-title") {
+            this._siteTitle.textContent = value;
+        } else if (property === "expand-content") {
             if (value) this._content.classList.add("expand-content");
             else this._content.classList.remove("expand-content");
         } else if (property === "use-drawer") {

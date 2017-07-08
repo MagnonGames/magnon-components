@@ -4,8 +4,9 @@ export default html`
 <div id="header-container">
     <magnon-icon-button id="navigation-button" icon="menu"></magnon-icon-button>
     <div id="logo-container">
-        <a id="logo-link" href="/" title="Magnon Homepage">
+        <a id="logo-link" href="/" title="Home">
             <magnon-logo></magnon-logo>
+            <span id="site-title"></span>
         </a>
     </div>
     <nav>

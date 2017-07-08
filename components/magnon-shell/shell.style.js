@@ -77,10 +77,20 @@ export default css`
 #logo-link {
     height: 40px;
     pointer-events: all;
+    font-family: var(--magnon-header-font);
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #logo-link > magnon-logo {
     height: 100%;
+}
+
+#site-title:not(:empty) {
+    margin-left: 0.5ch;
 }
 
 #main-container {
