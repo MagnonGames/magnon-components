@@ -28,7 +28,7 @@ export class MagnonCard extends MagnonElement {
         return {
             string: ["header-image", "href"],
             number: ["shadow"],
-            bool: ["big-header", "expand-content"]
+            bool: ["big-header", "expand-content", "center-content"]
         };
     }
 
@@ -57,6 +57,9 @@ export class MagnonCard extends MagnonElement {
         } else if (property === "expand-content") {
             if (value) this._card.classList.add("expand");
             else this._card.classList.remove("expand");
+        } else if (property === "center-content") {
+            if (value) this._card.classList.add("center-content");
+            else this._card.classList.remove("center-content");
         }
     }
 

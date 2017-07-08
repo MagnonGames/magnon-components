@@ -92,6 +92,10 @@ a {
     padding: 0;
 }
 
+#card.center-content * {
+    text-align: center;
+}
+
 #title ::slotted(h1) { margin: 0; } #title ::slotted(h2) { margin: 0; }
 #title ::slotted(h3) { margin: 0; } #title ::slotted(h4) { margin: 0; }
 #title ::slotted(h5) { margin: 0; } #title ::slotted(h6) { margin: 0; }
