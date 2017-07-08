@@ -312,4 +312,10 @@ blockquote {
     padding-left: 20px;
     border-left: 5px solid rgba(0, 0, 0, 0.2);
 }
+
+mark {
+    position: relative;
+    background-color: var(--magnon-black);
+    color: white;
+}
 `;
