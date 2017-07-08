@@ -64,9 +64,10 @@ export default css`
 }
 
 #header-container nav ::slotted(a) {
-    color: white;
+    color: white !important;
     text-decoration: none;
     font-size: 18px;
+    font-family: var(--magnon-header-font);
     color: var(--magnon-shell-header-color, var(--magnon-highlight-contrast-color));
     cursor: pointer;
 
@@ -184,6 +185,7 @@ export default css`
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: bold;
+    font-family: var(--magnon-header-font);
 }
 
 #license {
@@ -245,5 +247,46 @@ html, body {
     padding: 0;
     margin: 0;
     overflow-y: scroll;
+    font-size: 18px;
+    font-family: var(--magnon-font)
+    outline-color: white;
+}
+
+a {
+    color: var(--magnon-highlight-color);
+    transition: color 0.2s;
+}
+
+a:hover, a:focus {
+    color: var(--magnon-black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--magnon-header-font);
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 22px;
+}
+
+h6 {
+    font-size: 20px;
 }
 `;
