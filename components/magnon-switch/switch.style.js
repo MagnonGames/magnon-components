@@ -3,7 +3,6 @@ import { css } from "../../src/literals.js";
 export default css`
 :host {
     display: inline-block;
-    font-family: var(--magnon-font);
 }
 
 #container {
