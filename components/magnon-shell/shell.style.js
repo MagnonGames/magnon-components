@@ -299,4 +299,11 @@ h5 {
 h6 {
     font-size: 20px;
 }
+
+hr {
+    margin: 40px 15%;
+    height: 0px;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
 `;
