@@ -92,6 +92,7 @@ export default css`
     min-height: calc(100% - var(--magnon-header-height));
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     background: var(--magnon-shell-background, var(--magnon-background));
 }
