@@ -38,5 +38,5 @@ export default css`
     pointer-events: none;
 
     transition: opacity 0.2s ease-in-out;
-}    
+}
 `;
