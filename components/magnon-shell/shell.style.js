@@ -262,6 +262,11 @@ html, body {
     outline-color: white;
 }
 
+::selection {
+    background-color: var(--magnon-highlight-color);
+    color: var(--magnon-highlight-contrast-color);
+}
+
 a {
     color: var(--magnon-highlight-color);
     transition: color 0.2s;
