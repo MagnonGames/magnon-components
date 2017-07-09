@@ -6,7 +6,7 @@ import "../magnon-icon/magnon-icon.js";
 
 export class MagnonIconButton extends MagnonElement {
     constructor() {
-        super({ content: `<button><magnon-icon></magnon-icon></button>${css}` });
+        super({ content: `<button><magnon-icon></magnon-icon></button>` + css });
     }
 
     static get elementName() {

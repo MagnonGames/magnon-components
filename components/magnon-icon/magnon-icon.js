@@ -1,5 +1,4 @@
 import MagnonElement from "../../src/magnon-element.js";
-
 import { css } from "../../src/literals.js";
 
 import MagnonIconSet from "./icon-set.js";
@@ -19,7 +18,7 @@ svg {
 
 export class MagnonIcon extends MagnonElement {
     constructor() {
-        super({ content: `<svg width="100%" height="100%" viewBox="0 0 16 16"></svg>${style}` });
+        super({ content: `<svg width="100%" height="100%" viewBox="0 0 16 16"></svg>` + style });
     }
 
     static get elementName() {

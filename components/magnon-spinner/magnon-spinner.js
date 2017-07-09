@@ -1,5 +1,4 @@
 import MagnonElement from "../../src/magnon-element.js";
-
 import { css } from "../../src/literals.js";
 
 import "../magnon-styles/magnon-styles.js";
@@ -32,7 +31,7 @@ export class MagnonSpinner extends MagnonElement {
         balls: 3, ballScale: 1, ballOffset: 1 / 3, spinSpeed: 3,
         minRadius: 0, maxRadius: 100
     }) {
-        super({ content: `<div id="container"></div>${style}` });
+        super({ content: `<div id="container"></div>` + style });
 
         this._balls = [];
 

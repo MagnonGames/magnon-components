@@ -1,10 +1,11 @@
 import MagnonElement from "../../src/magnon-element.js";
+import { html } from "../../src/literals.js";
 
 import "../magnon-styles/magnon-styles.js";
 
 export class MagnonProgressBar extends MagnonElement {
     constructor() {
-        super({ content: `
+        super({ content: html`
             <style>
                 :host {
                     display: block;

@@ -1,4 +1,5 @@
 import MagnonElement from "../../src/magnon-element.js";
+import { html } from "../../src/literals.js";
 
 import css from "./switch.style.js";
 
@@ -6,13 +7,10 @@ import "../magnon-styles/magnon-styles.js";
 
 export class MagnonSwitch extends MagnonElement {
     constructor() {
-        super({ content: `
-            <div id="container">
-                <span id="shade"></span>
-                <span id="handle"></span>
-            </div>
-            ${css}
-        ` });
+        super({ content:
+            html`<div id="container"><span id="shade"></span><span id="handle"></span></div>` +
+            css
+        });
     }
 
     static get elementName() {

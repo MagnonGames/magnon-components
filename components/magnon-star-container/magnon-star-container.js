@@ -9,11 +9,7 @@ const reactionDistance = 0.3;
 
 export class MagnonStarContainer extends MagnonElement {
     constructor() {
-        super({ content: `
-            <canvas></canvas>
-            <div id="content"><slot></slot></div>
-            ${css}
-        ` });
+        super({ content: `<canvas></canvas><div id="content"><slot></slot></div>` + css });
     }
 
     static get elementName() {

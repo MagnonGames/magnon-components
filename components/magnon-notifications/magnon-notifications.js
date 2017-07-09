@@ -1,5 +1,4 @@
 import MagnonElement from "../../src/magnon-element.js";
-
 import { css } from "../../src/literals.js";
 
 import "./magnon-notification.js";
@@ -26,7 +25,7 @@ const style = css`
 
 export class MagnonNotifications extends MagnonElement {
     constructor() {
-        super({ content: `<slot></slot>${style}` });
+        super({ content: `<slot></slot>` + style });
     }
 
     static get elementName() {
