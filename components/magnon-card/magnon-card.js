@@ -20,6 +20,10 @@ export class MagnonCard extends MagnonElement {
         this._onResize();
     }
 
+    connectedCallback() {
+        this._onResize();
+    }
+
     static get elementName() {
         return "magnon-card";
     }
