@@ -31,27 +31,34 @@ export class FullscreenImage extends MagnonElement {
     }
 
     setFullscreen(magnonImage, closeCallback) {
-        this._emptyChildren();
-        this._addChildren(magnonImage.childNodes);
+        const onLoad = () => {
+            this._fullscreenImage.removeEventListener("load", onLoad);
 
-        this._currentImage = magnonImage.image;
-        this._currentAltText = magnonImage.altText;
+            this._emptyChildren();
+            this._addChildren(magnonImage.childNodes);
+
+            this._currentImage = magnonImage.image;
+            this._currentAltText = magnonImage.altText;
+
+            this._fullscreenOpacity = magnonImage.disableImageUrl ? "0.7" : "1";
+            this._fullscreenBackdrop.style.background = magnonImage.disableImageUrl
+                ? "var(--magnon-black)"
+                : "var(--magnon-black-blue)";
+
+            if (magnonImage.altTextEnabled) this._fullscreenImage.alt = "";
+            else this._fullscreenImage.alt = magnonImage.alt;
+
+            if (magnonImage.hasDescription) this._fullscreenText.classList.add("shown");
+            else this._fullscreenText.classList.remove("shown");
+
+            this._closeCallback = closeCallback;
+
+            this.fullscreen = true;
+        };
+
+        this._fullscreenImage.addEventListener("load", onLoad);
 
         this._fullscreenImage.src = magnonImage.src;
-        this._fullscreenOpacity = magnonImage.disableImageUrl ? "0.7" : "1";
-        this._fullscreenBackdrop.style.background = magnonImage.disableImageUrl
-            ? "var(--magnon-black)"
-            : "var(--magnon-black-blue)";
-
-        if (magnonImage.altTextEnabled) this._fullscreenImage.alt = "";
-        else this._fullscreenImage.alt = magnonImage.alt;
-
-        if (magnonImage.hasDescription) this._fullscreenText.classList.add("shown");
-        else this._fullscreenText.classList.remove("shown");
-
-        this._closeCallback = closeCallback;
-
-        this.fullscreen = true;
     }
 
     set fullscreen(value) {
