@@ -2,7 +2,7 @@ import MagnonElement from "../../src/magnon-element.js";
 import GlobalStyle from "../../src/global-style.js";
 
 import html from "./shell.content.js";
-import css, { globalStyle } from "./shell.style.js";
+import css, { globalStyle, selectionStyle } from "./shell.style.js";
 
 import "../magnon-icon-button/magnon-icon-button.js";
 import "../magnon-logo/magnon-logo.js";
@@ -10,6 +10,10 @@ import "../magnon-drawer/magnon-drawer.js";
 import "../magnon-styles/magnon-styles.js";
 
 GlobalStyle.add(globalStyle);
+
+if (!navigator.userAgent.includes("Edge")) {
+    GlobalStyle.add(selectionStyle);
+}
 
 export class MagnonShell extends MagnonElement {
     constructor() {
