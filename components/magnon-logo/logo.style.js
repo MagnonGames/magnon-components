@@ -5,14 +5,19 @@ export default css`
     display: inline-block;
     min-height: 30px;
     height: 50px;
+}
 
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     font-size: 0;
-    color: var(--magnon-logo-color, white);
 }
 
 #icon {
     height: 100%;
-    float: left;
 
     fill: var(--magnon-logo-color, white);
     stroke: none;
@@ -27,7 +32,6 @@ export default css`
 
 #text {
     height: 100%;
-    float: right;
 
     fill: none;
     stroke: var(--magnon-logo-color, white);
