@@ -26,8 +26,6 @@ export class MagnonNotification extends MagnonElement {
         this.root.querySelector(".close-button").addEventListener("click", () => this.close());
 
         requestAnimationFrame(() => {
-            const margin = window.getComputedStyle(this).margin;
-
             this.style.transition = "none";
             this.style.height = "0px";
             this.style.margin = "0px 0px";
@@ -41,7 +39,7 @@ export class MagnonNotification extends MagnonElement {
                 setTimeout(() => {
                     this.style.transition = "";
 
-                    this.style.margin = margin;
+                    this.style.margin = "";
                     this.style.height = `${height}px`;
 
                     this.addEventListener("animationstart", () => {

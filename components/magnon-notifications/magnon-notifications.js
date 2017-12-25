@@ -14,12 +14,23 @@ const style = css`
     align-items: flex-start;
     justify-content: flex-end;
 
-    padding: 20px 40px;
+    padding: 0;
 }
 
 ::slotted(magnon-notification) {
     flex-shrink: 0;
-    max-width: 30%;
+    width: 100vw;
+}
+
+@media(min-width: 580px) {
+    :host {
+        padding: 20px 40px;
+    }
+
+    ::slotted(magnon-notification) {
+        width: auto;
+        max-width: 30%;
+    }
 }
 `;
 

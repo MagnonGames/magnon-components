@@ -5,20 +5,28 @@ export default css`
     position: relative;
     display: flex;
     pointer-events: all;
-    min-width: 350px;
+    min-width: 0;
 
     background: var(--magnon-black);
     color: white;
     font-family: var(--magnon-font);
 
-    border-radius: 4px;
+    border-radius: 0;
 
     opacity: 0;
 
-    margin: 10px 0;
+    margin: 0;
 
     animation: 0.3s ease-out 0.4s 1 notification-in;
     transition: 0.2s all;
+}
+
+@media(min-width: 580px) {
+    :host {
+        border-radius: 4px;
+        margin: 10px 0;
+        min-width: 350px;
+    }
 }
 
 .close-button {
