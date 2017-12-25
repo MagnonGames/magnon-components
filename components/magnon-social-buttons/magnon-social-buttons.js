@@ -131,3 +131,12 @@ createSocialIconButton(
     userTmpl`${0}`,
     true
 );
+
+createSocialIconButton(
+    "magnon-artstation-button",
+    "social-artstation",
+    "#13AFF0FF",
+    userTmpl`https://www.artstation.com/${0}`,
+    userTmpl`Follow ${0} on ArtStation!`,
+    userTmpl`${0}`
+);
