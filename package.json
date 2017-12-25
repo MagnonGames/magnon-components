@@ -1,6 +1,6 @@
 {
   "name": "@magnon/components",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "A set of Magnon web-components",
   "main": "components/all.js",
   "directories": {
