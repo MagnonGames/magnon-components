@@ -15,6 +15,13 @@ export class MagnonButton extends MagnonElement {
     contentReady() {
         this._button = this.root.querySelector("button");
         this._generateLabel();
+
+        if (this.parentElement.tagName === "A") {
+            this.parentElement.setAttribute(
+                "aria-label", this._button.getAttribute("aria-label")
+            );
+            this._button.setAttribute("aria-hidden", "true");
+        }
     }
 
     _generateLabel() {

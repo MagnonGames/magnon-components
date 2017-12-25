@@ -23,6 +23,10 @@ export class MagnonIconButton extends MagnonElement {
     contentReady() {
         this._button = this.root.querySelector("button");
         this._icon = this.root.querySelector("magnon-icon");
+
+        if (this.parentElement.tagName === "A") {
+            this._button.setAttribute("aria-hidden", "true");
+        }
     }
 
     propertySet(property, old, value) {
