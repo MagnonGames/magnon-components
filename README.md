@@ -1,5 +1,5 @@
 # Magnon Webcomponents
-[![Build Status](https://travis-ci.org/theMagnon/magnon-components.svg?branch=master)](https://travis-ci.org/theMagnon/magnon-components)
+[![Build Status](https://travis-ci.org/MagnonGames/magnon-components.svg?branch=master)](https://travis-ci.org/MagnonGames/magnon-components)
 
 Magnon Webcomponents is a collection of webcomponents made for Magnon web projects. They're built with HTML imports, custom elements, shadow dom and CSS custom properties (also commonly known as CSS variables).
 
