@@ -16,7 +16,7 @@ export class MagnonButton extends MagnonElement {
         this._button = this.root.querySelector("button");
         this._generateLabel();
 
-        if (this.parentElement.tagName === "A") {
+        if (this.parentElement && this.parentElement.tagName === "A") {
             this.parentElement.setAttribute(
                 "aria-label", this._button.getAttribute("aria-label")
             );
